@@ -32,7 +32,7 @@
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
                 android:fontFamily="@font/latoblack"
-                android:text="Computer Science"
+                android:text="Computer Science NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
@@ -48,7 +48,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/latoblack"
-                android:text="E \u0026 C"
+                android:text="E \u0026 C NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
@@ -64,7 +64,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/latoblack"
-                android:text="EEE"
+                android:text="EEE NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 
@@ -80,12 +80,76 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/latoblack"
-                android:text="Mechanical"
+                android:text="Mechanical Engineering NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"/>
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/meNoteBookList"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Chemical Engineering NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/ceNoteBookList"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Instrumentaion Engineering NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/ieNoteBookList"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Mining Engineering NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/miningeggNoteBookList"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Textile Engineering NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/teNoteBookList"
                 android:layout_width="match_parent"
                 android:layout_height="175dp"
                 android:layout_marginTop="8dp"/>

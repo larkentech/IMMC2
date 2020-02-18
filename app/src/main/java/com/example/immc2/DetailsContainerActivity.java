@@ -7,8 +7,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
-
+import com.example.immc2.Fragments.BestSellingFragment;
 import com.example.immc2.Fragments.EngineeringListFragment;
+import com.example.immc2.Fragments.FeaturedFragment;
 import com.example.immc2.Fragments.MathsListFragment;
 import com.example.immc2.Fragments.QuoteSeriesListFragment;
 import com.example.immc2.Fragments.ScienceListFragment;
@@ -62,10 +63,23 @@ public class DetailsContainerActivity extends AppCompatActivity {
                 transaction3.commit();
                 break;
 
+            case "BestSelling":
+                FragmentManager manager4 = getSupportFragmentManager();
+                BestSellingFragment bestSellingFragment = new BestSellingFragment();
+                FragmentTransaction transaction4 = manager4.beginTransaction();
+                transaction4.add(R.id.detailsActivityContainer,bestSellingFragment);
+                transaction4.commit();
+                break;
+
+            case "Featured":
+                FragmentManager manager5 = getSupportFragmentManager();
+                FeaturedFragment featuredFragment = new FeaturedFragment();
+                FragmentTransaction transaction5 = manager5.beginTransaction();
+                transaction5.add(R.id.detailsActivityContainer,featuredFragment);
+                transaction5.commit();
+                break;
+
         }
-
-
-
 
     }
 }

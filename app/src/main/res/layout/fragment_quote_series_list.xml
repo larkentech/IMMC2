@@ -19,148 +19,158 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Vivekananda Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp"/>
+                android:fontFamily="@font/latoblack"
+                android:text="Quote Theme Books"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Vivekananda NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/vivekanandaNoteBooksList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp">
 
             </it.sephiroth.android.library.widget.HListView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="APJ Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="APJ NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/apjNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Subhash Chandra Bose Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Subhash Chandra Bose NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/scbNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Einsten Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Albert Einstein NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/einstenNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Elon Musk Notenooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Elon Musk NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/elonMuskNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Bill Gates Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Bill Gates NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/billGatesNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Steve Jobs Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Steve Jobs NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/steveJobsNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Ramanujan Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Ramanujan NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/ramanujanNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Buddha Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Buddha NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/buddhaNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 

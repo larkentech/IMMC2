@@ -19,52 +19,62 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Physics Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp"/>
+                android:fontFamily="@font/latoblack"
+                android:text="Science Books"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Physics NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/phyNoteBooksList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp">
 
             </it.sephiroth.android.library.widget.HListView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Chemistry Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Chemistry NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/chemNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Biology Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Biology NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/bioNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
 
 

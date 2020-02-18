@@ -20,68 +20,78 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
+                android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Algebra Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp"/>
+                android:fontFamily="@font/latoblack"
+                android:text="Maths Books"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Algebra NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/agbNoteBooksList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp">
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp">
 
             </it.sephiroth.android.library.widget.HListView>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Geometry Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Geometry NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/gmNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Trignometry Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Trigonometry NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/tgmNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="200dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/latobold"
-                android:padding="6dp"
-                android:text="Arithmetic Notebooks"
-                android:textColor="#000000"
-                android:textSize="16sp" />
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Aritmetic NoteBooks"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/atmNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 
