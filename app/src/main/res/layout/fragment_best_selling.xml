@@ -18,9 +18,12 @@
         android:textSize="24sp" />
 
     <GridView
+        android:layout_marginStart="12dp"
+        android:layout_marginTop="24dp"
         android:id="@+id/bestSellingGridView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:numColumns="2"/>
+        android:numColumns="2"
+        android:verticalSpacing="10dp"/>
 
 </LinearLayout>
