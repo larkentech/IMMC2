@@ -15,18 +15,25 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.immc2.R;
 import com.example.immc2.SplashActivity;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.hsalf.smilerating.BaseRating;
+import com.hsalf.smilerating.SmileRating;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -49,6 +56,8 @@ public class AccountFragment extends Fragment {
 
     TextView signout;
     TextView feedback;
+    String feeling = " ";
+    EditText feedbackEt;
 
 
     public AccountFragment() {
@@ -69,7 +78,7 @@ public class AccountFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
 
-        feedback = view.findViewById(R.id.feedbackTxt);
+
 
         userName = view.findViewById(R.id.prsnName);
         userEmail = view.findViewById(R.id.prsnMail);
@@ -80,7 +89,7 @@ public class AccountFragment extends Fragment {
         userArea = view.findViewById(R.id.addArea);
         userCity = view.findViewById(R.id.addCity);
         signout = view.findViewById(R.id.signOut);
-        feedback = view.findViewById(R.id.feedbackTxt);
+
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -94,6 +103,59 @@ public class AccountFragment extends Fragment {
                 userEmail.setText(dataSnapshot.child("Email").getValue(String.class));
                 userphone.setText(dataSnapshot.child("PhoneNumber").getValue(String.class));
                 userFlat.setText(dataSnapshot.child("Address").child("Flatno").getValue(String.class));
+
+                feedbackEt = (EditText) view.findViewById(R.id.userFeedbackET);
+                final HashMap<String, Object> feedbackMap = new HashMap<>();
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                final DatabaseReference databaseReference = firebaseDatabase.getReference().child("Feedback");
+
+                FloatingActionButton fab = (FloatingActionButton) view.findViewById(R.id.sendFeedback);
+                fab.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        String feedback = feedbackEt.getText().toString().trim();
+                        if (feeling.compareToIgnoreCase(" ") == 0) {
+                            Toasty.error(getContext(), "Please tell us how you feel", Toast.LENGTH_SHORT, true).show();
+                        } else {
+                            feedbackMap.put("Feedback", feedback);
+                            feedbackMap.put("Feeling", feeling);
+                            databaseReference.push().setValue(feedbackMap);
+                            Toasty.success(getContext(), "Thanks For Your Feedback!", Toast.LENGTH_SHORT, true).show();
+                            feedbackEt.setText("");
+                            feedbackEt.setHint("(Optional)");
+
+                        }
+
+                    }
+                });
+                SmileRating smileRating = (SmileRating) view.findViewById(R.id.smile_rating);
+                smileRating.setOnSmileySelectionListener(new SmileRating.OnSmileySelectionListener() {
+                    @Override
+                    public void onSmileySelected(@BaseRating.Smiley int smiley, boolean reselected) {
+                        // reselected is false when user selects different smiley that previously selected one
+                        // true when the same smiley is selected.
+                        // Except if it first time, then the value will be false.
+                        switch (smiley) {
+                            case SmileRating.BAD:
+                                feeling = "Bad";
+                                break;
+                            case SmileRating.GOOD:
+                                feeling = "Good";
+                                break;
+                            case SmileRating.GREAT:
+                                feeling = "Great";
+                                break;
+                            case SmileRating.OKAY:
+                                feeling = "Okay";
+                                break;
+                            case SmileRating.TERRIBLE:
+                                feeling = "Terrible";
+                                break;
+                        }
+                    }
+                });
+
+
             }
 
             @Override
@@ -112,14 +174,6 @@ public class AccountFragment extends Fragment {
             }
         });
 
-        feedback.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //showDialog();
-
-
-            }
-        });
 
     }
 
