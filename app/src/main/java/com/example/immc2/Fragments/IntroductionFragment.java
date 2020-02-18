@@ -25,6 +25,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.travijuu.numberpicker.library.NumberPicker;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -183,10 +184,10 @@ public class IntroductionFragment extends Fragment {
                     addToCart.setText("Added");
                     Drawable image = addToCart.getContext().getDrawable(R.drawable.add_to_cart_check);
                     addToCart.setCompoundDrawablesWithIntrinsicBounds(image,null,null,null);
+                    Toasty.success(getContext(), "Successfully added to the cart", Toast.LENGTH_SHORT, true).show();
                 }
             }
         });
-
 
 
     }
