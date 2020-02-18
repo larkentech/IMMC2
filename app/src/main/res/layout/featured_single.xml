@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="175dp"
+        android:layout_height="175dp"
+        android:layout_marginStart="12dp"
+        app:cardBackgroundColor="@android:color/white">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/featured_image_single"
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/featured_price_single"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Rs.360/-"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="4dp"
+                android:textSize="16sp"
+                android:fontFamily="@font/latoblack"
+                android:textColor="@color/colorPrimary" />
+
+            <TextView
+                android:id="@+id/featured_bookName_single"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="2dp"
+                android:layout_marginEnd="8dp"
+                android:textSize="14sp"
+                android:fontFamily="@font/latobold"
+                android:text="Hello World by india"
+                android:maxLines="1"
+                android:layout_marginBottom="8dp"
+                android:textColor="@android:color/darker_gray" />
+
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+</LinearLayout>

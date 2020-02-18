@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".Fragments.EngineeringListFragment">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Engineering Books"
+                android:textColor="@color/colorAccent"
+                android:textSize="24sp" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Computer Science"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/csNoteBooksList"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/latoblack"
+                android:text="E \u0026 C"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/ecNoteBookList"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/latoblack"
+                android:text="EEE"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/eeNoteBookList"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Mechanical"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"/>
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/meNoteBookList"
+                android:layout_width="match_parent"
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
+
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
