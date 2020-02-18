@@ -1,6 +1,7 @@
 package com.example.immc2;
 
 import android.content.Intent;
+import android.graphics.Paint;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -36,9 +37,10 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     TextView bookCategory;
     RatingBar bookRatings;
 
+
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
-
 
     public String bookID;
     public String bookCategoryID;
@@ -52,6 +54,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         bookID = getIntent().getExtras().getString("BookID");
         bookCategoryID = getIntent().getExtras().getString("BookCategory");
         bookSubCategoryID = getIntent().getExtras().getString("BookSubCategory");
+
 
         bookName = findViewById(R.id.selected_book_name);
         bookAuthor = findViewById(R.id.selected_book_designer);
@@ -76,6 +79,8 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                 bookAuthor.setText("Designed By: "+dataSnapshot.child("BookDesigner").getValue(String.class));
                 bookPrice.setText("Rs."+dataSnapshot.child("BookPrice").getValue(String.class)+"/-");
                 bookCategory.setText("Category: "+dataSnapshot.child("BookSubCategory").getValue(String.class));
+
+
             }
 
             @Override
