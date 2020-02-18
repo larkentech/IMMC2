@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -40,6 +41,10 @@ public class HomeFragment extends Fragment {
     CardView quotesTheme;
     CardView scienceTheme;
     CardView mathsTheme;
+
+    TextView bestSellingBtn;
+    TextView featuredBtn;
+
     OffersAdapter adapter;
     BestSellingAdapter featuredAdapter;
     BestSellingAdapter bestSellingAdapter;
@@ -97,6 +102,8 @@ public class HomeFragment extends Fragment {
         engBooks = (CardView) view.findViewById(R.id.engineeringBooks);
         scienceTheme = (CardView) view.findViewById(R.id.scienceTheme);
         mathsTheme = (CardView) view.findViewById(R.id.mathsTheme);
+        bestSellingBtn = (TextView) view.findViewById(R.id.bestSellingBtn);
+        featuredBtn = (TextView) view.findViewById(R.id.featuredBtn);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Offers");
         databaseReference.addChildEventListener(new ChildEventListener() {
@@ -218,6 +225,20 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        bestSellingBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openBestSeelingBtn();
+            }
+        });
+
+        featuredBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                openFeaturedBtn();
+            }
+        });
+
         /*
 
         FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
@@ -268,6 +289,19 @@ public class HomeFragment extends Fragment {
         intent.putExtra("Category","MathsTheme");
         startActivity(intent);
 
+    }
+
+    public void openBestSeelingBtn(){
+
+        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
+        intent.putExtra("Category","BestSelling");
+        startActivity(intent);
+    }
+
+    public void openFeaturedBtn(){
+        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
+        intent.putExtra("Category","Featured");
+        startActivity(intent);
     }
 
 }
