@@ -8,7 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.NumberPicker;
+
+import com.travijuu.numberpicker.library.Enums.ActionEnum;
+import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
+import com.travijuu.numberpicker.library.NumberPicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -23,9 +26,12 @@ import java.util.List;
 
 public class CartAdapter extends ArrayAdapter<BooksModal> {
 
+    List<String> itemsCount;
 
-    public CartAdapter(@NonNull Context context, int resource, @NonNull List<BooksModal> objects) {
+
+    public CartAdapter(@NonNull Context context, int resource, @NonNull List<BooksModal> objects, List<String> itemsCount) {
         super(context, resource, objects);
+        this.itemsCount = itemsCount;
     }
 
     @NonNull
@@ -53,19 +59,22 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
 
         bookName.setText(modal.getBookName());
         authorName.setText(modal.getBookDesigner());
+        quantityPicker.setValue(Integer.parseInt(itemsCount.get(position).toString()));
+        bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*quantityPicker.getValue()+"/-");
 
-        quantityPicker.setOnValueChangedListener(new NumberPicker.OnValueChangeListener() {
+        quantityPicker.setValueChangedListener(new ValueChangedListener() {
             @Override
-            public void onValueChange(NumberPicker numberPicker, int i, int i1) {
+            public void valueChanged(int value, ActionEnum action) {
                 try{
-                    bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*i1+"/-");
+                    bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*value+"/-");
                 }catch (Exception e)
                 {
                     Log.v("TAG",e.getMessage());
                 }
-
             }
         });
+
+
 
         deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
