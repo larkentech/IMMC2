@@ -1,6 +1,7 @@
 package com.example.immc2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -10,6 +11,7 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -35,6 +37,9 @@ public class UseraccountActivity extends AppCompatActivity {
 
     CircleImageView profilepic;
 
+    public static final int IMAGE_CODE=1;
+    Uri imageuri;
+
 
 
 
@@ -52,15 +57,15 @@ public class UseraccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_useraccount);
 
-        username= findViewById(R.id.name);
-        usermail=findViewById(R.id.entermail);
-        usercity=findViewById(R.id.entercity);
-        userflat=findViewById(R.id.enterflat);
-        userarea=findViewById(R.id.enterarea);
-        userzipcode=findViewById(R.id.enterzipcode);
-        userlandmark=findViewById(R.id.enterlandmark);
-        saveprofile=findViewById(R.id.btnsave);
-        profilepic=findViewById(R.id.propicMain);
+        username = findViewById(R.id.name);
+        usermail = findViewById(R.id.entermail);
+        usercity = findViewById(R.id.entercity);
+        userflat = findViewById(R.id.enterflat);
+        userarea = findViewById(R.id.enterarea);
+        userzipcode = findViewById(R.id.enterzipcode);
+        userlandmark = findViewById(R.id.enterlandmark);
+        saveprofile = findViewById(R.id.btnsave);
+        profilepic = findViewById(R.id.propicMain);
 
 
         saveprofile.setOnClickListener(new View.OnClickListener() {
@@ -74,17 +79,38 @@ public class UseraccountActivity extends AppCompatActivity {
                 Landmark = userlandmark.getText().toString();
                 Zipcode = userzipcode.getText().toString();
 
+                profilepic.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        openImageForm();
+
+                    }
+                });
+            }
+
+            private void openImageForm() {
+
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(intent, IMAGE_CODE);
+            }
+        });
+
+
+
+
+
                 if (Name.isEmpty() || Email.isEmpty() || City.isEmpty() || Flat.isEmpty() ||
-                        Landmark.isEmpty() || Zipcode.isEmpty() || Area.isEmpty())
-                {
+                        Landmark.isEmpty() || Zipcode.isEmpty() || Area.isEmpty()) {
                     Toasty.error(UseraccountActivity.this, "Enter Required Details").show();
                     if (Zipcode.length() < 6) {
                         Toasty.error(UseraccountActivity.this, "Invalid Zipcode").show();
                     }
                     Toasty.error(UseraccountActivity.this, "Enter Valid Zipcode").show();
 
-                }
-                else{
+                } else {
                     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference databaseReference = database.getReference();
@@ -98,13 +124,13 @@ public class UseraccountActivity extends AppCompatActivity {
                     databaseReference.child("UserDetails").child(currentFirebaseUser.getUid()).setValue(userMap);
 
 
-                    DatabaseReference databaseReference1=database.getReference();
-                    HashMap<String,Object> addMap=new HashMap<>();
-                    addMap.put("Flatno",userflat.getText().toString());
-                    addMap.put("Landmark",userlandmark.getText().toString());
-                    addMap.put("Area",userarea.getText().toString());
-                    addMap.put("City",usercity.getText().toString());
-                    addMap.put("Zipcode",userzipcode.getText().toString());
+                    DatabaseReference databaseReference1 = database.getReference();
+                    HashMap<String, Object> addMap = new HashMap<>();
+                    addMap.put("Flatno", userflat.getText().toString());
+                    addMap.put("Landmark", userlandmark.getText().toString());
+                    addMap.put("Area", userarea.getText().toString());
+                    addMap.put("City", usercity.getText().toString());
+                    addMap.put("Zipcode", userzipcode.getText().toString());
 
 
                     databaseReference1.child("UserDetails").child(currentFirebaseUser.getUid()).child("Address").setValue(addMap);
@@ -116,9 +142,16 @@ public class UseraccountActivity extends AppCompatActivity {
                 }
             }
 
-        });
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(requestCode == IMAGE_CODE && requestCode == RESULT_OK && data != null && data.getData() !=null);
+
+        imageuri=data.getData();
+
+        profilepic.setImageURI(imageuri);
+
     }
-
-
 }
 
