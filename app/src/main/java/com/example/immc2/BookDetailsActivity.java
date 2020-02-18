@@ -1,6 +1,8 @@
 package com.example.immc2;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
 import android.widget.TextView;
@@ -22,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class BookDetailsActivity extends AppCompatActivity implements View.OnClickListener{
@@ -132,5 +135,13 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         public CharSequence getPageTitle(int position) {
             return mFragmentTitles.get(position);
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent i = new Intent(getApplicationContext(),MainActivity.class);
+        startActivity(i);
+        finish();
     }
 }
