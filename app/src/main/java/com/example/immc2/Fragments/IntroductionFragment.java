@@ -22,6 +22,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -46,6 +47,8 @@ import it.sephiroth.android.library.widget.HListView;
  * A simple {@link Fragment} subclass.
  */
 public class IntroductionFragment extends Fragment {
+
+    NumberPicker numberPicker;
 
 
     private String BookDesc;
@@ -91,6 +94,10 @@ public class IntroductionFragment extends Fragment {
         final List<String> bestSellingIDs = new ArrayList<>();
         bestSellingAdapter = new BestSellingAdapter(getContext(),R.layout.best_seller_single,bestSellingList,bestSellingIDs);
         bestSellingListView.setAdapter(bestSellingAdapter);
+
+        //Number Picker
+        numberPicker = view.findViewById(R.id.number_picker);
+        String count = numberPicker.getDisplayedValues().toString();
 
 
         firebaseDatabase = FirebaseDatabase.getInstance();
