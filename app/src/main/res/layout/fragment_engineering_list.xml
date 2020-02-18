@@ -103,7 +103,8 @@
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/ceNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -118,7 +119,8 @@
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/ieNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -133,7 +135,8 @@
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/miningeggNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -148,7 +151,8 @@
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/teNoteBookList"
                 android:layout_width="match_parent"
-                android:layout_height="200dp" />
+                android:layout_height="175dp"
+                android:layout_marginTop="8dp"/>
 
         </LinearLayout>
 
