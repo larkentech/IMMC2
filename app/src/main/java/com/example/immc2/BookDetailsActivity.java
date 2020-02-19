@@ -80,8 +80,10 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                 String value = dataSnapshot.child("BookPrice").getValue(String.class);
                 String i ="0.2";
                 double value1 = Double.parseDouble(value) + ( Double.parseDouble(value) * Double.parseDouble(i)) ;
-                String value2 = Double.toString(value1);
-                bookPriceIncrement.setText("Rs."+value2+"/-");
+                int value2 = (int)value1;
+                String value3 = Integer.toString(Math.round(value2));
+
+                bookPriceIncrement.setText("Rs."+value3+"/-");
 
             }
 
