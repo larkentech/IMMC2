@@ -1,6 +1,11 @@
 <resources>
     <string name="app_name">IMMC2</string>
 
+
     <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="strike_line"> <strike>Testing for line str</strike> </string>
+
+
 </resources>

@@ -34,8 +34,8 @@ import java.util.List;
  */
 public class CartFragment extends Fragment {
 
-    CartAdapter adapter;
-    ListView cartListView;
+    public CartAdapter adapter;
+    public ListView cartListView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     DatabaseReference databaseReferenceBooks;
@@ -46,6 +46,7 @@ public class CartFragment extends Fragment {
     List<String> bookCategoryId;
     List<String> bookSubCategoryId;
     List<String> itemsCount;
+    List<String> tempKeys;
     int count1;
     int count2 = 0;
 
@@ -69,6 +70,7 @@ public class CartFragment extends Fragment {
         bookCategoryId = new ArrayList<>();
         bookSubCategoryId = new ArrayList<>();
         itemsCount = new ArrayList<>();
+        tempKeys = new ArrayList<>();
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
@@ -78,7 +80,7 @@ public class CartFragment extends Fragment {
 
         cartListView = view.findViewById(R.id.cartListView);
         List<BooksModal> cartItems = new ArrayList<>();
-        adapter = new CartAdapter(getContext(), R.layout.single_cart_item, cartItems,itemsCount);
+        adapter = new CartAdapter(getContext(), R.layout.single_cart_item, cartItems,itemsCount,tempKeys, CartFragment.this);
         cartListView.setAdapter(adapter);
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -88,6 +90,7 @@ public class CartFragment extends Fragment {
                     count1 = (int) dataSnapshot.child("Cart").getChildrenCount();
                     for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
                         String key = ds.getKey();
+                        tempKeys.add(key);
                         databaseReference.child("Cart").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -133,6 +136,7 @@ public class CartFragment extends Fragment {
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     BooksModal modal = dataSnapshot.getValue(BooksModal.class);
                     adapter.add(modal);
+                    adapter.notifyDataSetChanged();
                 }
 
                 @Override
@@ -143,22 +147,50 @@ public class CartFragment extends Fragment {
         }
     }
 
-    private void getBookDetails(List<String> bookId) {
+    public void reloadData(){
+        getData();
+    }
 
-        for (int i = 0; i < bookId.size(); i++) {
-            databaseReferenceBooks.child(bookCategoryId.get(i)).child(bookSubCategoryId.get(i)).child(bookId.get(i)).addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
-                    adapter.add(modal);
+    private void getData() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild("Cart")) {
+                    count1 = (int) dataSnapshot.child("Cart").getChildrenCount();
+                    for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
+                        String key = ds.getKey();
+                        tempKeys.add(key);
+                        databaseReference.child("Cart").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                count2++;
+                                bookId.add(dataSnapshot.child("BookId").getValue(String.class));
+                                bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
+                                bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
+                                itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
+                                if (count1 == count2){
+                                    Log.v("TAG", "BookID:" + bookId);
+                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
+
+                    //getBookDetails(bookId);
                 }
+            }
 
-                @Override
-                public void onCancelled(@NonNull DatabaseError databaseError) {
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                }
-            });
-        }
-
+            }
+        });
     }
 }

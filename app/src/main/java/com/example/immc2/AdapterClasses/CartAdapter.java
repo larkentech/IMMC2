@@ -9,6 +9,12 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.example.immc2.Fragments.CartFragment;
+import com.example.immc2.Fragments.HomeFragment;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
@@ -16,6 +22,7 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.fragment.app.Fragment;
 
 import com.bumptech.glide.Glide;
 import com.example.immc2.ModalClasses.BooksModal;
@@ -24,19 +31,25 @@ import com.example.immc2.R;
 import java.text.ParsePosition;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 public class CartAdapter extends ArrayAdapter<BooksModal> {
 
     List<String> itemsCount;
+    List<String> tempKeys;
+    Fragment fragment;
 
 
-    public CartAdapter(@NonNull Context context, int resource, @NonNull List<BooksModal> objects, List<String> itemsCount) {
+    public CartAdapter(@NonNull Context context, int resource, @NonNull List<BooksModal> objects, List<String> itemsCount,List<String> count, Fragment fragment) {
         super(context, resource, objects);
         this.itemsCount = itemsCount;
+        this.tempKeys = count;
+        this.fragment = fragment;
     }
 
     @NonNull
     @Override
-    public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+    public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null)
         {
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.single_cart_item,parent,false);
@@ -79,7 +92,20 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
         deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails")
+                        .child(mAuth.getUid()).child("Cart");
+                databaseReference.child(tempKeys.get(position)).removeValue(new DatabaseReference.CompletionListener() {
+                    @Override
+                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                        Toasty.error(getContext(),"Item Removed From Cart").show();
 
+                        ((CartFragment)fragment).adapter.clear();
+                        ((CartFragment)fragment).reloadData();
+
+                    }
+                });
             }
         });
 
