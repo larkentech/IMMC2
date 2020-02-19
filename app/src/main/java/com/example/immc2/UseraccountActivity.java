@@ -50,6 +50,7 @@ public class UseraccountActivity extends AppCompatActivity {
     String Area;
     String Zipcode;
     String Landmark;
+    String ProfilePic;
 
 
     @Override
@@ -67,6 +68,16 @@ public class UseraccountActivity extends AppCompatActivity {
         saveprofile = findViewById(R.id.btnsave);
         profilepic = findViewById(R.id.propicMain);
 
+        profilepic.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                openImageForm();
+
+            }
+        });
+
+
 
         saveprofile.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -79,31 +90,10 @@ public class UseraccountActivity extends AppCompatActivity {
                 Landmark = userlandmark.getText().toString();
                 Zipcode = userzipcode.getText().toString();
 
-                profilepic.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-
-                        openImageForm();
-
-                    }
-                });
-            }
-
-            private void openImageForm() {
-
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(intent, IMAGE_CODE);
-            }
-        });
-
-
-
 
 
                 if (Name.isEmpty() || Email.isEmpty() || City.isEmpty() || Flat.isEmpty() ||
-                        Landmark.isEmpty() || Zipcode.isEmpty() || Area.isEmpty()) {
+                        Landmark.isEmpty() || Zipcode.isEmpty() || Area.isEmpty() ) {
                     Toasty.error(UseraccountActivity.this, "Enter Required Details").show();
                     if (Zipcode.length() < 6) {
                         Toasty.error(UseraccountActivity.this, "Invalid Zipcode").show();
@@ -141,6 +131,16 @@ public class UseraccountActivity extends AppCompatActivity {
                     finish();
                 }
             }
+        });
+    }
+
+    private void openImageForm() {
+
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(intent, IMAGE_CODE);
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {

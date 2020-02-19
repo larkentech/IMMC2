@@ -3,6 +3,7 @@ package com.example.immc2.Fragments;
 
 import android.app.AlertDialog;
 import android.content.Intent;
+import android.hardware.Camera;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -102,7 +103,7 @@ public class AccountFragment extends Fragment {
                 userName.setText(dataSnapshot.child("Name").getValue(String.class));
                 userEmail.setText(dataSnapshot.child("Email").getValue(String.class));
                 userphone.setText(dataSnapshot.child("PhoneNumber").getValue(String.class));
-                userFlat.setText(dataSnapshot.child("Address").child("Flatno").getValue(String.class));
+                userFlat.setText(dataSnapshot.child("Address").child("Flatno").child("Area").child("City").child("Landmark").getValue(String.class));
 
                 feedbackEt = (EditText) view.findViewById(R.id.userFeedbackET);
                 final HashMap<String, Object> feedbackMap = new HashMap<>();
