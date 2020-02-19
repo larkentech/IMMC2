@@ -22,13 +22,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.NumberPicker;
+import com.travijuu.numberpicker.library.NumberPicker;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -38,8 +39,10 @@ import com.google.firebase.database.ValueEventListener;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
 import it.sephiroth.android.library.widget.HListView;
 
 
@@ -66,6 +69,9 @@ public class IntroductionFragment extends Fragment {
 
     TextView bookDesc;
     DatabaseReference databaseReference2;
+    Button addToCart;
+    FirebaseAuth mAuth;
+    int count;
 
 
     public IntroductionFragment() {
@@ -77,6 +83,7 @@ public class IntroductionFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        mAuth = FirebaseAuth.getInstance();
         return inflater.inflate(R.layout.fragment_introduction, container, false);
     }
 
@@ -84,9 +91,9 @@ public class IntroductionFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-       String bookID = ((BookDetailsActivity)getActivity()).bookID;
-       String bookSubCategory = ((BookDetailsActivity)getActivity()).bookSubCategoryID;
-       String bookCategoryID = ((BookDetailsActivity)getActivity()).bookCategoryID;
+       final String bookID = ((BookDetailsActivity)getActivity()).bookID;
+       final String bookSubCategory = ((BookDetailsActivity)getActivity()).bookSubCategoryID;
+       final String bookCategoryID = ((BookDetailsActivity)getActivity()).bookCategoryID;
 
         bookDesc = view.findViewById(R.id.selected_book_desc);
         bestSellingListView = view.findViewById(R.id.best_selling_list);
@@ -96,10 +103,10 @@ public class IntroductionFragment extends Fragment {
         bestSellingListView.setAdapter(bestSellingAdapter);
 
         //Number Picker
-
-
+        numberPicker = view.findViewById(R.id.number_picker);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
+        //Setting BestSelling List
         databaseReference = firebaseDatabase.getReference().child("BestSelling");
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -131,6 +138,7 @@ public class IntroductionFragment extends Fragment {
             }
         });
 
+        //Getting Book Details
         if (bookSubCategory == null)
         {
             databaseReference2 = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryID).child(bookID);
@@ -146,6 +154,32 @@ public class IntroductionFragment extends Fragment {
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        addToCart = view.findViewById(R.id.addtocart);
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                count = numberPicker.getValue();
+
+                if (count <= 0)
+                {
+                    Toasty.error(getContext(),"Select Quantity").show();
+                }
+                else {
+                    HashMap<String,String> cartMap = new HashMap<>();
+                    cartMap.put("Count",Integer.toString(count));
+                    cartMap.put("BookId",bookID);
+                    cartMap.put("BookCategory",bookCategoryID);
+                    cartMap.put("BookSubCategory",bookSubCategory);
+
+                    DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
+                    databaseReference3.child("Cart").push().setValue(cartMap);
+                }
+
 
             }
         });

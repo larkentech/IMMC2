@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="200dp"
         android:layout_marginStart="24dp"
         android:layout_marginEnd="24dp"
         android:layout_marginBottom="8dp"
@@ -15,15 +15,15 @@
         app:cardCornerRadius="16dp"
         app:cardElevation="0dp">
 
-        <LinearLayout
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:padding="12dp">
+            android:padding="16dp">
 
             <androidx.cardview.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
+                android:id="@+id/itemImageCard"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="6dp"
@@ -39,79 +39,83 @@
 
             </androidx.cardview.widget.CardView>
 
+
+            <TextView
+                android:id="@+id/bookNameCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_toEndOf="@id/itemImageCard"
+                android:fontFamily="@font/latoblack"
+                android:text="APJ Abdul Kalam"
+                android:textColor="@android:color/black"
+                android:textSize="16sp" />
+
+            <TextView
+                android:id="@+id/bookDesignerCart"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/bookNameCart"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_toEndOf="@id/itemImageCard"
+                android:fontFamily="@font/latobold"
+                android:text="By Hemanth Hem"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/bookPriceCart"
+                android:layout_toEndOf="@id/itemImageCard"
+                android:layout_below="@id/bookDesignerCart"
+                android:layout_marginStart="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/latoblack"
+                android:text="Rs.480/-"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp" />
+
             <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_marginStart="8dp"
-                android:layout_weight="2"
-                android:orientation="vertical">
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_below="@id/itemImageCard"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginTop="12dp">
 
-                <TextView
-                    android:id="@+id/bookNameCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/latoblack"
-                    android:text="APJ Abdul Kalam"
-                    android:textColor="@android:color/black"
-                    android:textSize="14sp" />
+                <com.travijuu.numberpicker.library.NumberPicker
+                    android:id="@+id/number_picker_cart"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="40dp"
+                    app:min="0"
+                    app:unit="1"
+                    app:focusable="false" />
 
-                <TextView
-                    android:id="@+id/bookDesignerCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                <Button
+                    android:id="@+id/delete_cart"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="4dp"
+                    android:layout_weight="1"
+                    android:minHeight="0dp"
+                    android:background="@android:color/holo_red_light"
                     android:fontFamily="@font/latobold"
-                    android:text="By Hemanth Hem"
-                    android:textColor="@android:color/darker_gray"
-                    android:textSize="11sp" />
-
-                <TextView
-                    android:id="@+id/bookPriceCart"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:fontFamily="@font/latoblack"
-                    android:text="Rs.480/-"
-                    android:textColor="@color/colorPrimary"
-                    android:textSize="14sp" />
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:orientation="horizontal">
-
-                    <com.travijuu.numberpicker.library.NumberPicker
-                        android:id="@+id/number_picker_cart"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:layout_marginStart="26dp"
-                        android:layout_marginTop="18dp"
-                        android:layout_marginBottom="16dp"
-                        app:focusable="false"
-                        app:min="0"
-                        app:unit="1"/>
-
-                    <Button
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:background="@android:color/holo_red_light"
-                        android:text="Delete"
-                        android:id="@+id/delete_cart"
-                        android:textColor="@android:color/white"
-                        android:fontFamily="@font/latobold"
-                        android:textAllCaps="false"
-                        android:layout_marginStart="4dp"/>
-
-
-                </LinearLayout>
-
+                    android:text="Delete"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/white" />
 
             </LinearLayout>
 
 
-        </LinearLayout>
+
+
+
+        </RelativeLayout>
 
 
     </androidx.cardview.widget.CardView>

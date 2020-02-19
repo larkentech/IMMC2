@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,16 +34,21 @@ import java.util.List;
  */
 public class CartFragment extends Fragment {
 
-    CartAdapter adapter;
-    ListView cartListView;
+    public CartAdapter adapter;
+    public ListView cartListView;
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    DatabaseReference databaseReferenceBooks;
     Button proceedToPay;
     FirebaseAuth mAuth;
 
     List<String> bookId;
     List<String> bookCategoryId;
     List<String> bookSubCategoryId;
+    List<String> itemsCount;
+    List<String> tempKeys;
+    int count1;
+    int count2 = 0;
 
 
     public CartFragment() {
@@ -55,12 +61,16 @@ public class CartFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
+        mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
+        databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getUid());
+        databaseReferenceBooks = firebaseDatabase.getReference().child("BookDetails");
 
         bookId = new ArrayList<>();
         bookCategoryId = new ArrayList<>();
         bookSubCategoryId = new ArrayList<>();
+        itemsCount = new ArrayList<>();
+        tempKeys = new ArrayList<>();
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
@@ -68,39 +78,112 @@ public class CartFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        databaseReference.addValueEventListener(new ValueEventListener() {
+        cartListView = view.findViewById(R.id.cartListView);
+        List<BooksModal> cartItems = new ArrayList<>();
+        adapter = new CartAdapter(getContext(), R.layout.single_cart_item, cartItems,itemsCount,tempKeys, CartFragment.this);
+        cartListView.setAdapter(adapter);
+
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if (dataSnapshot.hasChild("Cart"))
-                {
-                    databaseReference.child("Cart").addChildEventListener(new ChildEventListener() {
-                        @Override
-                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                            bookId.add(dataSnapshot.child("BookId").getValue(String.class));
-                            bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
-                            bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
-                        }
+                if (dataSnapshot.hasChild("Cart")) {
+                    count1 = (int) dataSnapshot.child("Cart").getChildrenCount();
+                    for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
+                        String key = ds.getKey();
+                        tempKeys.add(key);
+                        databaseReference.child("Cart").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                count2++;
+                                bookId.add(dataSnapshot.child("BookId").getValue(String.class));
+                                bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
+                                bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
+                                itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
+                                if (count1 == count2){
+                                    Log.v("TAG", "BookID:" + bookId);
+                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+                                }
 
-                        @Override
-                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                            }
 
-                        }
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        @Override
-                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                            }
+                        });
+                    }
 
-                        }
 
-                        @Override
-                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                    //getBookDetails(bookId);
+                }
+            }
 
-                        }
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
+            }
+        });
+    }
 
-                        }
-                    });
+    private void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId, List<String> itemsCount) {
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        for (int i=0;i<bookId.size();i++)
+        {
+            DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryId.get(i))
+                    .child(bookSubCategoryId.get(i)).child(bookId.get(i));
+            databaseReference3.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    adapter.add(modal);
+                    adapter.notifyDataSetChanged();
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+        }
+    }
+
+    public void reloadData(){
+        getData();
+    }
+
+    private void getData() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild("Cart")) {
+                    count1 = (int) dataSnapshot.child("Cart").getChildrenCount();
+                    for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
+                        String key = ds.getKey();
+                        tempKeys.add(key);
+                        databaseReference.child("Cart").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                count2++;
+                                bookId.add(dataSnapshot.child("BookId").getValue(String.class));
+                                bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
+                                bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
+                                itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
+                                if (count1 == count2){
+                                    Log.v("TAG", "BookID:" + bookId);
+                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+                                }
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                            }
+                        });
+                    }
+
+
+                    //getBookDetails(bookId);
                 }
             }
 
