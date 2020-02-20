@@ -11,6 +11,105 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Your Order Summary"
+                android:textSize="24sp"
+                android:fontFamily="@font/latoblack"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:textColor="@color/colorAccent">
+
+            </TextView>
+
+            <androidx.cardview.widget.CardView
+
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:id="@+id/cardview3"
+                android:layout_marginTop="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:cardBackgroundColor="#F2F5F4">
+
+                <TextView
+
+                    android:id="@+id/orderusername"
+                    android:layout_marginTop="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Abhishek Das R"
+                    android:fontFamily="@font/latoblack"
+                    android:textColor="#000000"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp">
+
+                </TextView>
+                <TextView
+
+                    android:id="@+id/orderuseraddress"
+                    android:layout_marginTop="40dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="#118 3rd Cross Kuvempunagar Mysuru"
+                    android:fontFamily="@font/latobold"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp">
+
+                </TextView>
+                <TextView
+
+                    android:id="@+id/orderuserphone"
+                    android:layout_marginTop="64dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="9611967501"
+                    android:fontFamily="@font/latobold"
+                    android:textColor="#000000"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:textSize="16sp">
+
+                </TextView>
+
+                <Button
+                    android:id="@+id/btnaddress"
+                    android:layout_width="300dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="120dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_gravity="center_horizontal"
+                    android:background="@color/colorAccent"
+                    android:text="Add Or Change Address"
+                    android:textColor="#ffffff"
+                    android:fontFamily="@font/latoblack">
+
+                </Button>
+
+
+            </androidx.cardview.widget.CardView>
+            <ListView
+                android:layout_marginTop="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp">
+
+            </ListView>
+
+
+
+        </LinearLayout>
+
 
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
