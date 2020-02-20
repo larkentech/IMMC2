@@ -103,7 +103,10 @@ public class AccountFragment extends Fragment {
                 userName.setText(dataSnapshot.child("Name").getValue(String.class));
                 userEmail.setText(dataSnapshot.child("Email").getValue(String.class));
                 userphone.setText(dataSnapshot.child("PhoneNumber").getValue(String.class));
-                userFlat.setText(dataSnapshot.child("Address").child("Flatno").child("Area").child("City").child("Landmark").getValue(String.class));
+                userFlat.setText(dataSnapshot.child("Address").child("Flatno").getValue(String.class));
+                userlandmark.setText(dataSnapshot.child("Address").child("Landmark").getValue(String.class));
+                userArea.setText(dataSnapshot.child("Address").child("Area").getValue(String.class));
+                userCity.setText(dataSnapshot.child("Address").child("City").getValue(String.class));
 
                 feedbackEt = (EditText) view.findViewById(R.id.userFeedbackET);
                 final HashMap<String, Object> feedbackMap = new HashMap<>();
