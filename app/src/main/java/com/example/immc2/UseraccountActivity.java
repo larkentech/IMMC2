@@ -47,6 +47,7 @@ public class UseraccountActivity extends AppCompatActivity {
 
     public static final int IMAGE_CODE=1;
     Uri imageuri;
+    String userProfileUrl;
 
     StorageReference mStorageRef;
 
@@ -120,6 +121,7 @@ public class UseraccountActivity extends AppCompatActivity {
                     HashMap<String, Object> userMap = new HashMap<>();
                     userMap.put("Name", username.getText().toString());
                     userMap.put("Email", usermail.getText().toString());
+                    userMap.put("ProfilePhoto",userProfileUrl);
 
 
 
@@ -179,7 +181,7 @@ public class UseraccountActivity extends AppCompatActivity {
         imageuri=data.getData();
         profilepic.setImageURI(imageuri);
 
-        StorageReference reference=mStorageRef.child(System.currentTimeMillis()+"."+getExtension(imageuri));
+        final StorageReference reference=mStorageRef.child(System.currentTimeMillis()+"."+getExtension(imageuri));
 
         reference.putFile(imageuri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
@@ -187,6 +189,12 @@ public class UseraccountActivity extends AppCompatActivity {
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
                         //Uri downloadUrl = taskSnapshot.getDownloadUrl();
+                        reference.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                            @Override
+                            public void onSuccess(Uri uri) {
+                                userProfileUrl = uri.toString();
+                            }
+                        });
                         Toast.makeText(UseraccountActivity.this,"Image Uploaded Successfully",Toast.LENGTH_LONG).show();
                     }
                 })
