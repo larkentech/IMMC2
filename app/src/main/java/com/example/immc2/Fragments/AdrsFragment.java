@@ -1,11 +1,15 @@
 package com.example.immc2.Fragments;
 
 
+import android.app.Dialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -13,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.example.immc2.MainActivity;
 import com.example.immc2.R;
@@ -29,7 +34,7 @@ import es.dmoral.toasty.Toasty;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class AdrsFragment extends Fragment {
+public class AdrsFragment extends DialogFragment {
 
     EditText enterPincode;
     EditText enterHouseNo;
@@ -62,6 +67,7 @@ public class AdrsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        getDialog().setTitle("Edit Address");
         return inflater.inflate(R.layout.fragment_adrs, container, false);
     }
 
@@ -69,7 +75,7 @@ public class AdrsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        enterName=view.findViewById(R.id.enterName);
+      /*  enterName=view.findViewById(R.id.enterName);
         enterPhone=view.findViewById(R.id.enterNumber);
         enterPincode=view.findViewById(R.id.enterPincode);
         enterHouseNo=view.findViewById(R.id.enterFlatNo);
@@ -143,9 +149,36 @@ public class AdrsFragment extends Fragment {
                     }
                 });
             }
+        }); */
+
+
+
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Edit Address");
+        builder.setView(R.layout.fragment_adrs);
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
+            @Override public void onClick(DialogInterface dialog, int which)
+            {
+                Toast.makeText(getContext(),"HEllo", Toast.LENGTH_LONG).show();
+                dismiss();
+            }
         });
 
-
-
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
+            @Override public void onClick(DialogInterface dialog, int which)
+            {
+                Toast.makeText(getContext(), "Cancel", Toast.LENGTH_LONG).show();
+                dismiss();
+            }
+        });
+        return builder.create();
     }
 }

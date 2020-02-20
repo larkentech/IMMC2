@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.immc2.AdapterClasses.CartAdapter;
 import com.example.immc2.AdapterClasses.PaymentOrdersListAdapter;
+import com.example.immc2.Fragments.AdrsFragment;
 import com.example.immc2.Fragments.CartFragment;
 import com.example.immc2.ModalClasses.BooksModal;
 import com.google.firebase.auth.FirebaseAuth;
@@ -75,6 +76,14 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         userAddress = findViewById(R.id.orderuseraddress);
         userPhone = findViewById(R.id.orderuserphone);
         finalPrice  = findViewById(R.id.finalPriceTV);
+        changeAddress = findViewById(R.id.btnaddress);
+        changeAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AdrsFragment adrsFragment = new AdrsFragment();
+                adrsFragment.show(getSupportFragmentManager(),"Showing Dialog");
+            }
+        });
 
         userPhone.setText(mAuth.getCurrentUser().getPhoneNumber());
         firebaseDatabase = FirebaseDatabase.getInstance();

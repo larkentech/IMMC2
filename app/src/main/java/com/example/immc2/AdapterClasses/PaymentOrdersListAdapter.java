@@ -99,7 +99,6 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
                     @Override
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         Toasty.error(getContext(),"Item Removed From Cart").show();
-
                         ((CartFragment)fragment).adapter.clear();
                         ((CartFragment)fragment).reloadData();
 
