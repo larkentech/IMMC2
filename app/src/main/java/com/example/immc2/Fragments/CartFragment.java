@@ -1,6 +1,7 @@
 package com.example.immc2.Fragments;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -16,6 +17,7 @@ import android.widget.ListView;
 
 import com.example.immc2.AdapterClasses.CartAdapter;
 import com.example.immc2.ModalClasses.BooksModal;
+import com.example.immc2.PaymentActivity;
 import com.example.immc2.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.ChildEventListener;
@@ -121,6 +123,15 @@ public class CartFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        proceedToPay = view.findViewById(R.id.proccedToBuyCart);
+        proceedToPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), PaymentActivity.class);
+                startActivity(i);
             }
         });
     }

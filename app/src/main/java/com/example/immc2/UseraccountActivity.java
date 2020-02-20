@@ -19,7 +19,6 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseError;
@@ -181,19 +180,13 @@ public class UseraccountActivity extends AppCompatActivity {
         profilepic.setImageURI(imageuri);
 
         StorageReference reference=mStorageRef.child(System.currentTimeMillis()+"."+getExtension(imageuri));
-        /*
-        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-        DatabaseReference databaseReference = firebaseDatabase.getReference();
-        databaseReference.child("UserDetails").child(currentFirebaseUser.getUid()).child("ProfilePicture").setValue(imageuri);
-
-         */
 
         reference.putFile(imageuri)
                 .addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                         // Get a URL to the uploaded content
+                        //Uri downloadUrl = taskSnapshot.getDownloadUrl();
                         Toast.makeText(UseraccountActivity.this,"Image Uploaded Successfully",Toast.LENGTH_LONG).show();
                     }
                 })

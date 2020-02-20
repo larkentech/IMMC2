@@ -18,6 +18,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.immc2.R;
 import com.example.immc2.SplashActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -107,6 +108,11 @@ public class AccountFragment extends Fragment {
                 userlandmark.setText(dataSnapshot.child("Address").child("Landmark").getValue(String.class));
                 userArea.setText(dataSnapshot.child("Address").child("Area").getValue(String.class));
                 userCity.setText(dataSnapshot.child("Address").child("City").getValue(String.class));
+                Glide
+                        .with(getContext())
+                        .load(dataSnapshot.child("ProfilePhoto").getValue(String.class))
+                        .centerCrop()
+                        .into(userImage);
 
                 feedbackEt = (EditText) view.findViewById(R.id.userFeedbackET);
                 final HashMap<String, Object> feedbackMap = new HashMap<>();

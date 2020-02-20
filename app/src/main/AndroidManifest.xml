@@ -45,6 +45,11 @@
         <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="com.razorpay.ApiKey"
+            android:value="rzp_test_GzbLgx5nWuFzaV" />
+
     </application>
 
 </manifest>
