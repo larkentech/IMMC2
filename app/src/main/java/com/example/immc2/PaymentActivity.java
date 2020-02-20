@@ -223,11 +223,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                     BooksModal modal = dataSnapshot.getValue(BooksModal.class);
                     adapter.add(modal);
-                    adapter.notifyDataSetChanged();
-                    for (int i=0;i<ordersList.getCount();i++)
-                    {
-                        Log.v("TAG","FinalPrice:"+adapter.finalPrice);
-                    }
+                    //adapter.notifyDataSetChanged();
                 }
 
                 @Override

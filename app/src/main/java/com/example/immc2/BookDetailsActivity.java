@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
@@ -14,6 +15,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.immc2.Fragments.IntroductionFragment;
 import com.example.immc2.Fragments.ReviewFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -35,6 +37,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     TextView bookPriceIncrement;
     TextView bookCategory;
     RatingBar bookRatings;
+    ImageView bookImage;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -52,6 +55,7 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         bookID = getIntent().getExtras().getString("BookID");
         bookCategoryID = getIntent().getExtras().getString("BookCategory");
         bookSubCategoryID = getIntent().getExtras().getString("BookSubCategory");
+        bookImage = findViewById(R.id.selected_book_image);
 
         bookName = findViewById(R.id.selected_book_name);
         bookAuthor = findViewById(R.id.selected_book_designer);
@@ -76,6 +80,11 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                 bookAuthor.setText("Designed By: "+dataSnapshot.child("BookDesigner").getValue(String.class));
                 bookPrice.setText("Rs."+dataSnapshot.child("BookPrice").getValue(String.class)+"/-");
                 bookCategory.setText("Category: "+dataSnapshot.child("BookSubCategory").getValue(String.class));
+                Glide
+                        .with(getApplicationContext())
+                        .load(dataSnapshot.child("BookImage").getValue(String.class))
+                        .centerCrop()
+                        .into(bookImage);
 
                 String value = dataSnapshot.child("BookPrice").getValue(String.class);
                 String i ="0.2";

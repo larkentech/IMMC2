@@ -27,6 +27,7 @@ import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -36,6 +37,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
     List<String> tempKeys;
     Fragment fragment;
     public int finalPrice;
+
 
 
     public PaymentOrdersListAdapter(@NonNull Context context, int resource, @NonNull List<BooksModal> objects, List<String> itemsCount,List<String> count) {
@@ -51,6 +53,8 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
         {
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.single_cart_item,parent,false);
         }
+
+
 
         final BooksModal modal = getItem(position);
 
@@ -72,13 +76,28 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
         quantityPicker.setValue(Integer.parseInt(itemsCount.get(position).toString()));
         bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*quantityPicker.getValue()+"/-");
 
+        final List<String> tempList = new ArrayList();
+        for(int i=0;i<itemsCount.size();i++){
+            //View view=listView.getChildAt(i);
+            tempList.add(i,bookPrice.getText().toString());
+            Log.v("TAG","Price:"+tempList);
+
+        }
+
+        final View finalConvertView = convertView;
         quantityPicker.setValueChangedListener(new ValueChangedListener() {
             @Override
             public void valueChanged(int value, ActionEnum action) {
                 try{
                     bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*value+"/-");
                     finalPrice = Integer.parseInt(modal.getBookPrice())*value;
-                    ((PaymentActivity)getContext()).finalPrice.setText("Rs."+finalPrice+"/-");
+                    for(int i=0;i<itemsCount.size();i++){
+                        //View view=listView.getChildAt(i);
+                        //tempList.remove(position);
+                        tempList.add(bookPrice.getText().toString());
+                        Log.v("TAG","Price1:"+tempList);
+
+                    }
                 }catch (Exception e)
                 {
                     Log.v("TAG",e.getMessage());
@@ -110,5 +129,18 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
         return convertView;
 
     }
+
+    @Override
+    public int getViewTypeCount() {
+
+        return 2;
+    }
+
+    @Override
+    public int getItemViewType(int position) {
+
+        return position;
+    }
+
 
 }
