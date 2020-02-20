@@ -76,6 +76,15 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                 bookAuthor.setText("Designed By: "+dataSnapshot.child("BookDesigner").getValue(String.class));
                 bookPrice.setText("Rs."+dataSnapshot.child("BookPrice").getValue(String.class)+"/-");
                 bookCategory.setText("Category: "+dataSnapshot.child("BookSubCategory").getValue(String.class));
+
+                String value = dataSnapshot.child("BookPrice").getValue(String.class);
+                String i ="0.2";
+                double value1 = Double.parseDouble(value) + ( Double.parseDouble(value) * Double.parseDouble(i)) ;
+                int value2 = (int)value1;
+                String value3 = Integer.toString(Math.round(value2));
+
+                bookPriceIncrement.setText("Rs."+value3+"/-");
+
             }
 
             @Override

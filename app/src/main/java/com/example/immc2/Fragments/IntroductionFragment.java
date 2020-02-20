@@ -1,7 +1,6 @@
 package com.example.immc2.Fragments;
 
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -25,7 +24,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import com.travijuu.numberpicker.library.NumberPicker;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -180,14 +178,12 @@ public class IntroductionFragment extends Fragment {
 
                     DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
                     databaseReference3.child("Cart").push().setValue(cartMap);
-                    addToCart.setBackgroundColor(getResources().getColor(R.color.finalColor));
-                    addToCart.setText("Added");
-                    Drawable image = addToCart.getContext().getDrawable(R.drawable.add_to_cart_check);
-                    addToCart.setCompoundDrawablesWithIntrinsicBounds(image,null,null,null);
-                    Toasty.success(getContext(), "Successfully added to the cart", Toast.LENGTH_SHORT, true).show();
                 }
+
+
             }
         });
+
 
 
     }
