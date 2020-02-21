@@ -1,0 +1,93 @@
+{
+  "project_info": {
+    "project_number": "617156791548",
+    "firebase_url": "https://iammc2-f61a0.firebaseio.com",
+    "project_id": "iammc2-f61a0",
+    "storage_bucket": "iammc2-f61a0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617156791548:android:6f2ec890fd0e053d86db79",
+        "android_client_info": {
+          "package_name": "com.larken.immc2"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617156791548-oi8no3lsnfe8engace1cpuon3rg8q3kv.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.larken.immc2",
+            "certificate_hash": "eb3b42d0a004c820bfc1f4a42236dfa51efd44a2"
+          }
+        },
+        {
+          "client_id": "617156791548-lv45l49bpnq42psjhi0bbht2b0lpsk25.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.larken.immc2",
+            "certificate_hash": "954103554cac4e2af9a7300c4a8353cdfe76eb89"
+          }
+        },
+        {
+          "client_id": "617156791548-du8vkuf0lonplbf5qjm78iv8kb8sp4o3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTkx9e_Wn_KF8gdlNzdCf0N7AvJ5g5fT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617156791548-du8vkuf0lonplbf5qjm78iv8kb8sp4o3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:617156791548:android:10046d56ec60051b86db79",
+        "android_client_info": {
+          "package_name": "com.larkentech.immc2_admin"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "617156791548-5i1b9bjf1fn7rcqc9o3r17hhqvi5u4jo.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.larkentech.immc2_admin",
+            "certificate_hash": "c8e7077027a36bad08477bc4e704ed07758d0393"
+          }
+        },
+        {
+          "client_id": "617156791548-du8vkuf0lonplbf5qjm78iv8kb8sp4o3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCTkx9e_Wn_KF8gdlNzdCf0N7AvJ5g5fT4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "617156791548-du8vkuf0lonplbf5qjm78iv8kb8sp4o3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
