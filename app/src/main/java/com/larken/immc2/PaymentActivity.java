@@ -35,9 +35,9 @@ import es.dmoral.toasty.Toasty;
 public class PaymentActivity extends AppCompatActivity implements PaymentResultListener {
 
     //TextViews
-    TextView userName;
-    TextView userAddress;
-    TextView userPhone;
+    public TextView userName;
+    public TextView userAddress;
+    public TextView userPhone;
     Button changeAddress;
     ListView ordersList;
     PaymentOrdersListAdapter adapter;
@@ -74,6 +74,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         userPhone = findViewById(R.id.orderuserphone);
         finalPrice  = findViewById(R.id.finalPriceTV);
         changeAddress = findViewById(R.id.btnaddress);
+
         changeAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -111,6 +112,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                         dataSnapshot.child("Address").child("Zipcode").getValue(String.class) + "\nLandmark: "
                         + dataSnapshot.child("Address").child("Landmark").getValue(String.class);
                 userAddress.setText(Address);
+
 
                 if (dataSnapshot.hasChild("Cart")) {
                     count1 = (int) dataSnapshot.child("Cart").getChildrenCount();
