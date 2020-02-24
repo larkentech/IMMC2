@@ -1,5 +1,7 @@
 package com.larken.immc2;
 
+import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -16,6 +18,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
+import com.kodmap.app.library.PopopDialogBuilder;
 import com.larken.immc2.Fragments.IntroductionFragment;
 import com.larken.immc2.Fragments.ReviewFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -53,9 +56,9 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
 
-        final ImagePopup imagePopup = new ImagePopup(this);
-        imagePopup.setHideCloseIcon(true);
-        imagePopup.setImageOnClickClose(true);
+        final List<String> url_list = new ArrayList<>();
+
+
 
 
         bookID = getIntent().getExtras().getString("BookID");
@@ -73,6 +76,10 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
 
         //bookRatings = findViewById(R.id.ratingBar);
         //bookRatings.setEnabled(false);
+
+
+
+
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         if (bookSubCategoryID != null)
@@ -95,6 +102,12 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
                         .centerCrop()
                         .into(bookImage);
 
+
+                for (DataSnapshot ds:dataSnapshot.child("BookImages").getChildren())
+                {
+                    url_list.add(ds.getValue(String.class));
+                }
+
                 String value = dataSnapshot.child("BookPrice").getValue(String.class);
                 String i ="0.2";
                 double value1 = Double.parseDouble(value) + ( Double.parseDouble(value) * Double.parseDouble(i)) ;
@@ -114,8 +127,34 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         bookImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                imagePopup.initiatePopup(bookImage.getDrawable());
-                imagePopup.viewPopup();
+
+
+
+                Dialog dialog = new PopopDialogBuilder(BookDetailsActivity.this)
+                        // Set list like as option1 or option2 or option3
+                        .setList(url_list,0)
+                        // or setList with initial position that like .setList(list,position)
+                        // Set dialog header color
+                        .setHeaderBackgroundColor(android.R.color.white)
+                        // Set dialog background color
+                        .setDialogBackgroundColor(R.color.color_dialog_bg)
+                        // Set close icon drawable
+                        .setCloseDrawable(R.drawable.ic_close_black_24dp)
+                        // Set loading view for pager image and preview image
+                        .setLoadingView(R.layout.loading_view)
+                        // Set dialog style
+                        .setDialogStyle(R.style.DialogStyle)
+                        // Choose selector type, indicator or thumbnail
+                        .showThumbSlider(true)
+                        // Set image scale type for slider image
+                        .setSliderImageScaleType(ImageView.ScaleType.FIT_XY)
+                        // Set indicator drawable
+                        .setSelectorIndicator(R.drawable.sample_indicator_selector)
+                        // Enable or disable zoomable
+                        .setIsZoomable(true)
+                        // Build Km Slider Popup Dialog
+                        .build();
+                dialog.show();
 
             }
         });
