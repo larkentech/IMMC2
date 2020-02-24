@@ -2,6 +2,8 @@ package com.larken.immc2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -78,8 +80,14 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         changeAddress.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AdrsFragment adrsFragment = new AdrsFragment();
-                adrsFragment.show(getSupportFragmentManager(),"Showing Dialog");
+                AdrsFragment dialogFragment = new AdrsFragment();
+                FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                Fragment prev = getSupportFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                dialogFragment.show(ft, "dialog");
             }
         });
 

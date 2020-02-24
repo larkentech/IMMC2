@@ -18,7 +18,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.larken.immc2.PaymentActivity;
 import com.larken.immc2.R;
 
 /**
@@ -36,8 +35,16 @@ public class AdrsFragment extends DialogFragment {
     EditText enterName;
     EditText enterPhone;
 
-    Button buttonOK;
+    Button btnSave;
 
+    String Name;
+    String Phone;
+    String City;
+    String Area;
+    String Landmark;
+    String HouseNo;
+    String Pincode;
+    String State;
 
 
     public AdrsFragment() {
@@ -48,82 +55,119 @@ public class AdrsFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
-
+        // Inflate the layout for this fragment
         getDialog().setTitle("Edit Address");
         return inflater.inflate(R.layout.fragment_adrs, container, false);
-
-    }
-
-
-    @NonNull
-    @Override
-    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        LayoutInflater li = LayoutInflater.from(builder.getContext());
-        View view = li.inflate(R.layout.fragment_adrs,null);
-
-        buttonOK=view.findViewById(R.id.btnsAVE);
-
-
-
-        enterName=view.findViewById(R.id.enterName);
-        enterPhone=view.findViewById(R.id.enterNumber);
-        enterCity=view.findViewById(R.id.entercity);
-        enterArea=view.findViewById(R.id.enterArea);
-        enterHouseNo=view.findViewById(R.id.enterFlatNo);
-        enterLandmark=view.findViewById(R.id.enterLandmark);
-        enterState=view.findViewById(R.id.enterState);
-        enterPincode=view.findViewById(R.id.enterPincode);
-
-
-
-
-
-        buttonOK.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = enterName.getText().toString();
-                String number=enterPhone.getText().toString();
-                String finalAddress = enterHouseNo.getText().toString() +",\nLandmark: "+
-                        enterLandmark.getText().toString() +","+ enterArea.getText().toString() +","+
-                        enterCity.getText().toString() +","+ enterState.getText().toString() +","+
-                        enterPincode.getText().toString();
-
-
-                ((PaymentActivity)(getContext())).userName.setText(name);
-                ((PaymentActivity)getContext()).userPhone.setText(number);
-                ((PaymentActivity)getContext()).userAddress.setText(finalAddress);
-            }
-        });
-        builder.setView(view);
-
-        return builder.create();
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+      /*  enterName=view.findViewById(R.id.enterName);
+        enterPhone=view.findViewById(R.id.enterNumber);
+        enterPincode=view.findViewById(R.id.enterPincode);
+        enterHouseNo=view.findViewById(R.id.enterFlatNo);
+        enterArea=view.findViewById(R.id.enterArea);
+        enterCity=view.findViewById(R.id.enterCity);
+        enterState=view.findViewById(R.id.enterState);
+        enterLandmark=view.findViewById(R.id.enterLandmark);
+
+        btnSave=view.findViewById(R.id.btnsave);
+
+
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btnSave.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Name = enterName.getText().toString();
+                        Phone=enterPhone.getText().toString();
+                        City = enterCity.getText().toString();
+                        HouseNo = enterHouseNo.getText().toString();
+                        Area = enterArea.getText().toString();
+                        Landmark = enterLandmark.getText().toString();
+                        Pincode = enterPincode.getText().toString();
+                        State=enterState.getText().toString();
 
 
 
 
-        // AdrsFragment adrsFragment = new AdrsFragment();
-        // Dialog dl = adrsFragment.getDialog();
-        //btnSave = dl.findViewById(R.id.btnsAVE);
+                        if (Name.isEmpty()  || City.isEmpty() || HouseNo.isEmpty() || Pincode.isEmpty() || Area.isEmpty() ) {
+                            Toasty.error(getContext(), "Enter Required Details").show();
+                            if (Pincode.length() < 6) {
+                                Toasty.error(getContext(), "Invalid Pipcode").show();
+                            }
+                            Toasty.error(getContext(), "Enter Valid Pipcode").show();
 
-        //btnSave.setOnClickListener(new View.OnClickListener() {
-        // @Override
-        // public void onClick(View v) {
+                        } else {
+                            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+                            FirebaseDatabase database = FirebaseDatabase.getInstance();
+                            DatabaseReference databaseReference = database.getReference();
 
-        //String name = enterName.getText().toString();
-        //String phone = enterPhone.getText().toString();
-        // Toasty.success(getContext(),"Hello"+name).show();
-        //Log.v("TAG","Success");
+                            HashMap<String, Object> userMap = new HashMap<>();
+                            userMap.put("Name", enterName.getText().toString());
+                            userMap.put("Phone", enterPhone.getText().toString());
 
-        // }
-        //});
 
+
+
+                            databaseReference.child("UserAddress").child(currentFirebaseUser.getUid()).setValue(userMap);
+
+
+                            DatabaseReference databaseReference1 = database.getReference();
+                            HashMap<String, Object> addMap = new HashMap<>();
+                            addMap.put("Pincode", enterPincode.getText().toString());
+                            addMap.put("House", enterHouseNo.getText().toString());
+                            addMap.put("Area", enterArea.getText().toString());
+                            addMap.put("City", enterCity.getText().toString());
+                            addMap.put("State",enterState.getText().toString());
+                            addMap.put("Landmark", enterLandmark.getText().toString());
+
+
+
+
+                            databaseReference1.child("UserAddress").child(currentFirebaseUser.getUid()).child("Address").setValue(addMap);
+
+
+                            Intent i = new Intent(getContext(), MainActivity.class);
+                            startActivity(i);
+                            getActivity().finish();
+                        }
+                    }
+                });
+            }
+        }); */
+
+
+
+    }
+
+    @NonNull
+    @Override
+    public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setTitle("Edit Address");
+        builder.setView(R.layout.fragment_adrs);
+
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener()
+        {
+            @Override public void onClick(DialogInterface dialog, int which)
+            {
+                Toast.makeText(getContext(),"HEllo", Toast.LENGTH_LONG).show();
+                dismiss();
+            }
+        });
+
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener()
+        {
+            @Override public void onClick(DialogInterface dialog, int which)
+            {
+                Toast.makeText(getContext(), "Cancel", Toast.LENGTH_LONG).show();
+                dismiss();
+            }
+        });
+        return builder.create();
     }
 }
