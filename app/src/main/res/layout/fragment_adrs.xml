@@ -39,7 +39,7 @@
 
                 android:id="@+id/enterPincode"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginEnd="32dp"
@@ -59,7 +59,7 @@
 
                 android:id="@+id/enterFlatNo"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
@@ -78,7 +78,7 @@
 
                 android:id="@+id/enterArea"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
@@ -98,7 +98,7 @@
 
                 android:id="@+id/enterCity"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
@@ -118,7 +118,7 @@
 
                 android:id="@+id/enterState"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"
@@ -138,7 +138,7 @@
 
                 android:id="@+id/enterLandmark"
                 android:layout_width="match_parent"
-                android:layout_height="54dp"
+                android:layout_height="50dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
                 android:layout_marginEnd="32dp"

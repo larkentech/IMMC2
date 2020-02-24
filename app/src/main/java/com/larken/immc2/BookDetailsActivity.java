@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentPagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.larken.immc2.Fragments.IntroductionFragment;
 import com.larken.immc2.Fragments.ReviewFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -46,10 +47,16 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     public String bookCategoryID;
     public String bookSubCategoryID;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
+
+        final ImagePopup imagePopup = new ImagePopup(this);
+        imagePopup.setHideCloseIcon(true);
+        imagePopup.setImageOnClickClose(true);
+
 
         bookID = getIntent().getExtras().getString("BookID");
         bookCategoryID = getIntent().getExtras().getString("BookCategory");
@@ -61,6 +68,9 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         bookPrice = findViewById(R.id.selected_book_price);
         bookPriceIncrement = findViewById(R.id.book_offer_price);
         bookCategory = findViewById(R.id.selected_book_category);
+
+
+
         //bookRatings = findViewById(R.id.ratingBar);
         //bookRatings.setEnabled(false);
 
@@ -97,6 +107,15 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+        bookImage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imagePopup.initiatePopup(bookImage.getDrawable());
+                imagePopup.viewPopup();
 
             }
         });
@@ -161,4 +180,6 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         startActivity(i);
         finish();
     }
+
+
 }

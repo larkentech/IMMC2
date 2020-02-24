@@ -14,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 
 import com.bumptech.glide.Glide;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.larken.immc2.BookDetailsActivity;
 import com.larken.immc2.ModalClasses.BooksModal;
 import com.larken.immc2.R;
@@ -43,7 +44,7 @@ public class BestSellingAdapter extends ArrayAdapter<BooksModal> {
         CardView bestSellercard = convertView.findViewById(R.id.bestSellerCard);
         TextView BookPrice = convertView.findViewById(R.id.best_seller_price_single);
         TextView BooksName = convertView.findViewById(R.id.best_seller_bookName_single);
-        ImageView BookImage = convertView.findViewById(R.id.best_seller_image_single);
+        final ImageView BookImage = convertView.findViewById(R.id.best_seller_image_single);
         Glide
                 .with(getContext())
                 .load(bestSellingModal.getBookImage())
@@ -64,6 +65,7 @@ public class BestSellingAdapter extends ArrayAdapter<BooksModal> {
                 ((Activity)getContext()).finish();
             }
         });
+
 
         return convertView;
     }

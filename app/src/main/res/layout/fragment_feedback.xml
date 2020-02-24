@@ -45,8 +45,10 @@
 
                 <com.hsalf.smilerating.SmileRating
                     android:id="@+id/smile_rating"
-                    android:layout_width="350dp"
-                    android:layout_height="150dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="36dp"
+                    android:layout_marginEnd="36dp"
                     android:layout_below="@id/questionTV"
                     android:layout_marginTop="25dp"
                     android:layout_centerHorizontal="true"/>

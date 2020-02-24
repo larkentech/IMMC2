@@ -48,7 +48,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:fontFamily="@font/latoblack"
-                android:text="E \u0026 C NoteBooks"
+                android:text="ECE NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
 

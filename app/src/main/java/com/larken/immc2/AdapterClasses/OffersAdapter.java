@@ -13,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
+import com.ceylonlabs.imageviewpopup.ImagePopup;
 import com.larken.immc2.ModalClasses.BooksModal;
 import com.larken.immc2.R;
 
@@ -32,9 +33,13 @@ public class OffersAdapter extends ArrayAdapter<BooksModal> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
         if (convertView == null)
+
+
         {
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.offers_single,parent,false);
         }
+
+
 
         BooksModal modal = getItem(position);
         ImageView offersImage = convertView.findViewById(R.id.offer_image_single);
@@ -44,10 +49,13 @@ public class OffersAdapter extends ArrayAdapter<BooksModal> {
                 .centerCrop()
                 .into(offersImage);
 
+
+
         offersImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(),"Hello Image:"+position,Toast.LENGTH_LONG).show();
+
             }
         });
 

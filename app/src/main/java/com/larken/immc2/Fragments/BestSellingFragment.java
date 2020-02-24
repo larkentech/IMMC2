@@ -35,6 +35,7 @@ public class BestSellingFragment extends Fragment {
     List<String> bestSellingID;
 
 
+
     public BestSellingFragment() {
         // Required empty public constructor
     }
