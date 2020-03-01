@@ -41,8 +41,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     public TextView userAddress;
     public TextView userPhone;
     Button changeAddress;
-    ListView ordersList;
-    PaymentOrdersListAdapter adapter;
+    public ListView ordersList;
+    public PaymentOrdersListAdapter adapter;
     public TextView finalPrice;
 
     Button proceedToBuy;
@@ -61,6 +61,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     List<String> tempKeys;
     int count1;
     int count2 = 0;
+    int calulatedprice = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -219,7 +221,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     }
 
-    private void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId, List<String> itemsCount) {
+    public void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId, List<String> itemsCount) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         for (int i=0;i<bookId.size();i++)
         {
@@ -231,6 +233,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                     BooksModal modal = dataSnapshot.getValue(BooksModal.class);
                     adapter.add(modal);
                     //adapter.notifyDataSetChanged();
+                    displayFinalPrice();
                 }
 
                 @Override
@@ -240,6 +243,42 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             });
         }
     }
+
+    //To Set the final price when loaded.
+    public void displayFinalPrice() {
+
+        String _finalPrice;
+        View v;
+        ArrayList<String> prices = new ArrayList<>();
+        TextView priceTV;
+        for (int i=0;i<ordersList.getCount();i++)
+        {
+            v = ordersList.getAdapter().getView(i,null,null);
+            priceTV = (TextView) v.findViewById(R.id.bookPriceCart);
+            prices.add(priceTV.getText().toString());
+            if (ordersList.getCount() == (i+1))
+            {
+                Log.v("TAG","FinalPrice:"+prices);
+                String[] temp = new String[prices.size()];
+                temp = prices.get(i).split("\\.");
+                String onlyPrice = temp[1];
+                String[] temp2 = new String[prices.size()];
+                temp2 = onlyPrice.split("/");
+                String exactPrice = temp2[0];
+                calulatedprice = calulatedprice + Integer.parseInt(exactPrice);
+                finalPrice.setText("Rs."+calulatedprice);
+            }
+
+        }
+
+    }
+
+    //To Display finalPrice When changed
+    public void displayFinalPriceTwo()
+    {
+        displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+    }
+
 
     public void reloadData(){
         getData();

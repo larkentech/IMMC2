@@ -18,6 +18,7 @@ import com.bumptech.glide.Glide;
 import com.larken.immc2.Fragments.CartFragment;
 import com.larken.immc2.ModalClasses.BooksModal;
 
+import com.larken.immc2.PaymentActivity;
 import com.larken.immc2.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
@@ -90,14 +91,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
             public void valueChanged(int value, ActionEnum action) {
                 try{
                     bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*value+"/-");
-                    finalPrice = Integer.parseInt(modal.getBookPrice())*value;
-                    for(int i=0;i<itemsCount.size();i++){
-                        //View view=listView.getChildAt(i);
-                        //tempList.remove(position);
-                        tempList.add(bookPrice.getText().toString());
-                        Log.v("TAG","Price1:"+tempList);
-
-                    }
+                    ((PaymentActivity)getContext()).displayFinalPrice();
                 }catch (Exception e)
                 {
                     Log.v("TAG",e.getMessage());
@@ -129,18 +123,5 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
         return convertView;
 
     }
-
-    @Override
-    public int getViewTypeCount() {
-
-        return 2;
-    }
-
-    @Override
-    public int getItemViewType(int position) {
-
-        return position;
-    }
-
 
 }
