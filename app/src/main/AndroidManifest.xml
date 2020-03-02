@@ -15,8 +15,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".PaymentActivity"></activity>
-        <activity android:name=".BookDetailsActivity"></activity>
+        <activity android:name=".PaymentFailedActivity"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+        <activity android:name=".PaymentSuccessActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity android:name=".PaymentActivity" />
+        <activity android:name=".BookDetailsActivity" />
         <activity
             android:name=".DetailsContainerActivity"
             android:theme="@style/AppTheme.NoActionBar" />
@@ -50,7 +54,6 @@
         <meta-data
             android:name="com.razorpay.ApiKey"
             android:value="rzp_test_GzbLgx5nWuFzaV" />
-
     </application>
 
 </manifest>

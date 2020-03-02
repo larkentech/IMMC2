@@ -104,6 +104,8 @@ public class AccountFragment extends Fragment {
                 userlandmark.setText(dataSnapshot.child("Address").child("Landmark").getValue(String.class));
                 userArea.setText(dataSnapshot.child("Address").child("Area").getValue(String.class));
                 userCity.setText(dataSnapshot.child("Address").child("City").getValue(String.class));
+
+
                 Glide
                         .with(getContext())
                         .load(dataSnapshot.child("ProfilePhoto").getValue(String.class))

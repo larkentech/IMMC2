@@ -36,7 +36,8 @@
 
             </EditText>
 
-            <de.hdodenhof.circleimageview.CircleImageView
+            <ImageView
+                android:tag="p"
                 android:id="@+id/propicMain"
                 android:layout_width="150dp"
                 android:layout_height="wrap_content"
@@ -47,7 +48,7 @@
                 android:src="@drawable/propic">
 
 
-            </de.hdodenhof.circleimageview.CircleImageView>
+            </ImageView>
 
 
         </RelativeLayout>

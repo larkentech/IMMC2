@@ -6,12 +6,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentResolver;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
 import android.webkit.MimeTypeMap;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -23,6 +25,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.larken.immc2.Fragments.AccountFragment;
 
 import java.util.HashMap;
 
@@ -39,7 +42,7 @@ public class UseraccountActivity extends AppCompatActivity {
     EditText userlandmark;
     Button saveprofile;
 
-    CircleImageView profilepic;
+    ImageView profilepic;
 
     public static final int IMAGE_CODE=1;
     Uri imageuri;
@@ -79,8 +82,8 @@ public class UseraccountActivity extends AppCompatActivity {
         profilepic.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 openImageForm();
+
 
             }
         });
@@ -99,17 +102,12 @@ public class UseraccountActivity extends AppCompatActivity {
                 Zipcode = userzipcode.getText().toString();
 
 
-
-
                 if (Name.isEmpty() || Email.isEmpty() || City.isEmpty() || Flat.isEmpty() ||
-                        Landmark.isEmpty() || Zipcode.isEmpty() || Area.isEmpty() ) {
+                        Landmark.isEmpty() || Zipcode.isEmpty() || Area.isEmpty()) {
                     Toasty.error(UseraccountActivity.this, "Enter Required Details").show();
-                    if (Zipcode.length() < 6) {
-                        Toasty.error(UseraccountActivity.this, "Invalid Zipcode").show();
                     }
-                    Toasty.error(UseraccountActivity.this, "Enter Valid Zipcode").show();
-
-                } else {
+                else
+                    {
                     FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
                     FirebaseDatabase database = FirebaseDatabase.getInstance();
                     DatabaseReference databaseReference = database.getReference();
@@ -177,6 +175,7 @@ public class UseraccountActivity extends AppCompatActivity {
         imageuri=data.getData();
         profilepic.setImageURI(imageuri);
 
+
         final StorageReference reference=mStorageRef.child(System.currentTimeMillis()+"."+getExtension(imageuri));
 
         reference.putFile(imageuri)
@@ -192,6 +191,8 @@ public class UseraccountActivity extends AppCompatActivity {
                             }
                         });
                         Toast.makeText(UseraccountActivity.this,"Image Uploaded Successfully",Toast.LENGTH_LONG).show();
+
+
                     }
                 })
                 .addOnFailureListener(new OnFailureListener() {
@@ -199,6 +200,7 @@ public class UseraccountActivity extends AppCompatActivity {
                     public void onFailure(@NonNull Exception exception) {
                         // Handle unsuccessful uploads
                         // ...
+
 
                     }
                 });

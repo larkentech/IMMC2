@@ -1,11 +1,15 @@
 package com.larken.immc2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.icu.text.DateFormat;
+import android.os.Build;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +18,7 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.larken.immc2.AdapterClasses.PaymentOrdersListAdapter;
 import com.larken.immc2.Fragments.AdrsFragment;
 import com.larken.immc2.ModalClasses.BooksModal;
@@ -28,7 +33,11 @@ import com.razorpay.PaymentResultListener;
 
 import org.json.JSONObject;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
 
@@ -48,10 +57,13 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     Button proceedToBuy;
     FirebaseAuth mAuth;
 
+
+
     //Database for UserDetails
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
     DatabaseReference databaseReferenceBooks;
+
 
     //Book Details
     List<String> bookId;
@@ -59,18 +71,23 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     List<String> bookSubCategoryId;
     List<String> itemsCount;
     List<String> tempKeys;
+
+    String Date;
+
+
     int count1;
     int count2 = 0;
 
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_payment);
 
+        Calendar calendar=Calendar.getInstance();
+        Date=DateFormat.getDateInstance(DateFormat.SHORT).format(calendar.getTime());
+
         mAuth = FirebaseAuth.getInstance();
-
-
-
         userName = findViewById(R.id.orderusername);
         userAddress = findViewById(R.id.orderuseraddress);
         userPhone = findViewById(R.id.orderuserphone);
@@ -98,9 +115,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
 
         bookId = new ArrayList<>();
+        itemsCount=new ArrayList<>();
         bookCategoryId = new ArrayList<>();
         bookSubCategoryId = new ArrayList<>();
-        itemsCount = new ArrayList<>();
         tempKeys = new ArrayList<>();
 
         ordersList = findViewById(R.id.ordersListPayment);
@@ -120,6 +137,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                         dataSnapshot.child("Address").child("Zipcode").getValue(String.class) + "\nLandmark: "
                         + dataSnapshot.child("Address").child("Landmark").getValue(String.class);
                 userAddress.setText(Address);
+                finalPrice.setText(dataSnapshot.child("FinalPrice").getValue(String.class));
 
 
                 if (dataSnapshot.hasChild("Cart")) {
@@ -162,8 +180,6 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         });
 
 
-
-
         proceedToBuy = findViewById(R.id.proceedToBuy);
         proceedToBuy.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -196,9 +212,13 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
             co.open(activity, options);
         } catch (Exception e) {
+
             Toast.makeText(activity, "Error in payment: " + e.getMessage(), Toast.LENGTH_SHORT)
+
                     .show();
             e.printStackTrace();
+
+
         }
     }
 
@@ -207,15 +227,51 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         Random rnd = new Random();
         int txnID = rnd.nextInt(99999999) + 1;
         return txnID;
+
+
+
     }
 
     @Override
     public void onPaymentSuccess(String s) {
-        Toasty.success(getApplicationContext(),"Payment Successfull").show();
+
+        try {
+            int txn = randomTxnID();
+            FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+            FirebaseDatabase database = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = database.getReference();
+
+            HashMap<String, Object> userMap = new HashMap<>();
+            userMap.put("Name", userName.getText().toString());
+            userMap.put("FinalPrice",finalPrice.getText().toString());
+            userMap.put("Address",userAddress.getText().toString());
+            userMap.put("TxnID",txn);
+            userMap.put("OrderDate",Date.toString());
+
+            userMap.put("PhoneNumber", currentFirebaseUser.getPhoneNumber().toString());
+
+            databaseReference.child("OrderDetails").child(Integer.toString(txn)).setValue(userMap);
+
+            Toasty.success(getApplicationContext(),"Payment Successfull").show();
+            Intent intent=new Intent(this,PaymentSuccessActivity.class);
+            startActivity(intent);
+        }catch (Exception e)
+        {
+            Toasty.error(getApplicationContext(),"failed").show();
+            Log.v("TAG","Exception:"+e);
+        }
+
+
+
+
     }
 
     @Override
     public void onPaymentError(int i, String s) {
+
+        Toasty.error(getApplicationContext(),"Payment Unsuccessfull").show();
+        Intent intent=new Intent(this,PaymentFailedActivity.class);
+        startActivity(intent);
 
     }
 
