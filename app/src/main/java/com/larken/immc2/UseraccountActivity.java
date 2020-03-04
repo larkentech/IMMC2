@@ -80,11 +80,10 @@ public class UseraccountActivity extends AppCompatActivity {
         profilepic = findViewById(R.id.propicMain);
 
         profilepic.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
                 openImageForm();
-
-
             }
         });
 
@@ -105,6 +104,7 @@ public class UseraccountActivity extends AppCompatActivity {
                 if (Name.isEmpty() || Email.isEmpty() || City.isEmpty() || Flat.isEmpty() ||
                         Landmark.isEmpty() || Zipcode.isEmpty() || Area.isEmpty()) {
                     Toasty.error(UseraccountActivity.this, "Enter Required Details").show();
+
                     }
                 else
                     {
@@ -117,10 +117,7 @@ public class UseraccountActivity extends AppCompatActivity {
                     userMap.put("Email", usermail.getText().toString());
                     userMap.put("ProfilePhoto",userProfileUrl);
 
-
-
                     userMap.put("PhoneNumber", currentFirebaseUser.getPhoneNumber().toString());
-
 
                     databaseReference.child("UserDetails").child(currentFirebaseUser.getUid()).setValue(userMap);
                     databaseReference.child("UserDetails").child(String.valueOf(currentFirebaseUser.getPhotoUrl())).setValue(userMap);
@@ -191,6 +188,9 @@ public class UseraccountActivity extends AppCompatActivity {
                             }
                         });
                         Toast.makeText(UseraccountActivity.this,"Image Uploaded Successfully",Toast.LENGTH_LONG).show();
+
+
+
 
 
                     }

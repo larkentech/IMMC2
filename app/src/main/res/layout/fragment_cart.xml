@@ -27,16 +27,16 @@
         android:divider="@null"/>
 
     <Button
+        android:id="@+id/proccedToBuyCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="88dp"
-        android:layout_marginTop="16dp"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginEnd="24dp"
+        android:layout_marginBottom="16dp"
         android:background="@drawable/button_shape"
-        android:text="Proceed To Buy"
-        android:textColor="@android:color/white"
         android:fontFamily="@font/latobold"
-        android:id="@+id/proccedToBuyCart" />
+        android:text="Proceed To Buy"
+        android:textColor="@android:color/white" />
 
 </LinearLayout>

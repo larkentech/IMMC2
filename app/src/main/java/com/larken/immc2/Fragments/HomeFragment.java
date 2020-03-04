@@ -13,6 +13,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.larken.immc2.AdapterClasses.BestSellingAdapter;
 import com.larken.immc2.AdapterClasses.OffersAdapter;
 import com.larken.immc2.DetailsContainerActivity;
@@ -73,6 +74,8 @@ public class HomeFragment extends Fragment {
 
         featuredID = new ArrayList<>();
         bestSellingID = new ArrayList<>();
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
+        bottomNavigationView.setVisibility(View.VISIBLE);
 
         quotesTheme = (CardView) view.findViewById(R.id.quotesTheme);
 

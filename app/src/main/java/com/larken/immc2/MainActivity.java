@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.mainFragmentContainer,homeFragment);
         transaction.commit();
+
 
 
 
@@ -51,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
                     case R.id.navigation_search:
+
                         FragmentManager manager1 = getSupportFragmentManager();
                         CartFragment cartFragment = new CartFragment();
                         FragmentTransaction transaction1 = manager1.beginTransaction();
@@ -85,4 +88,5 @@ public class MainActivity extends AppCompatActivity {
         });
 
     }
+
 }

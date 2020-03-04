@@ -12,10 +12,14 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationMenu;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.larken.immc2.AdapterClasses.CartAdapter;
+import com.larken.immc2.MainActivity;
 import com.larken.immc2.ModalClasses.BooksModal;
 import com.larken.immc2.PaymentActivity;
 import com.larken.immc2.R;
@@ -60,12 +64,14 @@ public class CartFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
         // Inflate the layout for this fragment
 
         mAuth = FirebaseAuth.getInstance();
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getUid());
         databaseReferenceBooks = firebaseDatabase.getReference().child("BookDetails");
+
 
         bookId = new ArrayList<>();
         bookCategoryId = new ArrayList<>();
@@ -80,9 +86,16 @@ public class CartFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         cartListView = view.findViewById(R.id.cartListView);
+
         List<BooksModal> cartItems = new ArrayList<>();
         adapter = new CartAdapter(getContext(), R.layout.single_cart_item, cartItems,itemsCount,tempKeys, CartFragment.this);
         cartListView.setAdapter(adapter);
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
+        bottomNavigationView.setVisibility(View.GONE);
+
+
+
+
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -133,6 +146,10 @@ public class CartFragment extends Fragment {
                 startActivity(i);
             }
         });
+    }
+
+    private Window getWindow() {
+        return null;
     }
 
     private void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId, List<String> itemsCount) {

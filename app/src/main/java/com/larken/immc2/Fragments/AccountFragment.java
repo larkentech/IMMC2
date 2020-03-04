@@ -13,10 +13,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.Query;
+import com.larken.immc2.AdapterClasses.OrderAdapter;
+import com.larken.immc2.AdapterClasses.PaymentOrdersListAdapter;
+import com.larken.immc2.ModalClasses.BooksModal;
+import com.larken.immc2.ModalClasses.OrderModal;
 import com.larken.immc2.R;
 import com.larken.immc2.SplashActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -29,7 +36,9 @@ import com.google.firebase.database.ValueEventListener;
 import com.hsalf.smilerating.BaseRating;
 import com.hsalf.smilerating.SmileRating;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
@@ -58,6 +67,11 @@ public class AccountFragment extends Fragment {
     EditText feedbackEt;
 
 
+
+
+
+
+
     public AccountFragment() {
         // Required empty public constructor
     }
@@ -66,14 +80,28 @@ public class AccountFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        mAuth = FirebaseAuth.getInstance();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference().child("OrderDeatails").child(mAuth.getUid());
+        databaseReference = firebaseDatabase.getReference().child("BookDetails");
+
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_account, container, false);
+
+
+
+
 
     }
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
+        bottomNavigationView.setVisibility(View.VISIBLE);
 
 
 
@@ -87,13 +115,13 @@ public class AccountFragment extends Fragment {
         userArea = view.findViewById(R.id.addArea);
         userCity = view.findViewById(R.id.addCity);
         signout = view.findViewById(R.id.signOut);
-
-
         mAuth = FirebaseAuth.getInstance();
 
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
+
+
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -111,6 +139,8 @@ public class AccountFragment extends Fragment {
                         .load(dataSnapshot.child("ProfilePhoto").getValue(String.class))
                         .centerCrop()
                         .into(userImage);
+
+
 
                 feedbackEt = (EditText) view.findViewById(R.id.userFeedbackET);
                 final HashMap<String, Object> feedbackMap = new HashMap<>();
@@ -166,11 +196,19 @@ public class AccountFragment extends Fragment {
 
             }
 
+
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
+
+
+
+            firebaseDatabase = FirebaseDatabase.getInstance();
+            databaseReference = firebaseDatabase.getReference().child("OrderDetails");
+
+
 
         signout.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -52,7 +52,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
         if (convertView == null)
         {
-            convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.single_cart_item,parent,false);
+            convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.single_order_item,parent,false);
         }
 
 
@@ -60,12 +60,10 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
         final BooksModal modal = getItem(position);
 
 
-        TextView bookName = convertView.findViewById(R.id.bookNameCart);
-        TextView authorName = convertView.findViewById(R.id.bookDesignerCart);
-        final TextView bookPrice = convertView.findViewById(R.id.bookPriceCart);
-        NumberPicker quantityPicker = convertView.findViewById(R.id.number_picker_cart);
-        ImageView BookImage = convertView.findViewById(R.id.itemImageCart);
-        Button deleteItem = convertView.findViewById(R.id.delete_cart);
+        TextView bookName = convertView.findViewById(R.id.bookNameOrder);
+        TextView authorName = convertView.findViewById(R.id.bookDesignerOrder);
+        final TextView bookPrice = convertView.findViewById(R.id.bookPriceOrder);
+        ImageView BookImage = convertView.findViewById(R.id.itemImageOrder);
         Glide
                 .with(getContext())
                 .load(modal.getBookImage())
@@ -74,8 +72,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
 
         bookName.setText(modal.getBookName());
         authorName.setText(modal.getBookDesigner());
-        quantityPicker.setValue(Integer.parseInt(itemsCount.get(position).toString()));
-        bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*quantityPicker.getValue()+"/-");
+        bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())+"/-");
 
         final List<String> tempList = new ArrayList();
         for(int i=0;i<itemsCount.size();i++){
@@ -85,40 +82,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
 
         }
 
-        final View finalConvertView = convertView;
-        quantityPicker.setValueChangedListener(new ValueChangedListener() {
-            @Override
-            public void valueChanged(int value, ActionEnum action) {
-                try{
-                    bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*value+"/-");
-                    ((PaymentActivity)getContext()).displayFinalPrice();
-                }catch (Exception e)
-                {
-                    Log.v("TAG",e.getMessage());
-                }
-            }
-        });
 
-
-
-        deleteItem.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
-                FirebaseAuth mAuth = FirebaseAuth.getInstance();
-                DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails")
-                        .child(mAuth.getUid()).child("Cart");
-                databaseReference.child(tempKeys.get(position)).removeValue(new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        Toasty.error(getContext(),"Item Removed From Cart").show();
-                        ((CartFragment)fragment).adapter.clear();
-                        ((CartFragment)fragment).reloadData();
-
-                    }
-                });
-            }
-        });
 
         return convertView;
 

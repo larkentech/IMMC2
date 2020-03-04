@@ -35,6 +35,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -70,9 +71,11 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     List<String> bookCategoryId;
     List<String> bookSubCategoryId;
     List<String> itemsCount;
+    List<String> bookName;
     List<String> tempKeys;
 
-    String Date;
+   String Date;
+
 
 
     int count1;
@@ -120,6 +123,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         itemsCount=new ArrayList<>();
         bookCategoryId = new ArrayList<>();
         bookSubCategoryId = new ArrayList<>();
+        bookName=new ArrayList<>();
         tempKeys = new ArrayList<>();
 
         ordersList = findViewById(R.id.ordersListPayment);
@@ -142,6 +146,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                 finalPrice.setText(dataSnapshot.child("FinalPrice").getValue(String.class));
 
 
+
                 if (dataSnapshot.hasChild("Cart")) {
                     count1 = (int) dataSnapshot.child("Cart").getChildrenCount();
                     for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
@@ -154,10 +159,11 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                                 bookId.add(dataSnapshot.child("BookId").getValue(String.class));
                                 bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
+                                bookName.add(dataSnapshot.child("BookName").getValue(String.class));
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
-                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName);
 
                                 }
 
@@ -250,9 +256,21 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             userMap.put("TxnID",txn);
             userMap.put("OrderDate",Date.toString());
 
-            userMap.put("PhoneNumber", currentFirebaseUser.getPhoneNumber().toString());
 
+
+            userMap.put("PhoneNumber", currentFirebaseUser.getPhoneNumber().toString());
             databaseReference.child("OrderDetails").child(Integer.toString(txn)).setValue(userMap);
+
+            DatabaseReference databaseReference1=database.getReference();
+            HashMap<String, Object> addMap = new HashMap<>();
+            addMap.put("BookID",bookId);
+            addMap.put("ItemsCount",itemsCount);
+
+
+            databaseReference1.child("OrderDetails").child(Integer.toString(txn)).child("BookDetails").setValue(addMap);
+
+
+
 
             Toasty.success(getApplicationContext(),"Payment Successfull").show();
             Intent intent=new Intent(this,PaymentSuccessActivity.class);
@@ -277,7 +295,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     }
 
-    public void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId, List<String> itemsCount) {
+    public void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId,List<String> bookName, List<String> itemsCount) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         for (int i=0;i<bookId.size();i++)
         {
@@ -310,7 +328,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         for (int i=0;i<ordersList.getCount();i++)
         {
             v = ordersList.getAdapter().getView(i,null,null);
-            priceTV = (TextView) v.findViewById(R.id.bookPriceCart);
+            priceTV = (TextView) v.findViewById(R.id.bookPriceOrder);
             prices.add(priceTV.getText().toString());
             if (ordersList.getCount() == (i+1))
             {
@@ -332,7 +350,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     //To Display finalPrice When changed
     public void displayFinalPriceTwo()
     {
-        displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+        displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName);
     }
 
 
@@ -357,9 +375,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                                 bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
+                                bookName.add(dataSnapshot.child("BookName").getValue(String.class));
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
-                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName);
                                 }
 
                             }
