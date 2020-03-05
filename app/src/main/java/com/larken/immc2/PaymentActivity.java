@@ -54,6 +54,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     public ListView ordersList;
     public PaymentOrdersListAdapter adapter;
     public TextView finalPrice;
+    public String orderedBookNames = "Book Name:";
 
     Button proceedToBuy;
     FirebaseAuth mAuth;
@@ -128,7 +129,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
         ordersList = findViewById(R.id.ordersListPayment);
         List<BooksModal> cartItems = new ArrayList<>();
-        adapter = new PaymentOrdersListAdapter(this, R.layout.single_cart_item, cartItems,itemsCount,tempKeys);
+        adapter = new PaymentOrdersListAdapter(this, R.layout.single_order_item, cartItems,itemsCount,tempKeys);
         ordersList.setAdapter(adapter);
 
 
@@ -160,7 +161,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                                 bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
                                 bookName.add(dataSnapshot.child("BookName").getValue(String.class));
+
+
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
+
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
                                     displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName);
@@ -255,22 +259,11 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             userMap.put("Address",userAddress.getText().toString());
             userMap.put("TxnID",txn);
             userMap.put("OrderDate",Date.toString());
-
-
+            userMap.put("ItemsCount",getItemCount());
+            userMap.put("BookName",getBookNames());
 
             userMap.put("PhoneNumber", currentFirebaseUser.getPhoneNumber().toString());
-            databaseReference.child("OrderDetails").child(Integer.toString(txn)).setValue(userMap);
-
-            DatabaseReference databaseReference1=database.getReference();
-            HashMap<String, Object> addMap = new HashMap<>();
-            addMap.put("BookID",bookId);
-            addMap.put("ItemsCount",itemsCount);
-
-
-            databaseReference1.child("OrderDetails").child(Integer.toString(txn)).child("BookDetails").setValue(addMap);
-
-
-
+            databaseReference.child("OrderDetails").push().setValue(userMap);
 
             Toasty.success(getApplicationContext(),"Payment Successfull").show();
             Intent intent=new Intent(this,PaymentSuccessActivity.class);
@@ -281,6 +274,41 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             Log.v("TAG","Exception:"+e);
         }
 
+
+
+
+    }
+
+    private String getBookNames() {
+
+        View v;
+        String BookNames = "Book Name:";
+        for (int i=0;i<ordersList.getCount();i++)
+        {
+            v = ordersList.getAdapter().getView(i,null,null);
+            TextView bookNames = (TextView) v.findViewById(R.id.bookNameOrder);
+            BookNames = BookNames + bookNames.getText().toString()+",";
+            Log.v("TAG","BookNames2=>"+bookNames.getText().toString()+",");
+            Log.v("TAG","BookNames2=>"+BookNames);
+        }
+
+        return BookNames;
+
+
+
+    }
+
+    private String getItemCount() {
+
+        View v;
+        String BookNames = "Book Count:";
+        for (int i=0;i<itemsCount.size();i++)
+        {
+            BookNames = BookNames + itemsCount.get(i).toString()+",";
+            Log.v("TAG","BookNames33=>"+BookNames);
+        }
+
+        return BookNames;
 
 
 
@@ -299,6 +327,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         for (int i=0;i<bookId.size();i++)
         {
+            orderedBookNames.concat(bookName.get(i)+",");
             DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryId.get(i))
                     .child(bookSubCategoryId.get(i)).child(bookId.get(i));
             databaseReference3.addValueEventListener(new ValueEventListener() {
@@ -347,11 +376,6 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     }
 
-    //To Display finalPrice When changed
-    public void displayFinalPriceTwo()
-    {
-        displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName);
-    }
 
 
     public void reloadData(){

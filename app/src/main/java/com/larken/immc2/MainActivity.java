@@ -63,15 +63,6 @@ public class MainActivity extends AppCompatActivity {
                         break;
 
 
-                    case R.id.navigation_notifications:
-                        FragmentManager manager3 = getSupportFragmentManager();
-                        NotificationsFragment notificationsFragment = new NotificationsFragment();
-                        FragmentTransaction transaction3 = manager3.beginTransaction();
-                        transaction3.replace(R.id.mainFragmentContainer,notificationsFragment);
-                        transaction3.addToBackStack("MainFlow");
-                        transaction3.commit();
-                        break;
-
                     case R.id.navigation_account:
                         FragmentManager manager4 = getSupportFragmentManager();
                         AccountFragment accountFragment = new AccountFragment();
