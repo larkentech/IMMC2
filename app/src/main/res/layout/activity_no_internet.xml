@@ -45,6 +45,7 @@
             android:textStyle="bold"
             android:fontFamily="@font/latoregular"
             android:background="@drawable/button_shape"
+            android:layout_marginBottom="20dp"
             android:textColor="#ffffff">
 
         </Button>

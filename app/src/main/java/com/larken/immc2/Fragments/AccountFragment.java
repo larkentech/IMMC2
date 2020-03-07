@@ -2,11 +2,13 @@ package com.larken.immc2.Fragments;
 
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -58,6 +60,9 @@ public class AccountFragment extends Fragment {
     EditText userlandmark;
     EditText userArea;
     EditText userCity;
+    TextView contactNumber;
+    TextView contactWeb;
+    TextView myOrders;
 
     FirebaseAuth mAuth;
 
@@ -65,6 +70,8 @@ public class AccountFragment extends Fragment {
     TextView feedback;
     String feeling = " ";
     EditText feedbackEt;
+
+
 
 
 
@@ -91,9 +98,6 @@ public class AccountFragment extends Fragment {
         return inflater.inflate(R.layout.fragment_account, container, false);
 
 
-
-
-
     }
 
     @Override
@@ -115,11 +119,30 @@ public class AccountFragment extends Fragment {
         userArea = view.findViewById(R.id.addArea);
         userCity = view.findViewById(R.id.addCity);
         signout = view.findViewById(R.id.signOut);
+        contactNumber=view.findViewById(R.id.contactNumber);
+        contactWeb=view.findViewById(R.id.contactWeb);
+        myOrders=view.findViewById(R.id.txtMyOrders);
         mAuth = FirebaseAuth.getInstance();
-
-
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
+
+        myOrders.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                MyOrdersFragment dialogFragment = new MyOrdersFragment();
+                FragmentTransaction ft = getActivity().getSupportFragmentManager().beginTransaction();
+                Fragment prev = getActivity().getSupportFragmentManager().findFragmentByTag("dialog");
+                if (prev != null) {
+                    ft.remove(prev);
+                }
+                ft.addToBackStack(null);
+                dialogFragment.show(ft, "dialog");
+
+
+            }
+        });
+
+
 
 
         databaseReference.addValueEventListener(new ValueEventListener() {
@@ -182,6 +205,7 @@ public class AccountFragment extends Fragment {
                                 break;
                             case SmileRating.GREAT:
                                 feeling = "Great";
+
                                 break;
                             case SmileRating.OKAY:
                                 feeling = "Okay";
@@ -218,6 +242,29 @@ public class AccountFragment extends Fragment {
                 startActivity(i);
                 getActivity().finish();
             }
+        });
+
+        contactNumber.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent i=new Intent(Intent.ACTION_DIAL);
+                i.setData(Uri.parse("tel:9900000000"));
+                startActivity(i);
+                getActivity();
+            }
+        });
+        contactWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent();
+                intent.setAction(Intent.ACTION_VIEW);
+                intent.addCategory(Intent.CATEGORY_BROWSABLE);
+                intent.setData(Uri.parse("https://www.google.co.in/"));
+                startActivity(intent);
+
+            }
+
         });
 
 

@@ -252,7 +252,6 @@
                         android:layout_width="360dp"
                         android:layout_height="400dp"
                         android:layout_marginStart="16dp">
-
                         <androidx.cardview.widget.CardView
 
                             android:layout_width="match_parent"
@@ -273,19 +272,22 @@
                                 android:textSize="28sp">
 
                             </TextView>
-
-                            <ListView
+                            <TextView
+                                android:id="@+id/txtMyOrders"
                                 android:layout_width="match_parent"
-                                android:layout_height="0dp"
-                                android:layout_weight="1"
-                                android:layout_marginTop="16dp"
-                                android:layout_marginBottom="16dp"
-                                android:id="@+id/orderList"
-                                android:scrollbars="none"
-                                android:divider="@null"/>
+                                android:layout_height="wrap_content"
+                                android:text="Click here to see Orders"
+                                android:fontFamily="@font/latobold"
+                                android:gravity="center"
+                                android:textColor="#2196F3"
+                                android:textSize="20sp"
+                                android:layout_gravity="center_vertical">
 
+                            </TextView>
 
                         </androidx.cardview.widget.CardView>
+
+
                     </FrameLayout>
 
                     <FrameLayout
@@ -404,24 +406,63 @@
                                 android:textSize="28sp">
 
                             </TextView>
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+                                <LinearLayout
+                                    android:layout_marginTop="100dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic_call_black">
 
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_marginStart="32dp"
-                                android:layout_marginTop="100dp"
-                                android:src="@drawable/ic_call_black">
+                                    </ImageView>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="+919900000000"
+                                        android:fontFamily="@font/latobold"
+                                        android:textColor="#2196F3"
+                                        android:textSize="20sp"
+                                        android:layout_marginStart="16dp"
+                                        android:id="@+id/contactNumber"
+                                        android:layout_gravity="center_vertical">
 
-                            </ImageView>
+                                    </TextView>
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_marginTop="200dp"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="16dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:src="@drawable/ic_computer_black_24dp">
 
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_marginStart="32dp"
-                                android:layout_marginTop="180dp"
-                                android:src="@drawable/ic_computer_black_24dp">
+                                    </ImageView>
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="support@immc2.com"
+                                        android:layout_marginStart="16dp"
+                                        android:fontFamily="@font/latobold"
+                                        android:textColor="#2196F3"
+                                        android:textSize="20sp"
+                                        android:id="@+id/contactWeb"
+                                        android:layout_gravity="center_vertical">
 
-                            </ImageView>
+                                    </TextView>
+                                </LinearLayout>
+                            </RelativeLayout>
+
 
 
                         </androidx.cardview.widget.CardView>

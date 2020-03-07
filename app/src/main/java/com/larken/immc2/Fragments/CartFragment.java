@@ -33,6 +33,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import es.dmoral.toasty.Toasty;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -142,8 +144,15 @@ public class CartFragment extends Fragment {
         proceedToPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getContext(), PaymentActivity.class);
-                startActivity(i);
+                if(bookId.isEmpty()){
+                    Toasty.error(getContext(),"No Items In Cart").show();
+                }
+                else {
+                    Intent i = new Intent(getContext(), PaymentActivity.class);
+                    startActivity(i);
+
+                }
+
             }
         });
     }

@@ -252,6 +252,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
             FirebaseDatabase database = FirebaseDatabase.getInstance();
             DatabaseReference databaseReference = database.getReference();
+            databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getUid());
+            firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid()).child("Cart").removeValue();
+
+
 
             HashMap<String, Object> userMap = new HashMap<>();
             userMap.put("Name", userName.getText().toString());
@@ -301,7 +305,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     private String getItemCount() {
 
         View v;
-        String BookNames = "Book Count:";
+        String BookNames = "";
         for (int i=0;i<itemsCount.size();i++)
         {
             BookNames = BookNames + itemsCount.get(i).toString()+",";
@@ -325,6 +329,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     public void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId,List<String> bookName, List<String> itemsCount) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
         for (int i=0;i<bookId.size();i++)
         {
             orderedBookNames.concat(bookName.get(i)+",");
@@ -369,7 +374,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                 temp2 = onlyPrice.split("/");
                 String exactPrice = temp2[0];
                 calulatedprice = calulatedprice + Integer.parseInt(exactPrice);
-                finalPrice.setText("Rs."+calulatedprice);
+                finalPrice.setText(""+calulatedprice);
             }
 
         }
