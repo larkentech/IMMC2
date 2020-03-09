@@ -215,7 +215,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             options.put("currency", "INR");
-            options.put("amount", i*100);
+            options.put("amount", calulatedprice*100);
 
             JSONObject preFill = new JSONObject();
             preFill.put("email", mAuth.getCurrentUser().getEmail());
@@ -374,7 +374,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                 temp2 = onlyPrice.split("/");
                 String exactPrice = temp2[0];
                 calulatedprice = calulatedprice + Integer.parseInt(exactPrice);
-                finalPrice.setText(""+calulatedprice);
+                finalPrice.setText("Rs."+calulatedprice+"/-");
             }
 
         }

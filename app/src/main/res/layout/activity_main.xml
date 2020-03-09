@@ -20,6 +20,7 @@
         android:layout_marginStart="36dp"
         android:layout_marginEnd="36dp"
         android:layout_gravity="bottom"
+        app:elevation="8dp"
         android:layout_marginBottom="16dp"
         app:menu="@menu/navigation_item"
         app:itemIconTint="@color/colorAccent"

@@ -14,8 +14,10 @@ import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.AdapterClasses.BestSellingAdapter;
 import com.larken.immc2.AdapterClasses.OffersAdapter;
+import com.larken.immc2.AdapterClasses.SubCategoryAdapter;
 import com.larken.immc2.DetailsContainerActivity;
 import com.larken.immc2.ModalClasses.BooksModal;
 import com.larken.immc2.R;
@@ -36,8 +38,8 @@ import it.sephiroth.android.library.widget.HListView;
 public class HomeFragment extends Fragment {
 
     HListView offersListView;
-    HListView featuredListView;
-    HListView bestSellerListView;
+    HListView quotesListView;
+    HListView scienceListView;
     CardView engBooks;
     CardView quotesTheme;
     CardView scienceTheme;
@@ -47,14 +49,26 @@ public class HomeFragment extends Fragment {
     TextView featuredBtn;
 
     OffersAdapter adapter;
-    BestSellingAdapter featuredAdapter;
-    BestSellingAdapter bestSellingAdapter;
+    SubCategoryAdapter quotesAdapter;
+    SubCategoryAdapter scienceAdapter;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
 
     List<String> featuredID;
     List<String> bestSellingID;
+
+    String category;
+    List<String> subcategory;
+    List<String> subcategoryImages;
+
+    //Quotes Theme
+    List<String>  subcategoryQuotes;
+    List<String> quotesList;
+
+    //Science Theme
+    List<String> scienceSubcategoryList;
+    List<String> scienceList;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -72,42 +86,27 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        featuredID = new ArrayList<>();
-        bestSellingID = new ArrayList<>();
+        subcategory = new ArrayList<>();
+        subcategoryImages = new ArrayList<>();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        engBooks = (CardView) view.findViewById(R.id.engineeringBooks);
+        scienceTheme = (CardView) view.findViewById(R.id.scienceTheme);
+        mathsTheme = (CardView) view.findViewById(R.id.mathsTheme);
+        bestSellingBtn = (TextView) view.findViewById(R.id.bestSellingBtn);
+        featuredBtn = (TextView) view.findViewById(R.id.featuredBtn);
+
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
         bottomNavigationView.setVisibility(View.VISIBLE);
 
         quotesTheme = (CardView) view.findViewById(R.id.quotesTheme);
 
         offersListView = view.findViewById(R.id.offersList);
-        featuredListView = view.findViewById(R.id.featuredList);
-        bestSellerListView = view.findViewById(R.id.bestSellerList);
+        quotesListView = view.findViewById(R.id.quotesList);
+        scienceListView = view.findViewById(R.id.scienceList);
 
         List<BooksModal> imageList = new ArrayList<>();
         adapter = new OffersAdapter(getContext(),R.layout.offers_single,imageList);
         offersListView.setAdapter(adapter);
-
-        //featurede model
-
-        List<BooksModal> featuredModelList = new ArrayList<>();
-        featuredAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,featuredModelList, featuredID);
-        featuredListView.setAdapter(featuredAdapter);
-
-        //Best Selling Model
-
-        List<BooksModal> bestSellingModalList = new ArrayList<>();
-        bestSellingAdapter = new BestSellingAdapter(getContext(),R.layout.best_seller_single,bestSellingModalList, bestSellingID);
-        bestSellerListView.setAdapter(bestSellingAdapter);
-
-        //Engineering Books
-
-        //CS NoteBooks
-        engBooks = (CardView) view.findViewById(R.id.engineeringBooks);
-        scienceTheme = (CardView) view.findViewById(R.id.scienceTheme);
-        mathsTheme = (CardView) view.findViewById(R.id.mathsTheme);
-        bestSellingBtn = (TextView) view.findViewById(R.id.bestSellingBtn);
-        featuredBtn = (TextView) view.findViewById(R.id.featuredBtn);
-        firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Offers");
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
@@ -137,29 +136,27 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("Featured");
 
-        databaseReference2.addChildEventListener(new ChildEventListener() {
+        //QuotesTheme model
+        quotesList = new ArrayList<>();
+        subcategoryQuotes = new ArrayList<>();
+        List<BooksModal> dummyList = new ArrayList<>();
+        category = "QuoteTheme";
+        quotesAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList,category,quotesList,subcategoryQuotes);
+        quotesListView.setAdapter(quotesAdapter);
+        //Quotes Theme
+        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("CategoryImages").child("QuoteTheme");
+        databaseReference2.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                BooksModal csNoteBooksModal = dataSnapshot.getValue(BooksModal.class);
-                featuredAdapter.add(csNoteBooksModal);
-                featuredID.add(dataSnapshot.getKey());
-            }
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                for (DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    quotesAdapter.add(modal);
+                    subcategoryQuotes.add(ds.getKey());
+                    quotesList.add(ds.getValue().toString());
+                }
             }
 
             @Override
@@ -168,29 +165,26 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("BestSelling");
-
-        databaseReference3.addChildEventListener(new ChildEventListener() {
+        //Science Model
+        scienceList = new ArrayList<>();
+        scienceSubcategoryList = new ArrayList<>();
+        List<BooksModal> dummyList1 = new ArrayList<>();
+        String category1 = "ScienceTheme";
+        scienceAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList1, category1,scienceList,scienceSubcategoryList);
+        scienceListView.setAdapter(scienceAdapter);
+        //Science Theme
+        DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("CategoryImages").child("ScienceTheme");
+        databaseReference3.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                BooksModal csNoteBooksModal = dataSnapshot.getValue(BooksModal.class);
-                bestSellingAdapter.add(csNoteBooksModal);
-                bestSellingID.add(dataSnapshot.getKey());
-            }
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                for (DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    scienceAdapter.add(modal);
+                    scienceSubcategoryList.add(ds.getKey());
+                    scienceList.add(ds.getValue().toString());
+                }
             }
 
             @Override
@@ -241,28 +235,6 @@ public class HomeFragment extends Fragment {
                 openFeaturedBtn();
             }
         });
-
-        /*
-
-        FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference1 = firebaseDatabase1.getReference().child("BookDetails");
-        HashMap<String,String> engMap = new HashMap<>();
-        engMap.put("BookName","How to Crack Test of Arithmetic");
-        engMap.put("BookDesigner","Hemanth");
-        engMap.put("BookPrice","792");
-        engMap.put("BookCategory","Maths");
-        engMap.put("BookDesc","This is a reproduction of a classic text optimised for kindle devices. " +
-                "We have endeavoured to create this version as close to the original artefact as possible.");
-        engMap.put("BookImage","https://firebasestorage.googleapis.com/v0/b/iammc2-f61a0.appspot.com/o/Arithmemtic.jpg?alt=media&token=29e00124-c5ff-4eec-a237-479ab1b237de");
-        databaseReference1.child("MathsTheme").child("ArithmeticNoteBooks").push().setValue(engMap);
-
-         */
-
-
-
-
-
-
 
     }
 

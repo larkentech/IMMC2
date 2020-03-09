@@ -7,6 +7,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +36,9 @@ public class FeaturedFragment extends Fragment {
     BestSellingAdapter featuredAdapter;
     List<String> featuredID;
 
+    String category;
+    String subcategory;
+
 
     public FeaturedFragment() {
         // Required empty public constructor
@@ -45,12 +49,18 @@ public class FeaturedFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+        category = getArguments().getString("Category");
+        subcategory = getArguments().getString("SubCategory");
         return inflater.inflate(R.layout.fragment_featured, container, false);
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+        Log.v("TAG","Category:"+category);
+        Log.v("TAG","SubCategory:"+subcategory);
+
 
         featuredID = new ArrayList<>();
         gridView = (GridView) view.findViewById(R.id.featuredGridView);
@@ -59,7 +69,7 @@ public class FeaturedFragment extends Fragment {
         gridView.setAdapter(featuredAdapter);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("Featured");
+        databaseReference = firebaseDatabase.getReference().child("BookDetails").child(category).child(subcategory);
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

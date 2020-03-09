@@ -11,30 +11,41 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_margin="16dp">
+
+
+                <ImageView
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:src="@drawable/logo"
+                    android:scaleType="fitXY"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="IamMC2"
+                    android:layout_marginStart="16dp"
+                    android:layout_gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/latoblack"
-                android:text="IamMC2"
-                android:layout_marginTop="24dp"
-                android:layout_gravity="center_horizontal"
-                android:textColor="@color/colorPrimary"
-                android:textSize="24sp" />
-
-
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:fontFamily="@font/latoblack"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/montserrat_bold"
                 android:padding="6dp"
                 android:text="Offers"
                 android:textColor="#000000"
@@ -50,10 +61,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:layout_marginStart="24dp"
-                android:fontFamily="@font/latoblack"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/montserrat_bold"
                 android:padding="6dp"
-                android:text="Categories"
+                android:text="Engineering Theme"
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
@@ -134,12 +145,12 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/latoblack"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="6dp"
-                    android:text="Featured"
+                    android:text="Quote Theme"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
@@ -150,15 +161,53 @@
                     android:layout_marginTop="16sp"
                     android:layout_marginEnd="16dp"
                     android:text="See all"
-                    android:fontFamily="@font/latoregular"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textSize="12sp" />
             </LinearLayout>
 
 
             <it.sephiroth.android.library.widget.HListView
-                android:id="@+id/featuredList"
+                android:id="@+id/quotesList"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="120dp"
+                android:layout_marginTop="4dp"
+                android:layout_marginStart="8dp"
+                android:paddingBottom="8dp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:padding="6dp"
+                    android:text="Science Theme"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:id="@+id/bestSellingBtn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16sp"
+                    android:layout_marginEnd="16dp"
+                    android:text="See all"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/scienceList"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
                 android:layout_marginTop="4dp"
                 android:paddingBottom="8dp"/>
 
@@ -170,35 +219,32 @@
                 <TextView
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginStart="24dp"
+                    android:layout_marginStart="16dp"
                     android:layout_marginTop="16dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/latoblack"
+                    android:fontFamily="@font/montserrat_bold"
                     android:padding="6dp"
-                    android:text="Best Selling"
+                    android:text="Maths Theme"
                     android:textColor="#000000"
                     android:textSize="18sp" />
 
                 <TextView
-                    android:id="@+id/bestSellingBtn"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16sp"
                     android:layout_marginEnd="16dp"
                     android:text="See all"
-                    android:fontFamily="@font/latoregular"
+                    android:fontFamily="@font/montserrat_regular"
                     android:textSize="12sp" />
 
             </LinearLayout>
 
-
             <it.sephiroth.android.library.widget.HListView
-                android:id="@+id/bestSellerList"
+                android:id="@+id/mathsList"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="100dp"
                 android:layout_marginTop="4dp"
-                android:paddingBottom="8dp"
-                android:layout_marginBottom="80dp"/>
+                android:paddingBottom="8dp"/>
 
         </LinearLayout>
 

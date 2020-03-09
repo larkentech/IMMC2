@@ -19,6 +19,7 @@ public class DetailsContainerActivity extends AppCompatActivity {
 
     FrameLayout detailsActivityContainer;
     String category;
+    String subcategory;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,60 +27,20 @@ public class DetailsContainerActivity extends AppCompatActivity {
         setContentView(R.layout.activity_details_container);
 
         category = getIntent().getExtras().getString("Category");
+        subcategory = getIntent().getExtras().getString("SubCategory");
 
         detailsActivityContainer = findViewById(R.id.detailsActivityContainer);
 
-        switch (category)
-        {
-            case "Engineering":
-                FragmentManager manager = getSupportFragmentManager();
-                EngineeringListFragment homeFragment = new EngineeringListFragment();
-                FragmentTransaction transaction = manager.beginTransaction();
-                transaction.add(R.id.detailsActivityContainer,homeFragment);
-                transaction.commit();
-                break;
+        Bundle args = new Bundle();
+        args.putString("Category",category);
+        args.putString("SubCategory",subcategory);
 
-            case "Quotes":
-                FragmentManager manager1 = getSupportFragmentManager();
-                QuoteSeriesListFragment quoteSeriesListFragment = new QuoteSeriesListFragment();
-                FragmentTransaction transaction1 = manager1.beginTransaction();
-                transaction1.add(R.id.detailsActivityContainer,quoteSeriesListFragment);
-                transaction1.commit();
-                break;
-
-            case "ScienceTheme":
-                FragmentManager manager2 = getSupportFragmentManager();
-                ScienceListFragment scienceListFragment = new ScienceListFragment();
-                FragmentTransaction transaction2 = manager2.beginTransaction();
-                transaction2.add(R.id.detailsActivityContainer,scienceListFragment);
-                transaction2.commit();
-                break;
-
-            case "MathsTheme":
-                FragmentManager manager3 = getSupportFragmentManager();
-                MathsListFragment mathsListFragment = new MathsListFragment();
-                FragmentTransaction transaction3 = manager3.beginTransaction();
-                transaction3.add(R.id.detailsActivityContainer,mathsListFragment);
-                transaction3.commit();
-                break;
-
-            case "BestSelling":
-                FragmentManager manager4 = getSupportFragmentManager();
-                BestSellingFragment bestSellingFragment = new BestSellingFragment();
-                FragmentTransaction transaction4 = manager4.beginTransaction();
-                transaction4.add(R.id.detailsActivityContainer,bestSellingFragment);
-                transaction4.commit();
-                break;
-
-            case "Featured":
-                FragmentManager manager5 = getSupportFragmentManager();
-                FeaturedFragment featuredFragment = new FeaturedFragment();
-                FragmentTransaction transaction5 = manager5.beginTransaction();
-                transaction5.add(R.id.detailsActivityContainer,featuredFragment);
-                transaction5.commit();
-                break;
-
-        }
+        FragmentManager manager5 = getSupportFragmentManager();
+        FeaturedFragment featuredFragment = new FeaturedFragment();
+        featuredFragment.setArguments(args);
+        FragmentTransaction transaction5 = manager5.beginTransaction();
+        transaction5.add(R.id.detailsActivityContainer,featuredFragment);
+        transaction5.commit();
 
     }
 }
