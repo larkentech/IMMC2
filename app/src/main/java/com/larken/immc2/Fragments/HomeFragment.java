@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -13,6 +14,7 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.AdapterClasses.BestSellingAdapter;
@@ -82,6 +84,10 @@ public class HomeFragment extends Fragment {
     List<String> mathsList;
     SubCategoryAdapter mathsAdapter;
 
+    ShimmerFrameLayout homeShimmer;
+    ScrollView homeSV;
+
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -107,6 +113,10 @@ public class HomeFragment extends Fragment {
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
         bottomNavigationView.setVisibility(View.VISIBLE);
 
+        homeSV=view.findViewById(R.id.homeSV);
+        homeShimmer = view.findViewById(R.id.shimmer_view_home);
+        homeShimmer.startShimmer();
+
 
         offersListView = view.findViewById(R.id.offersList);
         quotesListView = view.findViewById(R.id.quotesList);
@@ -121,6 +131,10 @@ public class HomeFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 BooksModal csNoteBooksModal = dataSnapshot.getValue(BooksModal.class);
                 adapter.add(csNoteBooksModal);
+
+                homeShimmer.stopShimmer();
+                homeShimmer.setVisibility(View.GONE);
+                homeSV.setVisibility(View.VISIBLE);
             }
 
             @Override
