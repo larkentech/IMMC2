@@ -40,6 +40,8 @@ public class HomeFragment extends Fragment {
     HListView offersListView;
     HListView quotesListView;
     HListView scienceListView;
+    HListView engineeringListView;
+    HListView mathsListView;
     CardView engBooks;
     CardView quotesTheme;
     CardView scienceTheme;
@@ -70,6 +72,16 @@ public class HomeFragment extends Fragment {
     List<String> scienceSubcategoryList;
     List<String> scienceList;
 
+    //engineering Theme
+    List<String> engineeringSubcategoryList;
+    List<String> engineeringList;
+    SubCategoryAdapter engineeringAdapter;
+
+    //maths Theme
+    List<String> mathsSubcategoryList;
+    List<String> mathsList;
+    SubCategoryAdapter mathsAdapter;
+
     public HomeFragment() {
         // Required empty public constructor
     }
@@ -89,16 +101,12 @@ public class HomeFragment extends Fragment {
         subcategory = new ArrayList<>();
         subcategoryImages = new ArrayList<>();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        engBooks = (CardView) view.findViewById(R.id.engineeringBooks);
-        scienceTheme = (CardView) view.findViewById(R.id.scienceTheme);
-        mathsTheme = (CardView) view.findViewById(R.id.mathsTheme);
         bestSellingBtn = (TextView) view.findViewById(R.id.bestSellingBtn);
         featuredBtn = (TextView) view.findViewById(R.id.featuredBtn);
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
         bottomNavigationView.setVisibility(View.VISIBLE);
 
-        quotesTheme = (CardView) view.findViewById(R.id.quotesTheme);
 
         offersListView = view.findViewById(R.id.offersList);
         quotesListView = view.findViewById(R.id.quotesList);
@@ -193,90 +201,65 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        engBooks.setOnClickListener(new View.OnClickListener() {
+        //Engineering Model
+        engineeringListView = view.findViewById(R.id.engineeringList);
+        engineeringList = new ArrayList<>();
+        engineeringSubcategoryList = new ArrayList<>();
+        List<BooksModal> dummyList2 = new ArrayList<>();
+        String category2 = "Engineering";
+        engineeringAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList2, category2,engineeringList,engineeringSubcategoryList);
+        engineeringListView.setAdapter(engineeringAdapter);
+        //Science Theme
+        DatabaseReference databaseReference4 = firebaseDatabase.getReference().child("CategoryImages").child("Engineering");
+        databaseReference4.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                openEnginneringbooks();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    engineeringAdapter.add(modal);
+                    engineeringSubcategoryList.add(ds.getKey());
+                    engineeringList.add(ds.getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-        quotesTheme.setOnClickListener(new View.OnClickListener() {
+        //maths Model
+        mathsListView = view.findViewById(R.id.mathsList);
+        mathsList = new ArrayList<>();
+        mathsSubcategoryList = new ArrayList<>();
+        List<BooksModal> dummyList3 = new ArrayList<>();
+        String category3 = "MathsTheme";
+        mathsAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList3, category3,mathsList,mathsSubcategoryList);
+        mathsListView.setAdapter(engineeringAdapter);
+        //Science Theme
+        DatabaseReference databaseReference5 = firebaseDatabase.getReference().child("CategoryImages").child("MathsTheme");
+        databaseReference5.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                openQuoteSeries();
-            }
-        });
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-        scienceTheme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openScienceTheme();
+                for (DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    mathsAdapter.add(modal);
+                    mathsSubcategoryList.add(ds.getKey());
+                    mathsList.add(ds.getValue().toString());
+                }
             }
-        });
 
-        mathsTheme.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                openMathsTheme();
-            }
-        });
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
-        bestSellingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openBestSeelingBtn();
-            }
-        });
-
-        featuredBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFeaturedBtn();
             }
         });
 
     }
 
-    public void openEnginneringbooks(){
-
-        Intent intent = new Intent(getContext(), DetailsContainerActivity.class);
-        intent.putExtra("Category","Engineering");
-        startActivity(intent);
-
-    }
-
-    public void openQuoteSeries(){
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","Quotes");
-        startActivity(intent);
-    }
-
-    public void openScienceTheme(){
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","ScienceTheme");
-        startActivity(intent);
-    }
-
-    public void openMathsTheme(){
-
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","MathsTheme");
-        startActivity(intent);
-
-    }
-
-    public void openBestSeelingBtn(){
-
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","BestSelling");
-        startActivity(intent);
-    }
-
-    public void openFeaturedBtn(){
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","Featured");
-        startActivity(intent);
-    }
 
 }
