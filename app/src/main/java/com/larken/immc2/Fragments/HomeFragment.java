@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -14,10 +13,11 @@ import androidx.annotation.Nullable;
 import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 
-import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.AdapterClasses.BestSellingAdapter;
 import com.larken.immc2.AdapterClasses.OffersAdapter;
+import com.larken.immc2.AdapterClasses.SubCategoryAdapter;
 import com.larken.immc2.DetailsContainerActivity;
 import com.larken.immc2.ModalClasses.BooksModal;
 import com.larken.immc2.R;
@@ -38,8 +38,10 @@ import it.sephiroth.android.library.widget.HListView;
 public class HomeFragment extends Fragment {
 
     HListView offersListView;
-    HListView featuredListView;
-    HListView bestSellerListView;
+    HListView quotesListView;
+    HListView scienceListView;
+    HListView engineeringListView;
+    HListView mathsListView;
     CardView engBooks;
     CardView quotesTheme;
     CardView scienceTheme;
@@ -49,8 +51,8 @@ public class HomeFragment extends Fragment {
     TextView featuredBtn;
 
     OffersAdapter adapter;
-    BestSellingAdapter featuredAdapter;
-    BestSellingAdapter bestSellingAdapter;
+    SubCategoryAdapter quotesAdapter;
+    SubCategoryAdapter scienceAdapter;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
@@ -58,9 +60,27 @@ public class HomeFragment extends Fragment {
     List<String> featuredID;
     List<String> bestSellingID;
 
-    ShimmerFrameLayout homeShimmer;
-    ScrollView homeSV;
+    String category;
+    List<String> subcategory;
+    List<String> subcategoryImages;
 
+    //Quotes Theme
+    List<String>  subcategoryQuotes;
+    List<String> quotesList;
+
+    //Science Theme
+    List<String> scienceSubcategoryList;
+    List<String> scienceList;
+
+    //engineering Theme
+    List<String> engineeringSubcategoryList;
+    List<String> engineeringList;
+    SubCategoryAdapter engineeringAdapter;
+
+    //maths Theme
+    List<String> mathsSubcategoryList;
+    List<String> mathsList;
+    SubCategoryAdapter mathsAdapter;
 
     public HomeFragment() {
         // Required empty public constructor
@@ -78,56 +98,29 @@ public class HomeFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        featuredID = new ArrayList<>();
-        bestSellingID = new ArrayList<>();
+        subcategory = new ArrayList<>();
+        subcategoryImages = new ArrayList<>();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        bestSellingBtn = (TextView) view.findViewById(R.id.bestSellingBtn);
+        featuredBtn = (TextView) view.findViewById(R.id.featuredBtn);
+
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
         bottomNavigationView.setVisibility(View.VISIBLE);
 
-        quotesTheme = (CardView) view.findViewById(R.id.quotesTheme);
 
         offersListView = view.findViewById(R.id.offersList);
-        featuredListView = view.findViewById(R.id.featuredList);
-        bestSellerListView = view.findViewById(R.id.bestSellerList);
-
-        homeSV=view.findViewById(R.id.homeSV);
-        homeShimmer = view.findViewById(R.id.shimmer_view_home);
-        homeShimmer.startShimmer();
+        quotesListView = view.findViewById(R.id.quotesList);
+        scienceListView = view.findViewById(R.id.scienceList);
 
         List<BooksModal> imageList = new ArrayList<>();
         adapter = new OffersAdapter(getContext(),R.layout.offers_single,imageList);
         offersListView.setAdapter(adapter);
-
-        //featurede model
-
-        List<BooksModal> featuredModelList = new ArrayList<>();
-        featuredAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,featuredModelList, featuredID);
-        featuredListView.setAdapter(featuredAdapter);
-
-        //Best Selling Model
-
-        List<BooksModal> bestSellingModalList = new ArrayList<>();
-        bestSellingAdapter = new BestSellingAdapter(getContext(),R.layout.best_seller_single,bestSellingModalList, bestSellingID);
-        bestSellerListView.setAdapter(bestSellingAdapter);
-
-        //Engineering Books
-
-        //CS NoteBooks
-        engBooks = (CardView) view.findViewById(R.id.engineeringBooks);
-        scienceTheme = (CardView) view.findViewById(R.id.scienceTheme);
-        mathsTheme = (CardView) view.findViewById(R.id.mathsTheme);
-        bestSellingBtn = (TextView) view.findViewById(R.id.bestSellingBtn);
-        featuredBtn = (TextView) view.findViewById(R.id.featuredBtn);
-        firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("Offers");
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 BooksModal csNoteBooksModal = dataSnapshot.getValue(BooksModal.class);
                 adapter.add(csNoteBooksModal);
-                homeShimmer.stopShimmer();
-                homeShimmer.setVisibility(View.GONE);
-                homeSV.setVisibility(View.VISIBLE);
-
             }
 
             @Override
@@ -151,34 +144,27 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("Featured");
 
-        databaseReference2.addChildEventListener(new ChildEventListener() {
+        //QuotesTheme model
+        quotesList = new ArrayList<>();
+        subcategoryQuotes = new ArrayList<>();
+        List<BooksModal> dummyList = new ArrayList<>();
+        category = "QuoteTheme";
+        quotesAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList,category,quotesList,subcategoryQuotes);
+        quotesListView.setAdapter(quotesAdapter);
+        //Quotes Theme
+        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("CategoryImages").child("QuoteTheme");
+        databaseReference2.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                BooksModal csNoteBooksModal = dataSnapshot.getValue(BooksModal.class);
-                featuredAdapter.add(csNoteBooksModal);
-                featuredID.add(dataSnapshot.getKey());
-                homeShimmer.stopShimmer();
-                homeShimmer.setVisibility(View.GONE);
-                homeSV.setVisibility(View.VISIBLE);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                for (DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    quotesAdapter.add(modal);
+                    subcategoryQuotes.add(ds.getKey());
+                    quotesList.add(ds.getValue().toString());
+                }
             }
 
             @Override
@@ -187,32 +173,26 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("BestSelling");
-
-        databaseReference3.addChildEventListener(new ChildEventListener() {
+        //Science Model
+        scienceList = new ArrayList<>();
+        scienceSubcategoryList = new ArrayList<>();
+        List<BooksModal> dummyList1 = new ArrayList<>();
+        String category1 = "ScienceTheme";
+        scienceAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList1, category1,scienceList,scienceSubcategoryList);
+        scienceListView.setAdapter(scienceAdapter);
+        //Science Theme
+        DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("CategoryImages").child("ScienceTheme");
+        databaseReference3.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                BooksModal csNoteBooksModal = dataSnapshot.getValue(BooksModal.class);
-                bestSellingAdapter.add(csNoteBooksModal);
-                bestSellingID.add(dataSnapshot.getKey());
-                homeShimmer.stopShimmer();
-                homeShimmer.setVisibility(View.GONE);
-                homeSV.setVisibility(View.VISIBLE);
-            }
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                for (DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    scienceAdapter.add(modal);
+                    scienceSubcategoryList.add(ds.getKey());
+                    scienceList.add(ds.getValue().toString());
+                }
             }
 
             @Override
@@ -221,114 +201,65 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        engBooks.setOnClickListener(new View.OnClickListener() {
+        //Engineering Model
+        engineeringListView = view.findViewById(R.id.engineeringList);
+        engineeringList = new ArrayList<>();
+        engineeringSubcategoryList = new ArrayList<>();
+        List<BooksModal> dummyList2 = new ArrayList<>();
+        String category2 = "Engineering";
+        engineeringAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList2, category2,engineeringList,engineeringSubcategoryList);
+        engineeringListView.setAdapter(engineeringAdapter);
+        //Science Theme
+        DatabaseReference databaseReference4 = firebaseDatabase.getReference().child("CategoryImages").child("Engineering");
+        databaseReference4.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                openEnginneringbooks();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    engineeringAdapter.add(modal);
+                    engineeringSubcategoryList.add(ds.getKey());
+                    engineeringList.add(ds.getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
 
             }
         });
 
-        quotesTheme.setOnClickListener(new View.OnClickListener() {
+        //maths Model
+        mathsListView = view.findViewById(R.id.mathsList);
+        mathsList = new ArrayList<>();
+        mathsSubcategoryList = new ArrayList<>();
+        List<BooksModal> dummyList3 = new ArrayList<>();
+        String category3 = "MathsTheme";
+        mathsAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList3, category3,mathsList,mathsSubcategoryList);
+        mathsListView.setAdapter(engineeringAdapter);
+        //Science Theme
+        DatabaseReference databaseReference5 = firebaseDatabase.getReference().child("CategoryImages").child("MathsTheme");
+        databaseReference5.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
-                openQuoteSeries();
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                for (DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    mathsAdapter.add(modal);
+                    mathsSubcategoryList.add(ds.getKey());
+                    mathsList.add(ds.getValue().toString());
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
             }
         });
 
-        scienceTheme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openScienceTheme();
-            }
-        });
-
-        mathsTheme.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openMathsTheme();
-            }
-        });
-
-        bestSellingBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openBestSeelingBtn();
-            }
-        });
-
-        featuredBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                openFeaturedBtn();
-            }
-        });
-
-        /*
-
-        FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
-        DatabaseReference databaseReference1 = firebaseDatabase1.getReference().child("BookDetails");
-        HashMap<String,String> engMap = new HashMap<>();
-        engMap.put("BookName","How to Crack Test of Arithmetic");
-        engMap.put("BookDesigner","Hemanth");
-        engMap.put("BookPrice","792");
-        engMap.put("BookCategory","Maths");
-        engMap.put("BookDesc","This is a reproduction of a classic text optimised for kindle devices. " +
-                "We have endeavoured to create this version as close to the original artefact as possible.");
-        engMap.put("BookImage","https://firebasestorage.googleapis.com/v0/b/iammc2-f61a0.appspot.com/o/Arithmemtic.jpg?alt=media&token=29e00124-c5ff-4eec-a237-479ab1b237de");
-        databaseReference1.child("MathsTheme").child("ArithmeticNoteBooks").push().setValue(engMap);
-
-         */
-
-
-
-
-
-
-
     }
-
-    public void openEnginneringbooks(){
-
-        Intent intent = new Intent(getContext(), DetailsContainerActivity.class);
-        intent.putExtra("Category","Engineering");
-        startActivity(intent);
-
-    }
-
-    public void openQuoteSeries(){
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","Quotes");
-        startActivity(intent);
-    }
-
-    public void openScienceTheme(){
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","ScienceTheme");
-        startActivity(intent);
-    }
-
-    public void openMathsTheme(){
-
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","MathsTheme");
-        startActivity(intent);
-
-    }
-
-    public void openBestSeelingBtn(){
-
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","BestSelling");
-        startActivity(intent);
-    }
-
-    public void openFeaturedBtn(){
-        Intent intent = new Intent(getContext(),DetailsContainerActivity.class);
-        intent.putExtra("Category","Featured");
-        startActivity(intent);
-    }
-
 
 
 }
