@@ -107,9 +107,6 @@ public class CartFragment extends Fragment {
         cartShimmer.startShimmer();
 
 
-
-
-
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -130,8 +127,9 @@ public class CartFragment extends Fragment {
                                     Log.v("TAG", "BookID:" + bookId);
                                     displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
                                     cartShimmer.stopShimmer();
-                                    cartShimmer.setVisibility(View.GONE);
                                     cardLL.setVisibility(View.VISIBLE);
+                                    cartShimmer.setVisibility(View.GONE);
+
                                 }
 
                             }
@@ -163,8 +161,7 @@ public class CartFragment extends Fragment {
                 }
                 else {
                     Intent i = new Intent(getContext(), PaymentActivity.class);
-                    startActivity(i);
-
+                    getActivity().startActivity(i);
                 }
 
             }

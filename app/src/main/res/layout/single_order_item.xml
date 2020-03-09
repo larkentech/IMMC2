@@ -7,12 +7,10 @@
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
+        android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="16dp"
+        app:cardCornerRadius="8dp"
         app:cardElevation="0dp">
 
         <RelativeLayout
@@ -22,8 +20,8 @@
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/itemImageCard"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
                 android:layout_weight="1"
                 app:cardBackgroundColor="@color/colorPrimary"
                 app:cardCornerRadius="6dp"
@@ -47,10 +45,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_toEndOf="@id/itemImageCard"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="APJ Abdul Kalam"
                 android:textColor="@android:color/black"
-                android:textSize="16sp" />
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/bookDesignerOrder"
@@ -60,10 +58,10 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
                 android:layout_toEndOf="@id/itemImageCard"
-                android:fontFamily="@font/latobold"
+                android:fontFamily="@font/montserrat_regular"
                 android:text="By Hemanth Hem"
                 android:textColor="@android:color/darker_gray"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
             <TextView
                 android:id="@+id/bookPriceOrder"
@@ -73,10 +71,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="Rs.480/-"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp" />
+                android:textSize="16sp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
