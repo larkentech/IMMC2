@@ -15,21 +15,18 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="16dp"/>
 
-    <ImageView
-
+    <View
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1"
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
+        android:layout_weight="1"
         android:background="#D5D1D1"
-        android:id="@+id/cartListView"
-        android:scrollbars="none"
-        android:divider="@null"/>
+        android:divider="@null"
+        android:scrollbars="none" />
 
     <Button
 
-        android:id="@+id/proccedToBuyCart"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
