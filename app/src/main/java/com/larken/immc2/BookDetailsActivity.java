@@ -5,9 +5,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.RatingBar;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -32,7 +36,8 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookDetailsActivity extends AppCompatActivity implements View.OnClickListener{
+public class BookDetailsActivity extends AppCompatActivity implements
+        AdapterView.OnItemSelectedListener {
 
     TextView bookName;
     TextView bookAuthor;
@@ -49,6 +54,8 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
     public String bookID;
     public String bookCategoryID;
     public String bookSubCategoryID;
+
+    String[] pages = { "160", "200", "240"};
 
 
     @Override
@@ -71,11 +78,17 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         bookPrice = findViewById(R.id.selected_book_price);
         bookPriceIncrement = findViewById(R.id.book_offer_price);
         bookCategory = findViewById(R.id.selected_book_category);
-
-
-
         //bookRatings = findViewById(R.id.ratingBar);
         //bookRatings.setEnabled(false);
+
+        Spinner spin = (Spinner) findViewById(R.id.spinner_pages);
+        spin.setOnItemSelectedListener(this);
+
+        ArrayAdapter aa = new ArrayAdapter(this,android.R.layout.simple_spinner_item,pages);
+        aa.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        //Setting the ArrayAdapter data on the Spinner
+        spin.setAdapter(aa);
+
 
 
 
@@ -178,8 +191,16 @@ public class BookDetailsActivity extends AppCompatActivity implements View.OnCli
         viewPager.setAdapter(adapter);
     }
 
+
+
     @Override
-    public void onClick(View v) {
+    public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        Toast.makeText(getApplicationContext(),pages[position]+" Page Book", Toast.LENGTH_LONG).show();
+
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> parent) {
 
     }
 

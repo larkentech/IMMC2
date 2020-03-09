@@ -45,6 +45,7 @@ dependencies {
     implementation 'com.razorpay:checkout:1.5.13'
     implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
     implementation 'com.github.smhdk:KM-Popup-Image-Slider:v1.2.1'
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
 
 
 }

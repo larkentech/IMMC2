@@ -7,9 +7,20 @@
     tools:context=".PaymentActivity"
     android:background="#F7f7f7">
 
-    <RelativeLayout
+    <com.facebook.shimmer.ShimmerFrameLayout
+        android:id="@+id/shimmer_view_payment"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
+
+        <include layout="@layout/dummy_payment" />
+
+    </com.facebook.shimmer.ShimmerFrameLayout>
+
+    <RelativeLayout
+        android:visibility="gone"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/paymentRL">
 
         <LinearLayout
             android:layout_width="match_parent"
