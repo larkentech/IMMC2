@@ -15,9 +15,11 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseUser;
 import com.larken.immc2.AdapterClasses.PaymentOrdersListAdapter;
 import com.larken.immc2.Fragments.AdrsFragment;
@@ -83,6 +85,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     int count2 = 0;
     int calulatedprice = 0;
 
+    ShimmerFrameLayout paymentShimmer;
+    RelativeLayout paymentRL;
+
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -132,6 +137,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         adapter = new PaymentOrdersListAdapter(this, R.layout.single_order_item, cartItems,itemsCount,tempKeys);
         ordersList.setAdapter(adapter);
 
+        paymentRL=findViewById(R.id.paymentRL);
+        paymentShimmer=findViewById(R.id.shimmer_view_payment);
+        paymentShimmer.startShimmer();
+
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -168,6 +177,12 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
                                     displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName);
+
+                                    paymentShimmer.startShimmer();
+                                    paymentShimmer.setVisibility(View.GONE);
+                                    paymentRL.setVisibility(View.VISIBLE);
+
+
 
                                 }
 
@@ -277,6 +292,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             Toasty.error(getApplicationContext(),"failed").show();
             Log.v("TAG","Exception:"+e);
         }
+
 
 
 

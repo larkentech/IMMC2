@@ -14,8 +14,10 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.larken.immc2.AdapterClasses.CartAdapter;
@@ -57,6 +59,10 @@ public class CartFragment extends Fragment {
     int count1;
     int count2 = 0;
 
+    //Dummy layout
+    ShimmerFrameLayout cartShimmer;
+    LinearLayout cardLL;
+
 
     public CartFragment() {
         // Required empty public constructor
@@ -95,6 +101,11 @@ public class CartFragment extends Fragment {
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
         bottomNavigationView.setVisibility(View.GONE);
 
+        cardLL=view.findViewById(R.id.cardLL);
+        cardLL.setVisibility(View.GONE);
+        cartShimmer = view.findViewById(R.id.shimmer_view_cart);
+        cartShimmer.startShimmer();
+
 
 
 
@@ -118,6 +129,9 @@ public class CartFragment extends Fragment {
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
                                     displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+                                    cartShimmer.stopShimmer();
+                                    cartShimmer.setVisibility(View.GONE);
+                                    cardLL.setVisibility(View.VISIBLE);
                                 }
 
                             }
@@ -174,7 +188,6 @@ public class CartFragment extends Fragment {
                     adapter.add(modal);
                     adapter.notifyDataSetChanged();
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
 
