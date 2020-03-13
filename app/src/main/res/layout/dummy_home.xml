@@ -33,13 +33,12 @@
                 android:textColor="#000000"
                 android:textSize="18sp" />
 
-            <it.sephiroth.android.library.widget.HListView
-                android:id="@+id/offersListDummy"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:background="#D5D1D1"
-                android:layout_marginTop="8dp">
-            </it.sephiroth.android.library.widget.HListView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:src="@drawable/dummy_background"
+            android:scaleType="centerCrop"/>
 
             <TextView
                 android:layout_width="150dp"
@@ -85,15 +84,13 @@
             </LinearLayout>
 
 
-            <it.sephiroth.android.library.widget.HListView
-                android:id="@+id/featuredListDummy"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="8dp"
-                android:background="#D5D1D1"
-                android:paddingBottom="8dp">
-
-            </it.sephiroth.android.library.widget.HListView>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:background="#D5D1D1"
+            android:src="@drawable/dummy_background"
+            android:scaleType="centerCrop"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -114,14 +111,14 @@
             </LinearLayout>
 
 
-            <it.sephiroth.android.library.widget.HListView
-                android:id="@+id/bestSellerListDummy"
-                android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:layout_marginTop="8dp"
-                android:paddingBottom="8dp"
-                android:background="#D5D1D1"
-                android:layout_marginBottom="80dp"/>
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="80dp"
+            android:src="@drawable/dummy_background"
+            android:scaleType="centerCrop"
+            android:paddingBottom="8dp" />
 
         </LinearLayout>
 

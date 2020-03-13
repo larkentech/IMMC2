@@ -46,6 +46,8 @@ dependencies {
     implementation 'com.github.chathuralakmal:AndroidImagePopup:1.2.2'
     implementation 'com.github.smhdk:KM-Popup-Image-Slider:v1.2.1'
     implementation 'com.facebook.shimmer:shimmer:0.5.0'
+    implementation 'com.github.aabhasr1:OtpView:v1.1.2'
+    implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.19'
 
 
 }

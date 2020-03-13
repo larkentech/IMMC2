@@ -51,33 +51,37 @@
                 android:layout_height="380dp"
                 android:orientation="vertical">
 
-                <LinearLayout
+                <ImageView
                     android:layout_marginTop="20dp"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp"
-                    android:background="#D5D1D1">
+                    android:src="@drawable/dummy_background"
+                    android:scaleType="centerCrop">
 
-                </LinearLayout>
-                <LinearLayout
+                </ImageView>
+
+                <ImageView
                     android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:background="#D5D1D1"
+                    android:src="@drawable/dummy_background"
+                    android:scaleType="centerCrop"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp">
 
-                </LinearLayout>
-                <LinearLayout
+                </ImageView>
+                <ImageView
                     android:layout_marginTop="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="120dp"
-                    android:background="#D5D1D1"
+                    android:src="@drawable/dummy_background"
+                    android:scaleType="centerCrop"
                     android:layout_marginStart="24dp"
                     android:layout_marginEnd="24dp">
 
-                </LinearLayout>
+                </ImageView>
             </LinearLayout>
 
 
