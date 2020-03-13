@@ -54,6 +54,7 @@ public class BookDetailsActivity extends AppCompatActivity implements
     public String bookID;
     public String bookCategoryID;
     public String bookSubCategoryID;
+    public String priceID;
 
     String[] pages = { "160", "200", "240"};
 
@@ -71,8 +72,9 @@ public class BookDetailsActivity extends AppCompatActivity implements
         bookID = getIntent().getExtras().getString("BookID");
         bookCategoryID = getIntent().getExtras().getString("BookCategory");
         bookSubCategoryID = getIntent().getExtras().getString("BookSubCategory");
-        bookImage = findViewById(R.id.selected_book_image);
 
+
+        bookImage = findViewById(R.id.selected_book_image);
         bookName = findViewById(R.id.selected_book_name);
         bookAuthor = findViewById(R.id.selected_book_designer);
         bookPrice = findViewById(R.id.selected_book_price);
@@ -187,7 +189,6 @@ public class BookDetailsActivity extends AppCompatActivity implements
     private void setupViewPager(ViewPager viewPager) {
         Adapter adapter = new Adapter(getSupportFragmentManager());
         adapter.addFragment(new IntroductionFragment(), "Introduction");
-        adapter.addFragment(new ReviewFragment(), "Review");
         viewPager.setAdapter(adapter);
     }
 

@@ -33,6 +33,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import es.dmoral.toasty.Toasty;
@@ -56,6 +57,7 @@ public class CartFragment extends Fragment {
     List<String> bookSubCategoryId;
     List<String> itemsCount;
     List<String> tempKeys;
+    List<String> bookPrice;
     int count1;
     int count2 = 0;
 
@@ -86,6 +88,7 @@ public class CartFragment extends Fragment {
         bookSubCategoryId = new ArrayList<>();
         itemsCount = new ArrayList<>();
         tempKeys = new ArrayList<>();
+        bookPrice=new ArrayList<>();
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
@@ -123,9 +126,12 @@ public class CartFragment extends Fragment {
                                 bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
+                                bookPrice.add(dataSnapshot.child("Price").getValue(String.class));
+
+                                databaseReference.child("Price").setValue(bookPrice);
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
-                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookPrice);
                                     cartShimmer.stopShimmer();
                                     cardLL.setVisibility(View.VISIBLE);
                                     cartShimmer.setVisibility(View.GONE);
@@ -172,12 +178,14 @@ public class CartFragment extends Fragment {
         return null;
     }
 
-    private void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId, List<String> itemsCount) {
+    private void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId,List<String> bookPrice,List<String> itemsCount) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         for (int i=0;i<bookId.size();i++)
         {
             DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryId.get(i))
                     .child(bookSubCategoryId.get(i)).child(bookId.get(i));
+
+
             databaseReference3.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -214,9 +222,11 @@ public class CartFragment extends Fragment {
                                 bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
+                                bookPrice.add(dataSnapshot.child("Price").getValue(String.class));
+
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
-                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount);
+                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookPrice);
                                 }
 
                             }
@@ -227,6 +237,7 @@ public class CartFragment extends Fragment {
                             }
                         });
                     }
+
 
 
                     //getBookDetails(bookId);

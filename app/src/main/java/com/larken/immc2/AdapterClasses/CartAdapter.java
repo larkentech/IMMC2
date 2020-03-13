@@ -72,8 +72,13 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
 
         bookName.setText(modal.getBookName());
         authorName.setText(modal.getBookDesigner());
-        quantityPicker.setValue(Integer.parseInt(itemsCount.get(position).toString()));
-        bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*quantityPicker.getValue()+"/-");
+        try {
+            quantityPicker.setValue(Integer.parseInt(itemsCount.get(position).toString()));
+            bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*quantityPicker.getValue()+"/-");
+
+        }catch (NumberFormatException ex){
+        }
+
 
         quantityPicker.setValueChangedListener(new ValueChangedListener() {
             @Override
@@ -85,6 +90,8 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
                     DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails")
                             .child(mAuth.getUid()).child("Cart");
                     databaseReference.child(tempKeys.get(position)).child("Count").setValue(String.valueOf(quantityPicker.getValue()));
+                    databaseReference.child(tempKeys.get(position)).child("Price").setValue(bookPrice);
+
 
                 }catch (Exception e)
                 {
@@ -98,20 +105,25 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
         deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails")
                         .child(mAuth.getUid()).child("Cart");
-                databaseReference.child(tempKeys.get(position)).removeValue(new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        Toasty.error(getContext(),"Item Removed From Cart").show();
 
-                        ((CartFragment)fragment).adapter.clear();
-                        ((CartFragment)fragment).reloadData();
+                    databaseReference.child(tempKeys.get(position)).removeValue(new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                            Toasty.error(getContext(),"Item Removed From Cart").show();
 
-                    }
-                });
+                            ((CartFragment)fragment).adapter.clear();
+                            ((CartFragment)fragment).reloadData();
+
+                        }
+                    });
+
+
+
             }
         });
 
