@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Maths Books"
                 android:textColor="@color/colorAccent"
                 android:textSize="24sp" />
@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Algebra NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -50,7 +50,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Geometry NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -66,7 +66,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Trigonometry NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Aritmetic NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />

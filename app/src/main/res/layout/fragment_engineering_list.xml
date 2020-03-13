@@ -20,7 +20,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Engineering Books"
                 android:textColor="@color/colorAccent"
                 android:textSize="24sp" />
@@ -31,7 +31,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginStart="16dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Computer Science NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -47,7 +47,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="ECE NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -63,7 +63,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="EEE NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -79,7 +79,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Mechanical Engineering NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp"/>
@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Chemical Engineering NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -111,7 +111,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Instrumentaion Engineering NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -127,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Mining Engineering NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />
@@ -143,7 +143,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
                 android:layout_marginTop="24dp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:text="Textile Engineering NoteBooks"
                 android:textColor="@android:color/black"
                 android:textSize="18sp" />

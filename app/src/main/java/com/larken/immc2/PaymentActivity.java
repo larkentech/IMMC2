@@ -76,6 +76,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     List<String> itemsCount;
     List<String> bookName;
     List<String> tempKeys;
+    List<String> bookPrice;
 
    String Date;
 
@@ -130,6 +131,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         bookCategoryId = new ArrayList<>();
         bookSubCategoryId = new ArrayList<>();
         bookName=new ArrayList<>();
+        bookPrice=new ArrayList<>();
         tempKeys = new ArrayList<>();
 
         ordersList = findViewById(R.id.ordersListPayment);
@@ -170,13 +172,12 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                                 bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
                                 bookName.add(dataSnapshot.child("BookName").getValue(String.class));
-
-
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
+                                bookPrice.add(dataSnapshot.child("Price").getValue(String.class));
 
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
-                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName);
+                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName,bookPrice);
 
                                     paymentShimmer.startShimmer();
                                     paymentShimmer.setVisibility(View.GONE);
@@ -343,7 +344,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     }
 
-    public void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId,List<String> bookName, List<String> itemsCount) {
+    public void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId,List<String> bookName,List<String> bookPrice, List<String> itemsCount) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
         for (int i=0;i<bookId.size();i++)
@@ -421,9 +422,10 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
                                 bookName.add(dataSnapshot.child("BookName").getValue(String.class));
+                                bookPrice.add(dataSnapshot.child("Price").getValue(String.class));
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
-                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName);
+                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName,bookPrice);
                                 }
 
                             }

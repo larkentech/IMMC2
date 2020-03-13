@@ -39,6 +39,7 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
     Fragment fragment;
 
 
+
     public CartAdapter(@NonNull Context context, int resource, @NonNull List<BooksModal> objects, List<String> itemsCount,List<String> count, Fragment fragment) {
         super(context, resource, objects);
         this.itemsCount = itemsCount;
@@ -60,7 +61,7 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
         TextView bookName = convertView.findViewById(R.id.bookNameCart);
         TextView authorName = convertView.findViewById(R.id.bookDesignerCart);
         final TextView bookPrice = convertView.findViewById(R.id.bookPriceCart);
-        NumberPicker quantityPicker = convertView.findViewById(R.id.number_picker_cart);
+        final NumberPicker quantityPicker = convertView.findViewById(R.id.number_picker_cart);
         ImageView BookImage = convertView.findViewById(R.id.itemImageCart);
         Button deleteItem = convertView.findViewById(R.id.delete_cart);
         Glide
@@ -78,7 +79,13 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
             @Override
             public void valueChanged(int value, ActionEnum action) {
                 try{
-                    bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*value+"/-");
+                    bookPrice.setText("Rs"+Integer.parseInt(modal.getBookPrice())*value+"/-");
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails")
+                            .child(mAuth.getUid()).child("Cart");
+                    databaseReference.child(tempKeys.get(position)).child("Count").setValue(String.valueOf(quantityPicker.getValue()));
+
                 }catch (Exception e)
                 {
                     Log.v("TAG",e.getMessage());

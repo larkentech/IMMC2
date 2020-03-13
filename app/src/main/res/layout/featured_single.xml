@@ -31,7 +31,7 @@
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="4dp"
                 android:textSize="16sp"
-                android:fontFamily="@font/latoblack"
+                android:fontFamily="@font/montserrat_black"
                 android:textColor="@color/colorPrimary" />
 
             <TextView
@@ -42,7 +42,7 @@
                 android:layout_marginTop="2dp"
                 android:layout_marginEnd="8dp"
                 android:textSize="14sp"
-                android:fontFamily="@font/latobold"
+                android:fontFamily="@font/montserrat_bold"
                 android:text="Hello World by india"
                 android:maxLines="1"
                 android:layout_marginBottom="8dp"
