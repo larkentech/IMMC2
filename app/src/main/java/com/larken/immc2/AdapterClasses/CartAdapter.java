@@ -39,6 +39,7 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
     Fragment fragment;
 
 
+
     public CartAdapter(@NonNull Context context, int resource, @NonNull List<BooksModal> objects, List<String> itemsCount,List<String> count, Fragment fragment) {
         super(context, resource, objects);
         this.itemsCount = itemsCount;
@@ -60,7 +61,7 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
         TextView bookName = convertView.findViewById(R.id.bookNameCart);
         TextView authorName = convertView.findViewById(R.id.bookDesignerCart);
         final TextView bookPrice = convertView.findViewById(R.id.bookPriceCart);
-        NumberPicker quantityPicker = convertView.findViewById(R.id.number_picker_cart);
+        final NumberPicker quantityPicker = convertView.findViewById(R.id.number_picker_cart);
         ImageView BookImage = convertView.findViewById(R.id.itemImageCart);
         Button deleteItem = convertView.findViewById(R.id.delete_cart);
         Glide
@@ -71,14 +72,28 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
 
         bookName.setText(modal.getBookName());
         authorName.setText(modal.getBookDesigner());
-        quantityPicker.setValue(Integer.parseInt(itemsCount.get(position).toString()));
-        bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*quantityPicker.getValue()+"/-");
+        try {
+            quantityPicker.setValue(Integer.parseInt(itemsCount.get(position).toString()));
+            bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*quantityPicker.getValue()+"/-");
+
+        }catch (NumberFormatException ex){
+        }
+
+
 
         quantityPicker.setValueChangedListener(new ValueChangedListener() {
             @Override
             public void valueChanged(int value, ActionEnum action) {
                 try{
-                    bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())*value+"/-");
+                    bookPrice.setText("Rs"+Integer.parseInt(modal.getBookPrice())*value+"/-");
+                    FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                    FirebaseAuth mAuth = FirebaseAuth.getInstance();
+                    DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails")
+                            .child(mAuth.getUid()).child("Cart");
+                    databaseReference.child(tempKeys.get(position)).child("Count").setValue(String.valueOf(quantityPicker.getValue()));
+                    databaseReference.child(tempKeys.get(position)).child("Price").setValue(bookPrice);
+
+
                 }catch (Exception e)
                 {
                     Log.v("TAG",e.getMessage());
@@ -91,20 +106,25 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
         deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
                 DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails")
                         .child(mAuth.getUid()).child("Cart");
-                databaseReference.child(tempKeys.get(position)).removeValue(new DatabaseReference.CompletionListener() {
-                    @Override
-                    public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
-                        Toasty.error(getContext(),"Item Removed From Cart").show();
 
-                        ((CartFragment)fragment).adapter.clear();
-                        ((CartFragment)fragment).reloadData();
+                    databaseReference.child(tempKeys.get(position)).removeValue(new DatabaseReference.CompletionListener() {
+                        @Override
+                        public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
+                            Toasty.error(getContext(),"Item Removed From Cart").show();
 
-                    }
-                });
+                            ((CartFragment)fragment).adapter.clear();
+                            ((CartFragment)fragment).reloadData();
+
+                        }
+                    });
+
+
+
             }
         });
 

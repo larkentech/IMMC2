@@ -30,8 +30,7 @@
             android:textColor="#000000"
             android:textSize="32sp"
             android:layout_gravity="center"
-            android:textStyle="bold"
-            android:fontFamily="@font/latoregular">
+            android:fontFamily="@font/montserrat_black">
 
         </TextView>
         <TextView
@@ -41,7 +40,7 @@
             android:id="@+id/enterOtpText"
             android:textColor="#131010"
             android:layout_centerHorizontal="true"
-            android:fontFamily="@font/latoregular"
+            android:fontFamily="@font/montserrat_regular"
             android:text="We have sent you an access code via SMS for Mobile number varification"
             android:layout_marginTop="12dp"
             android:textAlignment="center"
@@ -67,6 +66,7 @@
             android:gravity="center"
             android:padding="16dp"
             android:shadowColor="#0000ff"
+            android:fontFamily="@font/montserrat_bold"
             android:shadowDx="2"
             android:shadowDy="4"
             android:inputType="number">
@@ -83,6 +83,7 @@
             android:background="@drawable/button_shape"
             android:text="ENTER OTP"
             android:layout_marginTop="35dp"
+            android:fontFamily="@font/montserrat_black"
             android:layout_gravity="center_horizontal"
             android:layout_marginBottom="20dp">
 

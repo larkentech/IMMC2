@@ -23,7 +23,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="24dp"
                     android:layout_marginBottom="8dp"
-                    android:fontFamily="@font/latobold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:gravity="center_horizontal"
                     android:text="Thank You"
                     android:textColor="#000000"
@@ -39,7 +39,7 @@
                     android:textColor="#000000"
                     android:layout_marginTop="16dp"
                     android:gravity="center_horizontal"
-                    android:fontFamily="@font/latobold"
+                    android:fontFamily="@font/montserrat_bold"
                     android:layout_marginBottom="8dp"/>
 
 
@@ -65,7 +65,7 @@
                     android:layout_marginTop="24dp"
                     android:layout_below="@id/smile_rating"
                     android:gravity="center_horizontal"
-                    android:fontFamily="@font/latobold" />
+                    android:fontFamily="@font/montserrat_bold" />
 
                 <EditText
                     android:layout_width="match_parent"
@@ -79,6 +79,7 @@
                     android:background="@drawable/edittextstyle"
                     android:hint="(Optional)"
                     android:textSize="16sp"
+                    android:fontFamily="@font/montserrat_regular"
                     android:foregroundTint="@color/colorPrimary"
                     android:textColorHint="@android:color/black"
                     android:isScrollContainer="true"/>

@@ -28,7 +28,7 @@
             android:layout_below="@id/imageView2"
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
-            android:fontFamily="@font/latoblack"
+            android:fontFamily="@font/montserrat_black"
             android:text="Payment Successfull"
             android:textColor="#FFFFFF"
             android:textSize="40sp" />
@@ -41,7 +41,7 @@
             android:layout_marginStart="40dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="40dp"
-            android:fontFamily="@font/latobold"
+            android:fontFamily="@font/montserrat_regular"
             android:text="Your Payment has been processed Successfully.Go to your orders section to find your order."
             android:textColor="#FFFFFF"
             android:textSize="16sp" />
@@ -55,7 +55,7 @@
             android:layout_marginEnd="40dp"
             android:layout_marginBottom="30dp"
             android:text="Home"
-            android:fontFamily="@font/latoblack"
+            android:fontFamily="@font/montserrat_black"
             android:textColor="#4CAF50"
             android:textSize="20dp"  />
 
