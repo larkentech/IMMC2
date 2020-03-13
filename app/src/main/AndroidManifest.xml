@@ -22,7 +22,8 @@
             android:theme="@style/AppTheme.NoActionBar"/>
         <activity android:name=".PaymentActivity"
             android:theme="@style/AppTheme.NoActionBar"/>
-        <activity android:name=".BookDetailsActivity" />
+        <activity android:name=".BookDetailsActivity"
+            android:theme="@style/AppTheme.NoActionBar"/>
         <activity
             android:name=".DetailsContainerActivity"
             android:theme="@style/AppTheme.NoActionBar" />

@@ -8,8 +8,8 @@
         android:layout_width="200dp"
         android:layout_height="match_parent"
         android:layout_marginEnd="16dp"
-        android:src="@drawable/engineering_series"
-        android:scaleType="centerCrop"
+        android:src="@drawable/dummy_background"
+        android:scaleType="fitXY"
         android:id="@+id/single_subcategory_image"/>
 
 </LinearLayout>

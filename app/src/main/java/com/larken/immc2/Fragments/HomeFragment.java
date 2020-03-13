@@ -50,7 +50,7 @@ public class HomeFragment extends Fragment {
     CardView mathsTheme;
 
     TextView bestSellingBtn;
-    TextView featuredBtn;
+
 
     OffersAdapter adapter;
     SubCategoryAdapter quotesAdapter;
@@ -108,7 +108,6 @@ public class HomeFragment extends Fragment {
         subcategoryImages = new ArrayList<>();
         firebaseDatabase = FirebaseDatabase.getInstance();
         bestSellingBtn = (TextView) view.findViewById(R.id.bestSellingBtn);
-        featuredBtn = (TextView) view.findViewById(R.id.featuredBtn);
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
         bottomNavigationView.setVisibility(View.VISIBLE);

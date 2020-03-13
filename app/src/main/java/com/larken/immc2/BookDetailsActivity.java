@@ -3,10 +3,13 @@ package com.larken.immc2;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -22,7 +25,9 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
+import com.google.firebase.auth.FirebaseAuth;
 import com.kodmap.app.library.PopopDialogBuilder;
+import com.larken.immc2.AdapterClasses.ImageSliderAdapter;
 import com.larken.immc2.Fragments.IntroductionFragment;
 import com.larken.immc2.Fragments.ReviewFragment;
 import com.google.android.material.tabs.TabLayout;
@@ -31,10 +36,17 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.smarteist.autoimageslider.IndicatorAnimations;
+import com.smarteist.autoimageslider.SliderAnimations;
+import com.smarteist.autoimageslider.SliderView;
+import com.travijuu.numberpicker.library.NumberPicker;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 public class BookDetailsActivity extends AppCompatActivity implements
         AdapterView.OnItemSelectedListener {
@@ -57,21 +69,91 @@ public class BookDetailsActivity extends AppCompatActivity implements
 
     String[] pages = { "160", "200", "240"};
 
+    SliderView sliderView;
+    ImageSliderAdapter sliderAdapter;
+
+    //From the fragment
+    private String BookDesc;
+    public String[] keysURL=new String[100];
+    public int k=0;
+    Button add;
+    FirebaseDatabase firebaseDatabaseFrag;
+    DatabaseReference databaseReferenceFrag;
+    TextView addToCart;
+    TextView bookDesc;
+    FirebaseAuth mAuth;
+    int count;
+    NumberPicker numberPicker;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_book_details);
-
-        final List<String> url_list = new ArrayList<>();
-
-
-
+        setContentView(R.layout.dummy_layout);
 
         bookID = getIntent().getExtras().getString("BookID");
         bookCategoryID = getIntent().getExtras().getString("BookCategory");
         bookSubCategoryID = getIntent().getExtras().getString("BookSubCategory");
-        bookImage = findViewById(R.id.selected_book_image);
+
+        bookName = findViewById(R.id.selected_book_name);
+        bookAuthor = findViewById(R.id.selected_book_designer);
+        bookPrice = findViewById(R.id.selected_book_price);
+        bookPriceIncrement = findViewById(R.id.book_offer_price);
+        bookCategory = findViewById(R.id.selected_book_category);
+
+        //SliderView
+        sliderView = findViewById(R.id.imageSlider);
+        final List<String> url_list = new ArrayList<>();
+        sliderAdapter = new ImageSliderAdapter(this);
+        sliderView.setSliderAdapter(sliderAdapter);
+        sliderView.setIndicatorAnimation(IndicatorAnimations.WORM); //set indicator animation by using SliderLayout.IndicatorAnimations. :WORM or THIN_WORM or COLOR or DROP or FILL or NONE or SCALE or SCALE_DOWN or SLIDE and SWAP!!
+        sliderView.setSliderTransformAnimation(SliderAnimations.SIMPLETRANSFORMATION);
+        sliderView.setAutoCycleDirection(SliderView.AUTO_CYCLE_DIRECTION_BACK_AND_FORTH);
+        sliderView.setIndicatorSelectedColor(Color.WHITE);
+        sliderView.setIndicatorUnselectedColor(Color.GRAY);
+        sliderView.setScrollTimeInSec(4); //set scroll delay in seconds :
+        sliderView.startAutoCycle();
+
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        if (bookSubCategoryID != null)
+        {
+            databaseReference = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryID).child(bookSubCategoryID).child(bookID);
+        }
+        else {
+            databaseReference = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryID).child(bookID);
+        }
+        databaseReference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                bookName.setText(dataSnapshot.child("BookName").getValue(String.class));
+                bookAuthor.setText("Designed By: "+dataSnapshot.child("BookDesigner").getValue(String.class));
+                bookPrice.setText("Rs."+dataSnapshot.child("BookPrice").getValue(String.class)+"/-");
+                bookCategory.setText("Category: "+dataSnapshot.child("BookSubCategory").getValue(String.class));
+                for (DataSnapshot ds:dataSnapshot.child("BookImages").getChildren())
+                {
+                    url_list.add(ds.getValue(String.class));
+                    sliderAdapter.addItem(ds.getValue(String.class));
+                }
+
+                String value = dataSnapshot.child("BookPrice").getValue(String.class);
+                String i ="0.2";
+                double value1 = Double.parseDouble(value) + ( Double.parseDouble(value) * Double.parseDouble(i)) ;
+                int value2 = (int)value1;
+                String value3 = Integer.toString(Math.round(value2));
+
+                //bookPriceIncrement.setText("Rs."+value3+"/-");
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+      /*
 
         bookName = findViewById(R.id.selected_book_name);
         bookAuthor = findViewById(R.id.selected_book_designer);
@@ -180,7 +262,64 @@ public class BookDetailsActivity extends AppCompatActivity implements
             setupViewPager(viewPager);
         }
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tabs);
-        tabLayout.setupWithViewPager(viewPager);
+        tabLayout.setupWithViewPager(viewPager); */
+
+      //From the fragment
+        mAuth = FirebaseAuth.getInstance();
+        bookDesc = findViewById(R.id.selected_book_desc);
+        numberPicker = findViewById(R.id.number_picker);
+        firebaseDatabaseFrag = FirebaseDatabase.getInstance();
+        //Getting Book Details
+        if (bookSubCategoryID == null)
+        {
+            databaseReferenceFrag = firebaseDatabaseFrag.getReference().child("BookDetails").child(bookCategoryID).child(bookID);
+        }
+        else {
+            databaseReferenceFrag = firebaseDatabaseFrag.getReference().child("BookDetails").child(bookCategoryID).child(bookSubCategoryID).child(bookID);
+        }
+        databaseReferenceFrag.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                bookDesc.setText(dataSnapshot.child("BookDesc").getValue(String.class));
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        addToCart = findViewById(R.id.addtocart);
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                count = numberPicker.getValue();
+
+                if (count <= 0)
+                {
+                    Toasty.error(BookDetailsActivity.this,"Select Quantity").show();
+                }
+                else {
+                    HashMap<String,String> cartMap = new HashMap<>();
+                    cartMap.put("Count",Integer.toString(count));
+                    cartMap.put("BookId",bookID);
+                    cartMap.put("BookCategory",bookCategoryID);
+                    cartMap.put("BookSubCategory",bookSubCategoryID);
+
+                    DatabaseReference databaseReference3 = firebaseDatabaseFrag.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
+                    databaseReference3.child("Cart").push().setValue(cartMap);
+                    addToCart.setBackgroundColor(getResources().getColor(R.color.finalColor));
+                    addToCart.setText("Added");
+                    Drawable image = addToCart.getContext().getDrawable(R.drawable.add_to_cart_check);
+                    addToCart.setCompoundDrawablesWithIntrinsicBounds(image,null,null,null);
+                    Toasty.success(BookDetailsActivity.this, "Successfully added to the cart", Toast.LENGTH_SHORT, true).show();
+
+                }
+
+
+            }
+        });
+
     }
 
 

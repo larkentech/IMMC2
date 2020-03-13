@@ -36,8 +36,6 @@
 
 
 
-
-
             </androidx.cardview.widget.CardView>
 
 
@@ -63,7 +61,7 @@
 
 
             <TextView
-                android:id="@+id/selected_book_designer"
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="By AuthorName"

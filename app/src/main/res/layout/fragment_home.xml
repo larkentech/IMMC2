@@ -5,8 +5,11 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/background_light"
     tools:context=".Fragments.HomeFragment">
+
     <com.facebook.shimmer.ShimmerFrameLayout
+        android:visibility="gone"
         android:id="@+id/shimmer_view_home"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -19,10 +22,9 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <ScrollView
-        android:visibility="gone"
+        android:id="@+id/homeSV"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/homeSV">
+        android:layout_height="wrap_content">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -32,23 +34,23 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_margin="16dp">
+                android:layout_margin="16dp"
+                android:orientation="horizontal">
 
 
                 <ImageView
                     android:layout_width="50dp"
                     android:layout_height="50dp"
-                    android:src="@drawable/logo"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY"
+                    android:src="@drawable/logo" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="16dp"
                     android:fontFamily="@font/montserrat_bold"
                     android:text="IamMC2"
-                    android:layout_marginStart="16dp"
-                    android:layout_gravity="center_vertical"
                     android:textColor="@color/colorPrimary"
                     android:textSize="24sp" />
 
@@ -70,24 +72,102 @@
                 android:layout_height="125dp"
                 android:layout_marginTop="4dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="16dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:padding="6dp"
-                android:text="Engineering Theme"
-                android:textColor="#000000"
-                android:textSize="18sp" />
-
-            <it.sephiroth.android.library.widget.HListView
-                android:id="@+id/engineeringList"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
-                android:layout_height="120dp"
-                android:layout_marginTop="4dp"
-                android:layout_marginStart="8dp"
-                android:paddingBottom="8dp"/>
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Engineering Theme"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="A Small description about engineering"
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
+
+                    <it.sephiroth.android.library.widget.HListView
+                        android:id="@+id/engineeringList"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:paddingBottom="8dp" />
+
+                </LinearLayout>
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:cardElevation="0dp"
+                android:layout_marginTop="16dp"
+                app:cardBackgroundColor="@color/white">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Quotes Theme"
+                        android:textColor="#000000"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_gravity="center_horizontal"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:text="A Small quote"
+                        android:textColor="#000000"
+                        android:textSize="12sp" />
+
+                    <it.sephiroth.android.library.widget.HListView
+                        android:id="@+id/quotesList"
+                        android:layout_width="match_parent"
+                        android:layout_height="300dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:paddingBottom="8dp" />
+
+                </LinearLayout>
+
+
+
+
+
+            </androidx.cardview.widget.CardView>
+
 
 
 
@@ -107,26 +187,15 @@
                     android:text="Quote Theme"
                     android:textColor="#000000"
                     android:textSize="18sp" />
-
-                <TextView
-                    android:id="@+id/featuredBtn"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16sp"
-                    android:layout_marginEnd="16dp"
-                    android:text="See all"
-                    android:fontFamily="@font/montserrat_regular"
-                    android:textSize="12sp" />
             </LinearLayout>
-
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/quotesList"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
-                android:layout_marginTop="4dp"
                 android:layout_marginStart="8dp"
-                android:paddingBottom="8dp"/>
+                android:layout_marginTop="4dp"
+                android:paddingBottom="8dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -151,8 +220,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16sp"
                     android:layout_marginEnd="16dp"
-                    android:text="See all"
                     android:fontFamily="@font/montserrat_regular"
+                    android:text="See all"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -163,7 +232,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="4dp"
-                android:paddingBottom="8dp"/>
+                android:paddingBottom="8dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -187,8 +256,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16sp"
                     android:layout_marginEnd="16dp"
-                    android:text="See all"
                     android:fontFamily="@font/montserrat_regular"
+                    android:text="See all"
                     android:textSize="12sp" />
 
             </LinearLayout>
@@ -198,7 +267,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginTop="4dp"
-                android:paddingBottom="60dp"/>
+                android:paddingBottom="60dp" />
 
         </LinearLayout>
 

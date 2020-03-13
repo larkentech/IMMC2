@@ -146,6 +146,7 @@ public class IntroductionFragment extends Fragment {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 bookDesc.setText(dataSnapshot.child("BookDesc").getValue(String.class));
+
             }
 
             @Override
