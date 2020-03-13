@@ -80,6 +80,7 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
         }
 
 
+
         quantityPicker.setValueChangedListener(new ValueChangedListener() {
             @Override
             public void valueChanged(int value, ActionEnum action) {
