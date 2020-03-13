@@ -26,6 +26,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 import com.larken.immc2.Fragments.AccountFragment;
+import com.rengwuxian.materialedittext.MaterialEditText;
 
 import java.util.HashMap;
 
@@ -33,13 +34,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 
 public class UseraccountActivity extends AppCompatActivity {
-    EditText username;
-    EditText usermail;
-    EditText usercity;
-    EditText userflat;
-    EditText userarea;
-    EditText userzipcode;
-    EditText userlandmark;
+    MaterialEditText username;
+    MaterialEditText usermail;
+    MaterialEditText usercity;
+    MaterialEditText userflat;
+    MaterialEditText userarea;
+    MaterialEditText userzipcode;
+    MaterialEditText userlandmark;
+    MaterialEditText userPhone;
     Button saveprofile;
 
     ImageView profilepic;
@@ -50,9 +52,6 @@ public class UseraccountActivity extends AppCompatActivity {
 
     StorageReference mStorageRef;
 
-
-
-
     String Name;
     String Email;
     String City;
@@ -60,6 +59,7 @@ public class UseraccountActivity extends AppCompatActivity {
     String Area;
     String Zipcode;
     String Landmark;
+    String phone;
 
 
 
@@ -68,6 +68,7 @@ public class UseraccountActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_useraccount);
         mStorageRef = FirebaseStorage.getInstance().getReference("Profile_Pictures");
+        phone = getIntent().getExtras().getString("Phone");
 
         username = findViewById(R.id.name);
         usermail = findViewById(R.id.entermail);
@@ -78,6 +79,9 @@ public class UseraccountActivity extends AppCompatActivity {
         userlandmark = findViewById(R.id.enterlandmark);
         saveprofile = findViewById(R.id.btnsave);
         profilepic = findViewById(R.id.propicMain);
+        userPhone = findViewById(R.id.phone);
+        userPhone.setText("+91 "+phone);
+
 
         profilepic.setOnClickListener(new View.OnClickListener() {
 

@@ -198,6 +198,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
                     Intent i = new Intent(LoginActivity.this, UseraccountActivity.class);
+                    i.putExtra("Phone",phonenumber);
                     startActivity(i);
                     finish();
 
