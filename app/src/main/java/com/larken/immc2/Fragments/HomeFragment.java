@@ -107,7 +107,6 @@ public class HomeFragment extends Fragment {
         subcategory = new ArrayList<>();
         subcategoryImages = new ArrayList<>();
         firebaseDatabase = FirebaseDatabase.getInstance();
-        bestSellingBtn = (TextView) view.findViewById(R.id.bestSellingBtn);
 
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
         bottomNavigationView.setVisibility(View.VISIBLE);
@@ -157,7 +156,6 @@ public class HomeFragment extends Fragment {
             }
         });
 
-
         //QuotesTheme model
         quotesList = new ArrayList<>();
         subcategoryQuotes = new ArrayList<>();
@@ -193,6 +191,7 @@ public class HomeFragment extends Fragment {
         String category1 = "ScienceTheme";
         scienceAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList1, category1,scienceList,scienceSubcategoryList);
         scienceListView.setAdapter(scienceAdapter);
+
         //Science Theme
         DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("CategoryImages").child("ScienceTheme");
         databaseReference3.addValueEventListener(new ValueEventListener() {

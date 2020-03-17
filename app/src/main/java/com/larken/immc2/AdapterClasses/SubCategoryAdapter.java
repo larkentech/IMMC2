@@ -29,7 +29,6 @@ public class SubCategoryAdapter extends ArrayAdapter<BooksModal> {
         imagesUrl = objects1;
         this.category = category;
         this.subcategory = objects2;
-
     }
 
     @NonNull
@@ -47,7 +46,6 @@ public class SubCategoryAdapter extends ArrayAdapter<BooksModal> {
                 .load(imagesUrl.get(position))
                 .centerCrop()
                 .into(categoryImag);
-
 
         categoryImag.setOnClickListener(new View.OnClickListener() {
             @Override
