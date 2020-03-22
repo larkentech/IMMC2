@@ -77,9 +77,9 @@ public class BookDetailsActivity extends AppCompatActivity {
         final ImageSliderAdapter sliderAdapter = new ImageSliderAdapter(this);
         bookImage.setSliderAdapter(sliderAdapter);
 
-        Log.v("BookDetails","BookID:"+bookID);
-        Log.v("BookDetails","BookCategory:"+bookCategoryID);
-        Log.v("BookDetails","BookSubcategory:"+bookSubCategoryID);
+        Log.v("BookDetails", "BookID:" + bookID);
+        Log.v("BookDetails", "BookCategory:" + bookCategoryID);
+        Log.v("BookDetails", "BookSubcategory:" + bookSubCategoryID);
 
         bookName = findViewById(R.id.selected_book_name);
         bookAuthor = findViewById(R.id.selected_book_designer);
@@ -88,38 +88,30 @@ public class BookDetailsActivity extends AppCompatActivity {
         bookCategory = findViewById(R.id.selected_book_category);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
-        if (bookSubCategoryID != null)
-        {
-            databaseReference = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryID).child(bookSubCategoryID).child(bookID);
-        }
-        else {
-            databaseReference = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryID).child(bookID);
-        }
+        databaseReference = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryID).child(bookSubCategoryID).child(bookID);
         databaseReference.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                _160pages = "Rs."+dataSnapshot.child("BookPrice160Pages").getValue(String.class)+"/-";
+                _160pages = "Rs." + dataSnapshot.child("BookPrice160Pages").getValue(String.class) + "/-";
                 bookName.setText(dataSnapshot.child("BookName").getValue(String.class));
-                bookAuthor.setText("Designed By: "+dataSnapshot.child("BookDesigner").getValue(String.class));
+                bookAuthor.setText("Designed By: " + dataSnapshot.child("BookDesigner").getValue(String.class));
                 bookPrice.setText(_160pages);
-                bookCategory.setText("Category: "+dataSnapshot.child("BookSubCategory").getValue(String.class));
+                bookCategory.setText("Category: " + dataSnapshot.child("BookSubCategory").getValue(String.class));
 
-                for (DataSnapshot ds:dataSnapshot.child("BookImages").getChildren())
-                {
+                for (DataSnapshot ds : dataSnapshot.child("BookImages").getChildren()) {
                     url_list.add(ds.getValue(String.class));
                     sliderAdapter.addItem(ds.getValue(String.class));
                 }
 
                 String value = dataSnapshot.child("BookPrice160Pages").getValue(String.class);
+                Log.v("BookDetails", "BookPrice:" + value);
                 String i ="0.2";
                 double value1 = Double.parseDouble(value) + ( Double.parseDouble(value) * Double.parseDouble(i)) ;
                 int value2 = (int)value1;
                 String value3 = Integer.toString(Math.round(value2));
 
                 bookPriceIncrement.setText("Rs."+value3+"/-");
-
-
 
                 //bookCategory.setText("Category: "+modal.getBookCategory());
 
@@ -138,7 +130,7 @@ public class BookDetailsActivity extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        Intent i = new Intent(getApplicationContext(),MainActivity.class);
+        Intent i = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(i);
         finish();
     }
