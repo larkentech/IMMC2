@@ -4,6 +4,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -32,6 +33,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.larken.immc2.ModalClasses.BooksModal;
 import com.smarteist.autoimageslider.SliderView;
 
 
@@ -75,6 +77,9 @@ public class BookDetailsActivity extends AppCompatActivity {
         final ImageSliderAdapter sliderAdapter = new ImageSliderAdapter(this);
         bookImage.setSliderAdapter(sliderAdapter);
 
+        Log.v("BookDetails","BookID:"+bookID);
+        Log.v("BookDetails","BookCategory:"+bookCategoryID);
+        Log.v("BookDetails","BookSubcategory:"+bookSubCategoryID);
 
         bookName = findViewById(R.id.selected_book_name);
         bookAuthor = findViewById(R.id.selected_book_designer);
@@ -95,7 +100,6 @@ public class BookDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 _160pages = "Rs."+dataSnapshot.child("BookPrice160Pages").getValue(String.class)+"/-";
-
                 bookName.setText(dataSnapshot.child("BookName").getValue(String.class));
                 bookAuthor.setText("Designed By: "+dataSnapshot.child("BookDesigner").getValue(String.class));
                 bookPrice.setText(_160pages);
@@ -107,13 +111,18 @@ public class BookDetailsActivity extends AppCompatActivity {
                     sliderAdapter.addItem(ds.getValue(String.class));
                 }
 
-                String value = dataSnapshot.child("BookPrice").getValue(String.class);
+                String value = dataSnapshot.child("BookPrice160Pages").getValue(String.class);
                 String i ="0.2";
                 double value1 = Double.parseDouble(value) + ( Double.parseDouble(value) * Double.parseDouble(i)) ;
                 int value2 = (int)value1;
                 String value3 = Integer.toString(Math.round(value2));
 
                 bookPriceIncrement.setText("Rs."+value3+"/-");
+
+
+
+                //bookCategory.setText("Category: "+modal.getBookCategory());
+
 
             }
 

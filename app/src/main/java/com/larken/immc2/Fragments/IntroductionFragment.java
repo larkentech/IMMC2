@@ -169,7 +169,7 @@ public class IntroductionFragment extends Fragment {
                 else {
                     HashMap<String,String> cartMap = new HashMap<>();
                     cartMap.put("Count",Integer.toString(count));
-                    cartMap.put("BookId",bookID);
+                    cartMap.put("BookID",bookID);
                     cartMap.put("BookCategory",bookCategoryID);
                     cartMap.put("BookSubCategory",bookSubCategory);
 

@@ -122,7 +122,7 @@ public class CartFragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 count2++;
-                                bookId.add(dataSnapshot.child("BookId").getValue(String.class));
+                                bookId.add(dataSnapshot.child("BookID").getValue(String.class));
                                 bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
@@ -218,7 +218,7 @@ public class CartFragment extends Fragment {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 count2++;
-                                bookId.add(dataSnapshot.child("BookId").getValue(String.class));
+                                bookId.add(dataSnapshot.child("BookID").getValue(String.class));
                                 bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));

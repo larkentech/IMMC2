@@ -4,7 +4,7 @@ package com.larken.immc2.ModalClasses;
 public class OrderModal {
 
     private String Address;
-    private String BookId;
+    private String BookID;
     private String BookName;
     private String FinalPrice;
     private String Name;
@@ -19,7 +19,7 @@ public class OrderModal {
 
     public OrderModal(String address, String bookId, String bookName, String finalPrice, String name, String itemsCount, String phoneNumber, Long txnID, String orderDate) {
         Address = address;
-        BookId = bookId;
+        BookID = bookId;
         BookName = bookName;
         FinalPrice = finalPrice;
         Name = name;
@@ -38,12 +38,12 @@ public class OrderModal {
         Address = address;
     }
 
-    public String getBookId() {
-        return BookId;
+    public String getBookID() {
+        return BookID;
     }
 
-    public void setBookId(String bookId) {
-        BookId = bookId;
+    public void setBookID(String bookId) {
+        BookID = bookId;
     }
 
     public String getBookName() {

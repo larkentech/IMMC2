@@ -7,7 +7,7 @@ public class BooksModal {
     private String BookImage;
     private String BookDesigner;
     private String BookCategory;
-    private String BookId;
+    private String BookID;
     private String BookSubCategory;
 
     public String getBookSubCategory() {
@@ -28,7 +28,7 @@ public class BooksModal {
         BookImage = bookImage;
         BookDesigner = bookDesigner;
         BookCategory = bookCategory;
-        BookId = bookId;
+        BookID = bookId;
         BookSubCategory = bookSubCategory;
     }
 
@@ -80,11 +80,11 @@ public class BooksModal {
         BookCategory = bookCategory;
     }
 
-    public String getBookId() {
-        return BookId;
+    public String getBookID() {
+        return BookID;
     }
 
-    public void setBookId(String bookId) {
-        BookId = bookId;
+    public void setBookID(String bookId) {
+        BookID = bookId;
     }
 }

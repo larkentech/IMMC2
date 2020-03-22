@@ -58,7 +58,7 @@ public class BestSellingAdapter extends ArrayAdapter<BooksModal> {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), BookDetailsActivity.class);
-                i.putExtra("BookID",bestSellingModal.getBookId());
+                i.putExtra("BookID",bestSellingModal.getBookID());
                 i.putExtra("BookCategory",bestSellingModal.getBookCategory());
                 i.putExtra("BookSubCategory",bestSellingModal.getBookSubCategory());
                 getContext().startActivity(i);

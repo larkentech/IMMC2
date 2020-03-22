@@ -59,14 +59,14 @@ public class EngineeringListFragment extends Fragment {
     BestSellingAdapter miningeggNoteBookAdapter;
     BestSellingAdapter teNoteBookAdapter;
 
-    List<String> csBookId;
-    List<String> ecBookId;
-    List<String> eeBookId;
-    List<String> meBookId;
-    List<String> ceBookId;
-    List<String> ieBookId;
-    List<String> miningeggBookId;
-    List<String> teBookId;
+    List<String> csBookID;
+    List<String> ecBookID;
+    List<String> eeBookID;
+    List<String> meBookID;
+    List<String> ceBookID;
+    List<String> ieBookID;
+    List<String> miningeggBookID;
+    List<String> teBookID;
 
 
 
@@ -87,61 +87,61 @@ public class EngineeringListFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
 
         //Book ID's List
-        csBookId = new ArrayList<>();
-        ecBookId = new ArrayList<>();
-        eeBookId = new ArrayList<>();
-        meBookId = new ArrayList<>();
-        ceBookId = new ArrayList<>();
-        ieBookId = new ArrayList<>();
-        miningeggBookId = new ArrayList<>();
-        teBookId = new ArrayList<>();
+        csBookID = new ArrayList<>();
+        ecBookID = new ArrayList<>();
+        eeBookID = new ArrayList<>();
+        meBookID = new ArrayList<>();
+        ceBookID = new ArrayList<>();
+        ieBookID = new ArrayList<>();
+        miningeggBookID = new ArrayList<>();
+        teBookID = new ArrayList<>();
 
         csNotebookListView = view.findViewById(R.id.csNoteBooksList);
         List<BooksModal> csNoteBooksModalsList = new ArrayList<>();
-        csNoteBooksAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,csNoteBooksModalsList,csBookId);
+        csNoteBooksAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,csNoteBooksModalsList,csBookID);
         csNotebookListView.setAdapter(csNoteBooksAdapter);
 
         //Ec
         ecNoteBookListView = view.findViewById(R.id.ecNoteBookList);
         List<BooksModal> ecNoteBookModalList = new ArrayList<>();
-        ecNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,ecNoteBookModalList, ecBookId);
+        ecNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,ecNoteBookModalList, ecBookID);
         ecNoteBookListView.setAdapter(ecNoteBookAdapter);
 
         //EE
         eeNoteBookListView = view.findViewById(R.id.eeNoteBookList);
         List<BooksModal> eeNoteBookModalList = new ArrayList<>();
-        eeNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,eeNoteBookModalList, eeBookId);
+        eeNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,eeNoteBookModalList, eeBookID);
         eeNoteBookListView.setAdapter(eeNoteBookAdapter);
 
         //ME
 
         meNoteBookListView = view.findViewById(R.id.meNoteBookList);
         List<BooksModal> meNoteBookModalList = new ArrayList<>();
-        meNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,meNoteBookModalList, meBookId);
+        meNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,meNoteBookModalList, meBookID);
         meNoteBookListView.setAdapter(meNoteBookAdapter);
 
         //Chemical Engineering
         ceNoteBookListView = view.findViewById(R.id.ceNoteBookList);
         List<BooksModal> ceNoteBookModalList = new ArrayList<>();
-        ceNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,ceNoteBookModalList,ceBookId);
+        ceNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,ceNoteBookModalList,ceBookID);
         ceNoteBookListView.setAdapter(ceNoteBookAdapter);
 
         //Instrumentaion Engineering Note Books
         ieNoteBookListView = view.findViewById(R.id.ieNoteBookList);
         List<BooksModal> ieNoteBookModalList =  new ArrayList<>();
-        ieNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,ieNoteBookModalList,ieBookId);
+        ieNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,ieNoteBookModalList,ieBookID);
         ieNoteBookListView.setAdapter(ieNoteBookAdapter);
 
         //Mining Engineering Note books
         miningeggNoteBookListView = view.findViewById(R.id.miningeggNoteBookList);
         List<BooksModal> miningNoteBookModalList = new ArrayList<>();
-        miningeggNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,miningNoteBookModalList,miningeggBookId);
+        miningeggNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,miningNoteBookModalList,miningeggBookID);
         miningeggNoteBookListView.setAdapter(miningeggNoteBookAdapter);
 
         //textile Engineering Note Books
         teNoteBookListView = view.findViewById(R.id.teNoteBookList);
         List<BooksModal> teNoteBookModalList = new ArrayList<>();
-        teNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,teNoteBookModalList,teBookId);
+        teNoteBookAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,teNoteBookModalList,teBookID);
         teNoteBookListView.setAdapter(teNoteBookAdapter);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -151,7 +151,7 @@ public class EngineeringListFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 BooksModal csNoteBooksModal = dataSnapshot.getValue(BooksModal.class);
                 csNoteBooksAdapter.add(csNoteBooksModal);
-                csBookId.add(dataSnapshot.getKey());
+                csBookID.add(dataSnapshot.getKey());
             }
 
             @Override
@@ -181,7 +181,7 @@ public class EngineeringListFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 BooksModal ecNoteBookModal = dataSnapshot.getValue(BooksModal.class);
                 ecNoteBookAdapter.add(ecNoteBookModal);
-                ecBookId.add(dataSnapshot.getKey());
+                ecBookID.add(dataSnapshot.getKey());
 
             }
 
@@ -212,7 +212,7 @@ public class EngineeringListFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 BooksModal eeNoteBookModal = dataSnapshot.getValue(BooksModal.class);
                 eeNoteBookAdapter.add(eeNoteBookModal);
-                eeBookId.add(dataSnapshot.getKey());
+                eeBookID.add(dataSnapshot.getKey());
             }
 
             @Override
@@ -242,7 +242,7 @@ public class EngineeringListFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 BooksModal meNoteBookModal = dataSnapshot.getValue(BooksModal.class);
                 meNoteBookAdapter.add(meNoteBookModal);
-                meBookId.add(dataSnapshot.getKey());
+                meBookID.add(dataSnapshot.getKey());
             }
 
             @Override
