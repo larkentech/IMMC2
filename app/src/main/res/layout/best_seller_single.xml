@@ -20,12 +20,28 @@
             android:orientation="vertical"
             android:paddingBottom="8dp">
 
-            <ImageView
-                android:id="@+id/best_seller_image_single"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY" />
+                android:layout_height="200dp">
+
+                <ImageView
+                    android:src="@drawable/dummy_background"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY" />
+
+                <ImageView
+                    android:id="@+id/best_seller_image_single"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="fitXY" />
+
+            </FrameLayout>
+
+
+
 
             <TextView
                 android:id="@+id/best_seller_bookName_single"

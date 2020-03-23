@@ -44,6 +44,7 @@ public class BestSellingAdapter extends ArrayAdapter<BooksModal> {
         CardView bestSellercard = convertView.findViewById(R.id.bestSellerCard);
         TextView BookPrice = convertView.findViewById(R.id.best_seller_price_single);
         TextView BooksName = convertView.findViewById(R.id.best_seller_bookName_single);
+        TextView BookDesigner = convertView.findViewById(R.id.best_seller_bookDesc_single);
         final ImageView BookImage = convertView.findViewById(R.id.best_seller_image_single);
         Glide
                 .with(getContext())
@@ -51,8 +52,9 @@ public class BestSellingAdapter extends ArrayAdapter<BooksModal> {
                 .centerCrop()
                 .into(BookImage);
 
-        BookPrice.setText("Rs."+bestSellingModal.getBookPrice()+"/-");
+        BookPrice.setText("Rs."+bestSellingModal.getBookPrice160Pages()+"/-");
         BooksName.setText(bestSellingModal.getBookName());
+        BookDesigner.setText("Designed By "+bestSellingModal.getBookDesigner());
 
         bestSellercard.setOnClickListener(new View.OnClickListener() {
             @Override

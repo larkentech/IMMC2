@@ -9,6 +9,15 @@ public class BooksModal {
     private String BookCategory;
     private String BookID;
     private String BookSubCategory;
+    private String BookPrice160Pages;
+
+    public String getBookPrice160Pages() {
+        return BookPrice160Pages;
+    }
+
+    public void setBookPrice160Pages(String bookPrice160Pages) {
+        BookPrice160Pages = bookPrice160Pages;
+    }
 
     public String getBookSubCategory() {
         return BookSubCategory;
@@ -21,7 +30,7 @@ public class BooksModal {
     public BooksModal() {
     }
 
-    public BooksModal(String bookName, String bookPrice, String bookDesc, String bookImage, String bookDesigner, String bookCategory, String bookId, String bookSubCategory) {
+    public BooksModal(String bookName, String bookPrice, String bookDesc, String bookImage, String bookDesigner, String bookCategory, String bookId, String bookSubCategory, String bookPrice160Pages) {
         BookName = bookName;
         BookPrice = bookPrice;
         BookDesc = bookDesc;
@@ -30,6 +39,7 @@ public class BooksModal {
         BookCategory = bookCategory;
         BookID = bookId;
         BookSubCategory = bookSubCategory;
+        BookPrice160Pages = bookPrice160Pages;
     }
 
     public String getBookName() {
