@@ -19,6 +19,7 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <FrameLayout
+        android:visibility="gone"
         android:id="@+id/no_cart_item_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

@@ -100,7 +100,7 @@ public class CartFragment extends Fragment {
 
         cartListView = view.findViewById(R.id.cartListView);
 
-        List<BooksModal> cartItems = new ArrayList<>();
+        final List<BooksModal> cartItems = new ArrayList<>();
         adapter = new CartAdapter(getContext(), R.layout.single_cart_item, cartItems,itemsCount,tempKeys, CartFragment.this);
         cartListView.setAdapter(adapter);
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
@@ -112,19 +112,13 @@ public class CartFragment extends Fragment {
         cartShimmer.startShimmer();
         nocartitem=view.findViewById(R.id.no_cart_item_layout);
 
-
-        if (bookId.isEmpty())
-        {
-            nocartitem.setVisibility(View.VISIBLE);
-
-        }
-
-
-
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild("Cart")) {
+                    nocartitem.setVisibility(View.GONE);
+                    cartShimmer.setVisibility(View.GONE);
+
                     count1 = (int) dataSnapshot.child("Cart").getChildrenCount();
                     for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
                         String key = ds.getKey();
@@ -139,6 +133,8 @@ public class CartFragment extends Fragment {
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
                                 bookPrice.add(dataSnapshot.child("Price").getValue(String.class));
 
+
+
                                 databaseReference.child("Price").setValue(bookPrice);
                                 if (count1 == count2){
                                     Log.v("TAG", "BookID:" + bookId);
@@ -149,6 +145,8 @@ public class CartFragment extends Fragment {
 
                                 }
 
+
+
                             }
 
                             @Override
@@ -156,12 +154,24 @@ public class CartFragment extends Fragment {
 
                             }
                         });
+
+
+
+
                     }
 
 
                     //getBookDetails(bookId);
                 }
+                else
+                {
+                    nocartitem.setVisibility(View.VISIBLE);
+                    proceedToPay.setVisibility(View.GONE);
+                    cartShimmer.setVisibility(View.GONE);
+                }
+
             }
+
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -171,6 +181,7 @@ public class CartFragment extends Fragment {
 
         proceedToPay = view.findViewById(R.id.proccedToBuyCart);
         proceedToPay.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View view) {
                 if(bookId.isEmpty()){
@@ -182,8 +193,12 @@ public class CartFragment extends Fragment {
                 }
 
             }
+
+
         });
+
     }
+
 
     private Window getWindow() {
         return null;
