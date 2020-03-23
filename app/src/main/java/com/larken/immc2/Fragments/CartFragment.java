@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
@@ -64,6 +65,7 @@ public class CartFragment extends Fragment {
     //Dummy layout
     ShimmerFrameLayout cartShimmer;
     LinearLayout cardLL;
+    FrameLayout nocartitem;
 
 
     public CartFragment() {
@@ -108,6 +110,15 @@ public class CartFragment extends Fragment {
         cardLL.setVisibility(View.GONE);
         cartShimmer = view.findViewById(R.id.shimmer_view_cart);
         cartShimmer.startShimmer();
+        nocartitem=view.findViewById(R.id.no_cart_item_layout);
+
+
+        if (bookId.isEmpty())
+        {
+            nocartitem.setVisibility(View.VISIBLE);
+
+        }
+
 
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {

@@ -18,6 +18,18 @@
 
     </com.facebook.shimmer.ShimmerFrameLayout>
 
+    <FrameLayout
+        android:id="@+id/no_cart_item_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <include
+            layout="@layout/no_cart_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </include>
+    </FrameLayout>
+
     <LinearLayout
         android:id="@+id/cardLL"
         android:layout_width="match_parent"
