@@ -72,7 +72,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
 
         bookName.setText(modal.getBookName());
         authorName.setText(modal.getBookDesigner());
-        bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())+"/-");
+        //bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())+"/-");
 
         final List<String> tempList = new ArrayList();
         for(int i=0;i<itemsCount.size();i++){
