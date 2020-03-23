@@ -55,7 +55,6 @@ public class BookDetailsActivity extends AppCompatActivity {
     TextView bookPrice;
     TextView bookPriceIncrement;
     TextView bookCategory;
-    TextView bookDesc;
     RatingBar bookRatings;
     SliderView bookImage;
 
@@ -124,7 +123,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                 bookAuthor.setText("Designed By: " + dataSnapshot.child("BookDesigner").getValue(String.class));
                 bookPrice.setText(_160pages);
                 bookCategory.setText("Category: " + dataSnapshot.child("BookSubCategory").getValue(String.class));
-                bookDesc.setText(dataSnapshot.child("BookDesc").getValue(String.class));
 
                 for (DataSnapshot ds : dataSnapshot.child("BookImages").getChildren()) {
                     url_list.add(ds.getValue(String.class));
