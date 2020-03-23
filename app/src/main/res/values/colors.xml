@@ -6,4 +6,7 @@
     <color name="finalColor">#E60A0A</color>
     <color name="background_light">#F7F7F7</color>
 
+    <color name="yellow_middle">#ffee58</color>
+    <color name="yellow_end">#7ae7de83</color>
+
 </resources>

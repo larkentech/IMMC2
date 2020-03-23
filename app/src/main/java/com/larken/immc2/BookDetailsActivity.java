@@ -3,6 +3,7 @@ package com.larken.immc2;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,6 +20,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -55,7 +57,7 @@ public class BookDetailsActivity extends AppCompatActivity {
     TextView bookPrice;
     TextView bookPriceIncrement;
     TextView bookCategory;
-    RatingBar bookRatings;
+    TextView bookDesc;
     SliderView bookImage;
 
     TextView addToCart;
@@ -74,6 +76,8 @@ public class BookDetailsActivity extends AppCompatActivity {
     String _160pages;
     String _200pages;
     String _240pages;
+
+
 
     String singleBookPrice;
 
@@ -98,6 +102,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         final ImageSliderAdapter sliderAdapter = new ImageSliderAdapter(this);
         bookImage.setSliderAdapter(sliderAdapter);
         numberPicker = findViewById(R.id.number_picker);
+        bookDesc = findViewById(R.id.selected_book_desc);
 
         Log.v("BookDetails", "BookID:" + bookID);
         Log.v("BookDetails", "BookCategory:" + bookCategoryID);
@@ -115,14 +120,15 @@ public class BookDetailsActivity extends AppCompatActivity {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
-                _160pages = "Rs." + dataSnapshot.child("BookPrice160Pages").getValue(String.class) + "/-";
-                _200pages = "Rs." + dataSnapshot.child("BookPrice200Pages").getValue(String.class) + "/-";
-                _240pages = "Rs." + dataSnapshot.child("BookPrice240Pages").getValue(String.class) + "/-";
-                singleBookPrice = dataSnapshot.child("BookPrice160Pages").getValue(String.class);
+                _160pages =  dataSnapshot.child("BookPrice160Pages").getValue(String.class) ;
+                _200pages =  dataSnapshot.child("BookPrice200Pages").getValue(String.class);
+                _240pages =  dataSnapshot.child("BookPrice240Pages").getValue(String.class);
+                singleBookPrice = _160pages;
                 bookName.setText(dataSnapshot.child("BookName").getValue(String.class));
                 bookAuthor.setText("Designed By: " + dataSnapshot.child("BookDesigner").getValue(String.class));
-                bookPrice.setText(_160pages);
+                bookPrice.setText("Rs." +_160pages+ "/-");
                 bookCategory.setText("Category: " + dataSnapshot.child("BookSubCategory").getValue(String.class));
+                bookDesc.setText(dataSnapshot.child("BookDesc").getValue(String.class));
 
                 for (DataSnapshot ds : dataSnapshot.child("BookImages").getChildren()) {
                     url_list.add(ds.getValue(String.class));
@@ -177,6 +183,59 @@ public class BookDetailsActivity extends AppCompatActivity {
                     Toasty.success(BookDetailsActivity.this, "Successfully added to the cart", Toast.LENGTH_SHORT, true).show();
 
                 }
+
+            }
+        });
+
+        _160pagescard = findViewById(R.id.pages_160_card);
+        _200pagescard = findViewById(R.id.pages_200_card);
+        _240pagescard = findViewById(R.id.pages_240_card);
+
+        _160pagescard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                _200pagescard.setCardElevation(0);
+                _240pagescard.setCardElevation(0);
+                _200pagescard.setCardBackgroundColor( Color.parseColor("#F7F7F7"));
+                _240pagescard.setCardBackgroundColor( Color.parseColor("#F7F7F7"));
+                _200pagescard.setBackground( null);
+                _240pagescard.setBackground( null);
+                _160pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
+                singleBookPrice  =_160pages;
+                bookPrice.setText("Rs." +_160pages+ "/-");
+
+            }
+        });
+
+        _200pagescard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _160pagescard.setCardElevation(0);
+                _240pagescard.setCardElevation(0);
+                _160pagescard.setCardBackgroundColor(Color.parseColor("#F7F7F7"));
+                _240pagescard.setCardBackgroundColor(Color.parseColor("#F7F7F7"));
+                _160pagescard.setBackground( null);
+                _240pagescard.setBackground( null);
+                _200pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
+                singleBookPrice = _200pages;
+                bookPrice.setText("Rs." +_200pages+ "/-");
+            }
+        });
+
+        _240pagescard.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                _200pagescard.setCardElevation(0);
+                _160pagescard.setCardElevation(0);
+                _160pagescard.setCardBackgroundColor(Color.LTGRAY);
+                _200pagescard.setCardBackgroundColor(Color.LTGRAY);
+                _200pagescard.setBackground( null);
+                _160pagescard.setBackground( null);
+                _240pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
+                singleBookPrice = _240pages;
+                bookPrice.setText("Rs." +_240pages+ "/-");
+
 
             }
         });
