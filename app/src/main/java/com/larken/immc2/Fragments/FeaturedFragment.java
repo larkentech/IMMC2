@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import com.larken.immc2.AdapterClasses.BestSellingAdapter;
 import com.larken.immc2.ModalClasses.BooksModal;
@@ -39,6 +40,8 @@ public class FeaturedFragment extends Fragment {
     String category;
     String subcategory;
 
+    TextView sub_category_title;
+
 
     public FeaturedFragment() {
         // Required empty public constructor
@@ -51,6 +54,7 @@ public class FeaturedFragment extends Fragment {
         // Inflate the layout for this fragment
         category = getArguments().getString("Category");
         subcategory = getArguments().getString("SubCategory");
+
         return inflater.inflate(R.layout.fragment_featured, container, false);
     }
 
@@ -62,11 +66,15 @@ public class FeaturedFragment extends Fragment {
         Log.v("TAG","SubCategory:"+subcategory);
 
 
+        sub_category_title = (TextView) view.findViewById(R.id.sub_category_title);
+
         featuredID = new ArrayList<>();
         gridView = (GridView) view.findViewById(R.id.featuredGridView);
         List<BooksModal> booksModal = new ArrayList<>();
         featuredAdapter = new BestSellingAdapter(getContext(),R.layout.featured_single,booksModal,featuredID);
         gridView.setAdapter(featuredAdapter);
+
+
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("BookDetails").child(category).child(subcategory);
@@ -75,6 +83,8 @@ public class FeaturedFragment extends Fragment {
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                 BooksModal featuredBooks = dataSnapshot.getValue(BooksModal.class);
                 featuredAdapter.add(featuredBooks);
+
+                sub_category_title.setText(subcategory);
             }
 
             @Override
