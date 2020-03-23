@@ -74,13 +74,6 @@ public class AccountFragment extends Fragment {
     EditText feedbackEt;
 
 
-
-
-
-
-
-
-
     public AccountFragment() {
         // Required empty public constructor
     }

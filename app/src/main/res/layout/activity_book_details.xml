@@ -121,7 +121,7 @@
                         android:fontFamily="@font/montserrat_bold"/>
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:layout_gravity="center"
@@ -129,111 +129,71 @@
                         android:padding="8dp">
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="80dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginStart="8dp"
                             android:layout_marginEnd="16dp"
-                            android:layout_height="100dp"
-                            app:cardBackgroundColor="@color/colorPrimary"
+                            android:layout_marginBottom="8dp"
+                            android:layout_height="50dp"
+                            app:cardBackgroundColor="@color/background_light"
                             app:cardCornerRadius="6dp"
-                            app:cardElevation="6dp"
+                            app:cardElevation="0dp"
                             android:id="@+id/pages_160_card">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="2dp"
-                                android:background="@android:color/white"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/dummy_background"
-                                    android:scaleType="fitXY"
-                                    android:id="@+id/pages_160"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:text="160 Pages"
-                                    android:textSize="11sp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:fontFamily="@font/montserrat_regular"
-                                    android:textColor="@android:color/black"/>
-
-                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="160 Pages"
+                                android:textSize="11sp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:textColor="@android:color/black"/>
 
 
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="80dp"
-                            android:layout_height="100dp"
-                            app:cardBackgroundColor="@color/white"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
+                            android:layout_height="50dp"
+                            android:layout_marginBottom="8dp"
+                            app:cardBackgroundColor="@color/background_light"
                             app:cardCornerRadius="6dp"
-                            app:cardElevation="6dp"
+                            app:cardElevation="0dp"
                             android:id="@+id/pages_200_card">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="2dp"
-                                android:background="@android:color/white"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/dummy_background"
-                                    android:scaleType="fitXY"
-                                    android:id="@+id/pages_200"/>
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="1"
-                                    android:text="200 Pages"
-                                    android:textSize="11sp"
-                                    android:layout_gravity="center"
-                                    android:gravity="center"
-                                    android:fontFamily="@font/montserrat_regular"
-                                    android:textColor="@android:color/black"/>
-
-                            </LinearLayout>
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="200 Pages"
+                                android:textSize="11sp"
+                                android:layout_gravity="center"
+                                android:gravity="center"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:textColor="@android:color/black"/>
 
 
                         </androidx.cardview.widget.CardView>
 
                         <androidx.cardview.widget.CardView
-                            android:layout_width="80dp"
+                            android:layout_width="0dp"
+                            android:layout_weight="1"
                             android:layout_marginStart="16dp"
-                            android:layout_height="100dp"
-                            app:cardBackgroundColor="@color/white"
+                            android:layout_height="50dp"
+                            app:cardBackgroundColor="@color/background_light"
                             app:cardCornerRadius="6dp"
-                            app:cardElevation="6dp"
+                            android:layout_marginBottom="8dp"
+                            app:cardElevation="0dp"
+                            android:layout_marginEnd="8dp"
                             android:id="@+id/pages_240_card">
 
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:layout_margin="2dp"
-                                android:background="@android:color/white"
-                                android:orientation="vertical">
-
-                                <ImageView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
-                                    android:layout_weight="3"
-                                    android:src="@drawable/dummy_background"
-                                    android:scaleType="fitXY"
-                                    android:id="@+id/pages_240"/>
 
                                 <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="0dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="240 Pages"
                                     android:textSize="11sp"
@@ -242,7 +202,6 @@
                                     android:fontFamily="@font/montserrat_regular"
                                     android:textColor="@android:color/black"/>
 
-                            </LinearLayout>
 
 
                         </androidx.cardview.widget.CardView>

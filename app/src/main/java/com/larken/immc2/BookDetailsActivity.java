@@ -3,11 +3,13 @@ package com.larken.immc2;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
@@ -16,6 +18,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
@@ -23,6 +26,7 @@ import androidx.viewpager.widget.ViewPager;
 
 import com.bumptech.glide.Glide;
 import com.ceylonlabs.imageviewpopup.ImagePopup;
+import com.google.firebase.auth.FirebaseAuth;
 import com.kodmap.app.library.PopopDialogBuilder;
 import com.larken.immc2.AdapterClasses.ImageSliderAdapter;
 import com.larken.immc2.Fragments.IntroductionFragment;
@@ -35,10 +39,14 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.ModalClasses.BooksModal;
 import com.smarteist.autoimageslider.SliderView;
+import com.travijuu.numberpicker.library.NumberPicker;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+
+import es.dmoral.toasty.Toasty;
 
 public class BookDetailsActivity extends AppCompatActivity {
 
@@ -50,8 +58,13 @@ public class BookDetailsActivity extends AppCompatActivity {
     RatingBar bookRatings;
     SliderView bookImage;
 
+    TextView addToCart;
+    int count;
+    NumberPicker numberPicker;
+
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    FirebaseAuth mAuth;
 
 
     public String bookID;
@@ -62,11 +75,19 @@ public class BookDetailsActivity extends AppCompatActivity {
     String _200pages;
     String _240pages;
 
+    String singleBookPrice;
+
+    CardView _160pagescard;
+    CardView _200pagescard;
+    CardView _240pagescard;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book_details);
+
+        mAuth = FirebaseAuth.getInstance();
 
         final List<String> url_list = new ArrayList<>();
 
@@ -76,6 +97,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         bookImage = findViewById(R.id.imageSlider);
         final ImageSliderAdapter sliderAdapter = new ImageSliderAdapter(this);
         bookImage.setSliderAdapter(sliderAdapter);
+        numberPicker = findViewById(R.id.number_picker);
 
         Log.v("BookDetails", "BookID:" + bookID);
         Log.v("BookDetails", "BookCategory:" + bookCategoryID);
@@ -94,6 +116,9 @@ public class BookDetailsActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 _160pages = "Rs." + dataSnapshot.child("BookPrice160Pages").getValue(String.class) + "/-";
+                _200pages = "Rs." + dataSnapshot.child("BookPrice200Pages").getValue(String.class) + "/-";
+                _240pages = "Rs." + dataSnapshot.child("BookPrice240Pages").getValue(String.class) + "/-";
+                singleBookPrice = dataSnapshot.child("BookPrice160Pages").getValue(String.class);
                 bookName.setText(dataSnapshot.child("BookName").getValue(String.class));
                 bookAuthor.setText("Designed By: " + dataSnapshot.child("BookDesigner").getValue(String.class));
                 bookPrice.setText(_160pages);
@@ -112,7 +137,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                 String value3 = Integer.toString(Math.round(value2));
 
                 bookPriceIncrement.setText("Rs."+value3+"/-");
-
                 //bookCategory.setText("Category: "+modal.getBookCategory());
 
 
@@ -125,6 +149,37 @@ public class BookDetailsActivity extends AppCompatActivity {
         });
 
 
+        addToCart = findViewById(R.id.addtocart);
+        addToCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                count = numberPicker.getValue();
+
+                if (count <= 0)
+                {
+                    Toasty.error(BookDetailsActivity.this,"Select Quantity").show();
+                }
+                else {
+                    HashMap<String,String> cartMap = new HashMap<>();
+                    cartMap.put("Count",Integer.toString(count));
+                    cartMap.put("BookID",bookID);
+                    cartMap.put("BookCategory",bookCategoryID);
+                    cartMap.put("BookSubCategory",bookSubCategoryID);
+                    cartMap.put("CartPrice",String.valueOf(count*(Integer.parseInt(singleBookPrice))));
+
+                    DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
+                    databaseReference3.child("Cart").push().setValue(cartMap);
+                    addToCart.setBackgroundColor(getResources().getColor(R.color.finalColor));
+                    addToCart.setText("Added");
+                    Drawable image = addToCart.getContext().getDrawable(R.drawable.add_to_cart_check);
+                    addToCart.setCompoundDrawablesWithIntrinsicBounds(image,null,null,null);
+                    Toasty.success(BookDetailsActivity.this, "Successfully added to the cart", Toast.LENGTH_SHORT, true).show();
+
+                }
+
+            }
+        });
     }
 
     @Override
