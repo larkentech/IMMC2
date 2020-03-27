@@ -15,6 +15,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.larken.immc2.ModalClasses.PaymentModal;
 import com.travijuu.numberpicker.library.Enums.ActionEnum;
 import com.travijuu.numberpicker.library.Interface.ValueChangedListener;
 import com.travijuu.numberpicker.library.NumberPicker;
@@ -32,7 +33,7 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-public class CartAdapter extends ArrayAdapter<BooksModal> {
+public class CartAdapter extends ArrayAdapter<PaymentModal> {
 
     List<String> itemsCount;
     List<String> tempKeys;
@@ -40,7 +41,7 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
 
 
 
-    public CartAdapter(@NonNull Context context, int resource, @NonNull List<BooksModal> objects, List<String> itemsCount,List<String> count, Fragment fragment) {
+    public CartAdapter(@NonNull Context context, int resource, @NonNull List<PaymentModal> objects, List<String> itemsCount,List<String> count, Fragment fragment) {
         super(context, resource, objects);
         this.itemsCount = itemsCount;
         this.tempKeys = count;
@@ -55,7 +56,7 @@ public class CartAdapter extends ArrayAdapter<BooksModal> {
             convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.single_cart_item,parent,false);
         }
 
-        final BooksModal modal = getItem(position);
+        final PaymentModal modal = getItem(position);
 
 
         TextView bookName = convertView.findViewById(R.id.bookNameCart);

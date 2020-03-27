@@ -24,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.larken.immc2.AdapterClasses.CartAdapter;
 import com.larken.immc2.MainActivity;
 import com.larken.immc2.ModalClasses.BooksModal;
+import com.larken.immc2.ModalClasses.PaymentModal;
 import com.larken.immc2.PaymentActivity;
 import com.larken.immc2.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -100,7 +101,7 @@ public class CartFragment extends Fragment {
 
         cartListView = view.findViewById(R.id.cartListView);
 
-        final List<BooksModal> cartItems = new ArrayList<>();
+        final List<PaymentModal> cartItems = new ArrayList<>();
         adapter = new CartAdapter(getContext(), R.layout.single_cart_item, cartItems,itemsCount,tempKeys, CartFragment.this);
         cartListView.setAdapter(adapter);
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
@@ -215,7 +216,7 @@ public class CartFragment extends Fragment {
             databaseReference3.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    PaymentModal modal = dataSnapshot.getValue(PaymentModal.class);
                     adapter.add(modal);
                     adapter.notifyDataSetChanged();
                 }
