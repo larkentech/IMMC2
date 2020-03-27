@@ -68,6 +68,8 @@ public class CartFragment extends Fragment {
     ShimmerFrameLayout cartShimmer;
     LinearLayout cardLL;
     FrameLayout nocartitem;
+    public List<PaymentModal> cartItems;
+
 
 
     public CartFragment() {
@@ -102,7 +104,7 @@ public class CartFragment extends Fragment {
 
         cartListView = view.findViewById(R.id.cartListView);
 
-        List<PaymentModal> cartItems = new ArrayList<>();
+        cartItems = new ArrayList<>();
         adapter = new CartAdapter(getContext(), R.layout.single_cart_item, cartItems, tempKeys, CartFragment.this);
         cartListView.setAdapter(adapter);
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
@@ -153,40 +155,6 @@ public class CartFragment extends Fragment {
                         }
                     });
 
-                   /* for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
-                        String key = ds.getKey();
-                        tempKeys.add(key);
-                        databaseReference.child("Cart").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                count2++;
-                                bookId.add(dataSnapshot.child("BookID").getValue(String.class));
-                                bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
-                                bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
-                                itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
-                                bookPrice.add(dataSnapshot.child("Price").getValue(String.class));
-
-                                databaseReference.child("Price").setValue(bookPrice);
-                                if (count1 == count2){
-                                    Log.v("TAG", "BookID:" + bookId);
-                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookPrice);
-                                    cartShimmer.stopShimmer();
-                                    cardLL.setVisibility(View.VISIBLE);
-                                    cartShimmer.setVisibility(View.GONE);
-
-                                }
-
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                            }
-                        });
-                    } */
-
-
-                    //getBookDetails(bookId);
                 } else {
                     cartShimmer.stopShimmer();
                     nocartitem.setVisibility(View.VISIBLE);

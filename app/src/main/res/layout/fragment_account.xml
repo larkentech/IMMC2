@@ -1,504 +1,401 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F7F7F7"
-    tools:context=".Fragments.AccountFragment">
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".BookDetailsActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
-        android:id="@+id/app_bar"
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/prsnImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        android:id="@+id/prsnName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="16dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Hemanth"
+        android:textColor="@android:color/black"
+        android:textSize="18sp" />
+
+    <TextView
+        android:id="@+id/prsnMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="abhishekdas218@gmail.com"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <TextView
+        android:id="@+id/prsnNum"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:fontFamily="@font/montserrat_regular"
+        android:text="+917204974972"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <HorizontalScrollView
         android:layout_width="match_parent"
-        android:layout_height="275dp"
-        android:fitsSystemWindows="true"
-        app:layout_scrollFlags="scroll|enterAlways|enterAlwaysCollapsed"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:layout_height="wrap_content"
+        android:scrollbars="none">
 
-        <com.google.android.material.appbar.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            app:collapsedTitleTextAppearance="@android:color/transparent"
-            app:contentScrim="?attr/colorPrimary"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
             <FrameLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_width="360dp"
+                android:layout_height="400dp"
+                android:layout_marginStart="16dp">
 
-                <ImageView
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/collapsing_background" />
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"
+                    app:cardBackgroundColor="#F2F5F4"
+                    app:cardCornerRadius="6dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Address Details"
+                            android:textColor="#000000"
+                            android:textSize="16sp">
+
+                        </TextView>
+
+                        <EditText
+                            android:id="@+id/addFlatnum"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:padding="12dp"
+                            android:text="#118"
+                            android:textColor="#000000"
+                            android:textSize="14sp" />
+
+                        <EditText
+                            android:id="@+id/addLandmark"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:padding="12dp"
+                            android:text="3rd cross"
+                            android:textColor="#000000"
+                            android:textSize="14sp">
+                        </EditText>
+
+                        <EditText
+                            android:id="@+id/addArea"
+                            android:layout_width="match_parent"
+                            android:layout_height="48dp"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:padding="12dp"
+                            android:text="Vivekanda nagar"
+                            android:textColor="#000000"
+                            android:textSize="14sp">
+
+                        </EditText>
+
+                        <EditText
+                            android:id="@+id/addCity"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:padding="12dp"
+                            android:text="mysuru"
+                            android:textColor="#000000"
+                            android:textSize="14sp">
+
+                        </EditText>
+
+                        <Button
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="24dp"
+                            android:layout_marginEnd="24dp"
+                            android:layout_marginTop="16dp"
+                            android:background="@color/colorAccent"
+                            android:text="Update"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@android:color/white"
+                            android:id="@+id/updateAddress"/>
+
+                    </LinearLayout>
 
 
-                <RelativeLayout
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
+
+            <FrameLayout
+                android:layout_width="360dp"
+                android:layout_height="400dp"
+                android:layout_marginStart="16dp">
+
+                <androidx.cardview.widget.CardView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-
-                    <androidx.cardview.widget.CardView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentBottom="true"
-                        android:layout_marginStart="16dp"
-                        android:layout_marginEnd="16dp"
-                        app:layout_collapseMode="parallax">
-
-                        <ImageView
-                            android:id="@+id/prsnImage"
-                            android:layout_width="140dp"
-                            android:layout_height="160dp"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/propic">
-
-                        </ImageView>
-
-
-                    </androidx.cardview.widget.CardView>
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"
+                    app:cardBackgroundColor="#F2F5F4"
+                    app:cardCornerRadius="6dp">
 
                     <TextView
-                        android:id="@+id/prsnName"
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="180dp"
-                        android:layout_marginTop="100dp"
+                        android:layout_marginTop="30dp"
                         android:fontFamily="@font/montserrat_bold"
-                        android:text="Hemanth"
-                        android:textColor="#FFFFFF"
+                        android:gravity="center_horizontal"
+                        android:text="My Orders"
+                        android:textColor="#000000"
                         android:textSize="28sp">
 
                     </TextView>
 
                     <TextView
-                        android:id="@+id/prsnMail"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/txtMyOrders"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="180dp"
-                        android:layout_marginTop="140dp"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:text="hemanth123453@gmail.com"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp">
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:gravity="center"
+                        android:text="Click here to see Orders"
+                        android:textColor="#2196F3"
+                        android:textSize="20sp">
 
                     </TextView>
 
-                    <TextView
-                        android:id="@+id/prsnNum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="180dp"
-                        android:layout_marginTop="170dp"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:text="+919611967501"
-                        android:textColor="#FFFFFF"
-                        android:textSize="16sp">
-
-                    </TextView>
-
-
-                </RelativeLayout>
+                </androidx.cardview.widget.CardView>
 
 
             </FrameLayout>
 
-            <androidx.appcompat.widget.Toolbar
-                android:id="@+id/toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_collapseMode="parallax"
-                app:popupTheme="@style/AppTheme.PopupOverlay">
+            <FrameLayout
 
-            </androidx.appcompat.widget.Toolbar>
+                android:layout_width="360dp"
+                android:layout_height="400dp"
+                android:layout_marginStart="16dp">
 
+                <androidx.cardview.widget.CardView
 
-        </com.google.android.material.appbar.CollapsingToolbarLayout>
-
-    </com.google.android.material.appbar.AppBarLayout>
-
-    <androidx.core.widget.NestedScrollView
-        android:id="@+id/nestedScrollViewUserAccount"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginStart="12dp"
-            android:layout_marginEnd="12dp"
-            android:orientation="vertical">
-
-            <HorizontalScrollView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none">
-
-                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"
+                    app:cardBackgroundColor="#F2F5F4"
+                    app:cardCornerRadius="6dp">
 
-                    <FrameLayout
 
-                        android:layout_width="360dp"
-                        android:layout_height="400dp"
-                        android:layout_marginStart="16dp">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Send Feedback"
+                        android:textColor="#000000"
+                        android:textSize="28sp">
 
-                        <androidx.cardview.widget.CardView
+                    </TextView>
 
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp">
+
+
+                        <com.hsalf.smilerating.SmileRating
+                            android:id="@+id/smile_rating"
+                            android:layout_width="300dp"
+                            android:layout_height="90dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="90dp" />
+
+
+                        <TextView
+                            android:id="@+id/feedbackTV"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="40dp"
-                            android:layout_marginBottom="20dp"
-                            app:cardBackgroundColor="#F2F5F4"
-                            app:cardCornerRadius="6dp">
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/smile_rating"
+                            android:layout_marginTop="12dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:gravity="center_horizontal"
+                            android:text="Your feedback is important to us!!"
+                            android:textColor="@color/colorAccent"
+                            android:textSize="14sp" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="30dp"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:gravity="center_horizontal"
-                                android:text="Address Details"
-                                android:textColor="#000000"
-                                android:textSize="28sp">
-
-                            </TextView>
-
-
-                            <EditText
-                                android:id="@+id/addFlatnum"
-                                android:layout_width="match_parent"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="32dp"
-                                android:layout_marginTop="88dp"
-                                android:layout_marginEnd="32dp"
-                                android:background="@drawable/edittextstyle"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:padding="16dp"
-                                android:shadowColor="#0000ff"
-                                android:shadowDx="2"
-                                android:shadowDy="4"
-                                android:text="#118"
-                                android:textColor="#000000"
-                                android:textSize="12sp" />
-
-                            <EditText
-                                android:id="@+id/addLandmark"
-                                android:layout_width="match_parent"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="32dp"
-                                android:layout_marginTop="144dp"
-                                android:layout_marginEnd="32dp"
-                                android:background="@drawable/edittextstyle"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:padding="16dp"
-                                android:shadowColor="#0000ff"
-                                android:shadowDx="2"
-                                android:shadowDy="4"
-                                android:text="3rd cross"
-                                android:textColor="#000000"
-                                android:textSize="12sp">
-
-                            </EditText>
-
-                            <EditText
-                                android:id="@+id/addArea"
-                                android:layout_width="match_parent"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="32dp"
-                                android:layout_marginTop="200dp"
-                                android:layout_marginEnd="32dp"
-                                android:background="@drawable/edittextstyle"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:padding="16dp"
-                                android:shadowColor="#0000ff"
-                                android:shadowDx="2"
-                                android:shadowDy="4"
-                                android:text="Vivekanda nagar"
-                                android:textColor="#000000"
-                                android:textSize="12sp">
-
-                            </EditText>
-
-                            <EditText
-                                android:id="@+id/addCity"
-                                android:layout_width="match_parent"
-                                android:layout_height="48dp"
-                                android:layout_marginStart="32dp"
-                                android:layout_marginTop="256dp"
-                                android:layout_marginEnd="32dp"
-                                android:background="@drawable/edittextstyle"
-                                android:fontFamily="@font/montserrat_regular"
-                                android:padding="16dp"
-                                android:shadowColor="#0000ff"
-                                android:shadowDx="2"
-                                android:shadowDy="4"
-                                android:text="mysuru"
-                                android:textColor="#000000"
-                                android:textSize="12sp">
-
-                            </EditText>
-
-                        </androidx.cardview.widget.CardView>
-                    </FrameLayout>
-
-                    <FrameLayout
-
-                        android:layout_width="360dp"
-                        android:layout_height="400dp"
-                        android:layout_marginStart="16dp">
-                        <androidx.cardview.widget.CardView
-
+                        <EditText
+                            android:id="@+id/userFeedbackET"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="40dp"
-                            android:layout_marginBottom="20dp"
-                            app:cardBackgroundColor="#F2F5F4"
-                            app:cardCornerRadius="6dp">
+                            android:layout_height="60dp"
+                            android:layout_below="@id/feedbackTV"
+                            android:layout_margin="16dp"
+                            android:background="@drawable/edittextstyle"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:foregroundTint="@color/colorPrimary"
+                            android:gravity="start"
+                            android:hint="(Optional)"
+                            android:isScrollContainer="true"
+                            android:padding="8dp"
+                            android:textColor="@android:color/black"
+                            android:textColorHint="@android:color/black"
+                            android:textSize="12sp" />
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="30dp"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:gravity="center_horizontal"
-                                android:text="My Orders"
-                                android:textColor="#000000"
-                                android:textSize="28sp">
-
-                            </TextView>
-                            <TextView
-                                android:id="@+id/txtMyOrders"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:text="Click here to see Orders"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:gravity="center"
-                                android:textColor="#2196F3"
-                                android:textSize="20sp"
-                                android:layout_gravity="center_vertical">
-
-                            </TextView>
-
-                        </androidx.cardview.widget.CardView>
+                        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                            android:id="@+id/sendFeedback"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/userFeedbackET"
+                            android:layout_alignParentEnd="true"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginEnd="20dp"
+                            app:backgroundTint="@color/colorPrimary"
+                            app:fabSize="mini"
+                            app:srcCompat="@drawable/ic_feedback" />
 
 
-                    </FrameLayout>
-
-                    <FrameLayout
-
-                        android:layout_width="360dp"
-                        android:layout_height="400dp"
-                        android:layout_marginStart="16dp">
-
-                        <androidx.cardview.widget.CardView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="40dp"
-                            android:layout_marginBottom="20dp"
-                            app:cardBackgroundColor="#F2F5F4"
-                            app:cardCornerRadius="6dp">
+                    </RelativeLayout>
 
 
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="30dp"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:gravity="center_horizontal"
-                                android:text="Send Feedback"
-                                android:textColor="#000000"
-                                android:textSize="28sp">
-
-                            </TextView>
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="16dp">
-
-
-                                <com.hsalf.smilerating.SmileRating
-                                    android:id="@+id/smile_rating"
-                                    android:layout_width="300dp"
-                                    android:layout_height="90dp"
-                                    android:layout_marginTop="90dp"
-                                    android:layout_centerHorizontal="true"/>
-
-
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:id="@+id/feedbackTV"
-                                    android:text="Your feedback is important to us!!"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/colorAccent"
-                                    android:layout_marginTop="12dp"
-                                    android:layout_below="@id/smile_rating"
-                                    android:gravity="center_horizontal"
-                                    android:fontFamily="@font/montserrat_bold" />
-
-                                <EditText
-                                    android:layout_width="match_parent"
-                                    android:layout_height="60dp"
-                                    android:layout_below="@id/feedbackTV"
-                                    android:layout_margin="16dp"
-                                    android:gravity="start"
-                                    android:padding="8dp"
-                                    android:id="@+id/userFeedbackET"
-                                    android:textColor="@android:color/black"
-                                    android:background="@drawable/edittextstyle"
-                                    android:hint="(Optional)"
-                                    android:textSize="12sp"
-                                    android:fontFamily="@font/montserrat_regular"
-                                    android:foregroundTint="@color/colorPrimary"
-                                    android:textColorHint="@android:color/black"
-                                    android:isScrollContainer="true"/>
-
-                                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_alignParentEnd="true"
-                                    android:layout_alignParentBottom="true"
-                                    android:layout_below="@id/userFeedbackET"
-                                    app:fabSize="mini"
-                                    android:layout_marginEnd="20dp"
-                                    app:backgroundTint="@color/colorPrimary"
-                                    app:srcCompat="@drawable/ic_feedback"
-                                    android:id="@+id/sendFeedback"/>
-
-
-
-                            </RelativeLayout>
-
-
-                        </androidx.cardview.widget.CardView>
-                    </FrameLayout>
-
-                    <FrameLayout
-
-                        android:layout_width="360dp"
-                        android:layout_height="400dp"
-                        android:layout_marginStart="16dp">
-
-                        <androidx.cardview.widget.CardView
-
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:layout_marginTop="40dp"
-                            android:layout_marginBottom="20dp"
-                            app:cardBackgroundColor="#F2F5F4"
-                            app:cardCornerRadius="6dp">
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginTop="30dp"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:gravity="center_horizontal"
-                                android:text="Contact Us"
-                                android:textColor="#000000"
-                                android:textSize="28sp">
-
-                            </TextView>
-                            <RelativeLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent">
-                                <LinearLayout
-                                    android:layout_marginTop="100dp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-                                    <ImageView
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:src="@drawable/ic_call_black">
-
-                                    </ImageView>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="+919900000000"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:textColor="#2196F3"
-                                        android:textSize="20sp"
-                                        android:layout_marginStart="16dp"
-                                        android:id="@+id/contactNumber"
-                                        android:layout_gravity="center_vertical">
-
-                                    </TextView>
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_marginTop="200dp"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-                                    <ImageView
-                                        android:layout_width="40dp"
-                                        android:layout_height="40dp"
-                                        android:layout_marginStart="16dp"
-                                        android:layout_gravity="center_vertical"
-                                        android:src="@drawable/ic_computer_black_24dp">
-
-                                    </ImageView>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="support@immc2.com"
-                                        android:layout_marginStart="16dp"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:textColor="#2196F3"
-                                        android:textSize="20sp"
-                                        android:id="@+id/contactWeb"
-                                        android:layout_gravity="center_vertical">
-
-                                    </TextView>
-                                </LinearLayout>
-                            </RelativeLayout>
-
-
-
-                        </androidx.cardview.widget.CardView>
-                    </FrameLayout>
-                </LinearLayout>
-
-            </HorizontalScrollView>
-
-            <TextView
-                android:id="@+id/signOut"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="18dp"
-                android:drawableLeft="@drawable/ic_power_settings_new_black_24dp"
-                android:drawablePadding="8dp"
-                android:fontFamily="@font/montserrat_bold"
-                android:text="Sign Out"
-                android:textColor="@android:color/black"
-                android:textSize="18sp" />
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
 
             <FrameLayout
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:id="@+id/userAccountBottom" />
+
+                android:layout_width="360dp"
+                android:layout_height="400dp"
+                android:layout_marginStart="16dp">
+
+                <androidx.cardview.widget.CardView
+
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginBottom="20dp"
+                    app:cardBackgroundColor="#F2F5F4"
+                    app:cardCornerRadius="6dp">
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:gravity="center_horizontal"
+                        android:text="Contact Us"
+                        android:textColor="#000000"
+                        android:textSize="28sp">
+
+                    </TextView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="100dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:src="@drawable/ic_call_black">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/contactNumber"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="+919900000000"
+                                android:textColor="#2196F3"
+                                android:textSize="20sp">
+
+                            </TextView>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="200dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:src="@drawable/ic_computer_black_24dp">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/contactWeb"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="16dp"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:text="support@immc2.com"
+                                android:textColor="#2196F3"
+                                android:textSize="20sp">
+
+                            </TextView>
+                        </LinearLayout>
+                    </RelativeLayout>
 
 
+                </androidx.cardview.widget.CardView>
+            </FrameLayout>
         </LinearLayout>
 
+    </HorizontalScrollView>
 
-    </androidx.core.widget.NestedScrollView>
+    <TextView
+        android:id="@+id/signOut"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="18dp"
+        android:drawableLeft="@drawable/ic_power_settings_new_black_24dp"
+        android:drawablePadding="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:text="Sign Out"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"/>
 
-
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
-
-
-
+</LinearLayout>

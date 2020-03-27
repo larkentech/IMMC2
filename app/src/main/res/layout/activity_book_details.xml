@@ -80,12 +80,12 @@
                 android:id="@+id/selected_book_designer"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Designed By"
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="4dp"
+                android:fontFamily="@font/montserrat_semi_bold_italic"
+                android:text="Activity Tracker"
                 android:textColor="#A0A0A0"
-                android:textSize="14sp"
-                android:fontFamily="@font/montserrat_semi_bold_italic"/>
+                android:textSize="14sp" />
 
             <TextView
                 android:id="@+id/selected_book_category"
@@ -298,16 +298,45 @@
 
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/addtocart"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Add to cart"
-            android:background="@color/colorPrimary"
-            android:padding="16dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/montserrat_bold"
-            android:layout_gravity="bottom"/>
+            android:orientation="horizontal"
+            android:layout_gravity="bottom">
+
+
+            <TextView
+                android:id="@+id/addtocart"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:text="Add to cart"
+                android:textAlignment="center"
+                android:background="@color/colorPrimary"
+                android:padding="16dp"
+                android:layout_marginEnd="8dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_bold" />
+
+            <TextView
+                android:visibility="gone"
+                android:id="@+id/gotocart"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:layout_height="wrap_content"
+                android:text="Go to cart"
+                android:textAlignment="center"
+                android:background="@android:color/holo_orange_light"
+                android:padding="16dp"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_bold"/>
+
+
+        </LinearLayout>
+
+
+
 
     </FrameLayout>
 

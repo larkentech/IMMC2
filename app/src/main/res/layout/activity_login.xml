@@ -73,7 +73,7 @@
         app:bar_inactive_color="#A0A0A0"
         app:bar_enabled="true"
         app:otp_text_size="14sp"
-        app:bar_active_color="@color/colorPrimary" />
+        app:bar_active_color="@color/colorPrimary"/>
 
     <LinearLayout
         android:layout_below="@id/otpView"

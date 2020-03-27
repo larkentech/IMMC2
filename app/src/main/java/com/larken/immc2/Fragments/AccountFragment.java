@@ -15,6 +15,7 @@ import androidx.fragment.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -44,6 +45,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import de.hdodenhof.circleimageview.CircleImageView;
 import es.dmoral.toasty.Toasty;
 
 /**
@@ -57,7 +59,7 @@ public class AccountFragment extends Fragment {
     TextView userName;
     TextView userEmail;
     TextView userphone;
-    ImageView userImage;
+    CircleImageView userImage;
     EditText userFlat;
     EditText userlandmark;
     EditText userArea;
@@ -72,6 +74,8 @@ public class AccountFragment extends Fragment {
     TextView feedback;
     String feeling = " ";
     EditText feedbackEt;
+
+    Button updateAddress;
 
 
     public AccountFragment() {
@@ -118,6 +122,7 @@ public class AccountFragment extends Fragment {
         contactWeb=view.findViewById(R.id.contactWeb);
         myOrders=view.findViewById(R.id.txtMyOrders);
         mAuth = FirebaseAuth.getInstance();
+        updateAddress = view.findViewById(R.id.updateAddress);
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
 
@@ -136,6 +141,8 @@ public class AccountFragment extends Fragment {
 
             }
         });
+
+
 
 
 
@@ -219,6 +226,24 @@ public class AccountFragment extends Fragment {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
 
+            }
+        });
+
+        updateAddress.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                HashMap<String,Object> userMap = new HashMap<>();
+                userMap.put("Flatno",userFlat.getText().toString());
+                userMap.put("Landmark",userlandmark.getText().toString().trim());
+                userMap.put("City",userCity.getText().toString().trim());
+                userMap.put("Area",userArea.getText().toString().trim());
+
+                FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails")
+                        .child(mAuth.getUid()).child("Address");
+                databaseReference.updateChildren(userMap);
+
+                Toasty.success(getContext(),"Address changed successfully").show();
             }
         });
 

@@ -169,7 +169,7 @@ public class LoginActivity extends AppCompatActivity {
 
                                 if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                     message = "Invalid code entered...";
-                                    Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                                    Toasty.error(getApplicationContext(),"Invalid Code").show();
                                 }
                             }
                         }catch (Exception e)

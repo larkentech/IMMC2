@@ -82,6 +82,8 @@ public class BookDetailsActivity extends AppCompatActivity {
     CardView _200pagescard;
     CardView _240pagescard;
 
+    TextView gotoCart;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -100,6 +102,7 @@ public class BookDetailsActivity extends AppCompatActivity {
         bookImage.setSliderAdapter(sliderAdapter);
         numberPicker = findViewById(R.id.number_picker);
         bookDesc = findViewById(R.id.selected_book_desc);
+        gotoCart = findViewById(R.id.gotocart);
 
         Log.v("BookDetails", "BookID:" + bookID);
         Log.v("BookDetails", "BookCategory:" + bookCategoryID);
@@ -110,6 +113,9 @@ public class BookDetailsActivity extends AppCompatActivity {
         bookPrice = findViewById(R.id.selected_book_price);
         bookPriceIncrement = findViewById(R.id.book_offer_price);
         bookCategory = findViewById(R.id.selected_book_category);
+        _160pagescard = findViewById(R.id.pages_160_card);
+        _200pagescard = findViewById(R.id.pages_200_card);
+        _240pagescard = findViewById(R.id.pages_240_card);
 
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryID).child(bookSubCategoryID).child(bookID);
@@ -122,7 +128,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                 _240pages = dataSnapshot.child("BookPrice240Pages").getValue(String.class);
                 singleBookPrice = dataSnapshot.child("BookPrice160Pages").getValue(String.class);
                 bookName.setText(dataSnapshot.child("BookName").getValue(String.class));
-                bookAuthor.setText("Designed By: " + dataSnapshot.child("BookDesigner").getValue(String.class));
+                bookAuthor.setText("Activity Tracker " + dataSnapshot.child("BookDesigner").getValue(String.class));
                 bookPrice.setText("Rs."+_160pages+"/-");
                 bookCategory.setText("Category: " + dataSnapshot.child("BookSubCategory").getValue(String.class));
                 bookDesc.setText(dataSnapshot.child("BookDesc").getValue(String.class));
@@ -157,6 +163,8 @@ public class BookDetailsActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                gotoCart.setVisibility(View.VISIBLE);
+
                 count = numberPicker.getValue();
 
                 if (count <= 0)
@@ -176,20 +184,37 @@ public class BookDetailsActivity extends AppCompatActivity {
 
                     DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
                     databaseReference3.child("Cart").push().setValue(cartMap);
-                    addToCart.setBackgroundColor(getResources().getColor(R.color.finalColor));
-                    addToCart.setText("Added");
                     Drawable image = addToCart.getContext().getDrawable(R.drawable.add_to_cart_check);
-                    addToCart.setCompoundDrawablesWithIntrinsicBounds(image,null,null,null);
                     Toasty.success(BookDetailsActivity.this, "Successfully added to the cart", Toast.LENGTH_SHORT, true).show();
 
                 }
 
+                numberPicker.setValue(1);
+                bookPrice.setText("Rs." + _160pages + "/-");
+
+                _200pagescard.setCardElevation(0);
+                _240pagescard.setCardElevation(0);
+                _160pagescard.setCardElevation(0);
+                _160pagescard.setCardBackgroundColor(Color.LTGRAY);
+                _200pagescard.setCardBackgroundColor( Color.parseColor("#F7F7F7"));
+                _240pagescard.setCardBackgroundColor( Color.parseColor("#F7F7F7"));
+                _200pagescard.setBackground( null);
+                _240pagescard.setBackground( null);
+                _160pagescard.setBackground( null);
+
             }
         });
 
-        _160pagescard = findViewById(R.id.pages_160_card);
-        _200pagescard = findViewById(R.id.pages_200_card);
-        _240pagescard = findViewById(R.id.pages_240_card);
+        gotoCart.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),MainActivity.class);
+                i.putExtra("Flow","Cart");
+                startActivity(i);
+            }
+        });
+
+
 
         _160pagescard.setOnClickListener(new View.OnClickListener() {
             @Override

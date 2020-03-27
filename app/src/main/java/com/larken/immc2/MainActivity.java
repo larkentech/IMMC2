@@ -17,6 +17,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
+    String flow;
+
     public BottomNavigationView bottomNavigationView;
 
 
@@ -27,6 +29,11 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        if (getIntent().hasExtra("Flow"))
+        {
+            flow = getIntent().getExtras().getString("Flow");
+        }
+
         bottomNavigationView = findViewById(R.id.mainBottomNavigationView);
         bottomNavigationView.setVisibility(View.VISIBLE);
 
@@ -35,6 +42,16 @@ public class MainActivity extends AppCompatActivity {
         FragmentTransaction transaction = manager.beginTransaction();
         transaction.add(R.id.mainFragmentContainer,homeFragment);
         transaction.commit();
+
+        if (flow != null)
+        {
+            FragmentManager manager1 = getSupportFragmentManager();
+            CartFragment cartFragment = new CartFragment();
+            FragmentTransaction transaction1 = manager1.beginTransaction();
+            transaction1.replace(R.id.mainFragmentContainer,cartFragment);
+            transaction1.addToBackStack("MainFlow");
+            transaction1.commit();
+        }
 
 
 

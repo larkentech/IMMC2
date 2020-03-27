@@ -29,6 +29,8 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.concurrent.TimeUnit;
 
+import es.dmoral.toasty.Toasty;
+
 public class OtpActivity extends AppCompatActivity {
     private String varificationid;
     private FirebaseAuth mAuth;
@@ -147,7 +149,7 @@ public class OtpActivity extends AppCompatActivity {
 
                                     if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
                                         message = "Invalid code entered...";
-                                        Toast.makeText(getApplicationContext(),message,Toast.LENGTH_LONG).show();
+                                        Toasty.error(getApplicationContext(),message).show();
                                     }
                                 }
                             }catch (Exception e)

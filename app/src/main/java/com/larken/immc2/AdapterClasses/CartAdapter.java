@@ -30,6 +30,7 @@ import com.bumptech.glide.Glide;
 import com.larken.immc2.ModalClasses.BooksModal;
 import com.larken.immc2.R;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -40,12 +41,14 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
     List<String> itemsCount;
     List<String> tempKeys;
     Fragment fragment;
+    List<PaymentModal> objects = new ArrayList<>();
 
 
     public CartAdapter(@NonNull Context context, int resource, @NonNull List<PaymentModal> objects, List<String> count, Fragment fragment) {
         super(context, resource, objects);
         this.tempKeys = count;
         this.fragment = fragment;
+        this.objects = objects;
     }
 
     @NonNull
@@ -99,6 +102,7 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
         });
 
 
+
         deleteItem.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -113,9 +117,10 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         Toasty.error(getContext(), "Item Removed From Cart").show();
 
-                        ((CartFragment) fragment).adapter.clear();
-                        //  ((CartFragment)fragment).reloadData();
-
+                        ((CartFragment) fragment).cartItems.remove(position);
+                        //((CartFragment) fragment).adapter.clear();
+                        ((CartFragment) fragment).adapter.notifyDataSetChanged();
+                        Log.v("TAG","OBjects:"+objects);
                     }
                 });
 

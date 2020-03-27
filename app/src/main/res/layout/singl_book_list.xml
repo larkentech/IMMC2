@@ -21,23 +21,12 @@
                 android:id="@+id/singleMainCategoryHeadingTV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:layout_gravity="center_horizontal"
                 android:fontFamily="@font/montserrat_bold"
                 android:text="Engineering Theme"
                 android:textColor="#000000"
                 android:textSize="16sp" />
-
-            <TextView
-                android:id="@+id/singleMainCategorySubheading"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_gravity="center_horizontal"
-                android:fontFamily="@font/montserrat_regular"
-                android:text="A Small description about engineering"
-                android:textColor="#000000"
-                android:textSize="12sp" />
 
             <it.sephiroth.android.library.widget.HListView
                 android:id="@+id/singleMainCategoryList"
