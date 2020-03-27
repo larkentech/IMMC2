@@ -31,6 +31,11 @@ public class SubCategoryAdapter extends ArrayAdapter<BooksModal> {
         this.subcategory = objects2;
     }
 
+    @Override
+    public int getCount() {
+        return imagesUrl.size();
+    }
+
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {

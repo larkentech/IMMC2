@@ -12,8 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.AdapterClasses.BestSellingAdapter;
 import com.larken.immc2.ModalClasses.BooksModal;
 import com.larken.immc2.R;
@@ -65,6 +68,9 @@ public class FeaturedFragment extends Fragment {
         Log.v("TAG","Category:"+category);
         Log.v("TAG","SubCategory:"+subcategory);
 
+        final RelativeLayout noBooksFound = view.findViewById(R.id.featuredFragmentAnimation);
+        final LinearLayout featuredFragmentLL = view.findViewById(R.id.featuredFragmentLL);
+
 
         sub_category_title = (TextView) view.findViewById(R.id.sub_category_title);
 
@@ -75,31 +81,66 @@ public class FeaturedFragment extends Fragment {
         gridView.setAdapter(featuredAdapter);
 
 
-
         firebaseDatabase = FirebaseDatabase.getInstance();
-        databaseReference = firebaseDatabase.getReference().child("BookDetails").child(category).child(subcategory);
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        databaseReference = firebaseDatabase.getReference().child("BookDetails");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                BooksModal featuredBooks = dataSnapshot.getValue(BooksModal.class);
-                featuredAdapter.add(featuredBooks);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(category))
+                {
+                    databaseReference.child(category).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            if (dataSnapshot.hasChild(subcategory))
+                            {
+                                databaseReference.child(category).child(subcategory).addChildEventListener(new ChildEventListener() {
+                                    @Override
+                                    public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                        BooksModal featuredBooks = dataSnapshot.getValue(BooksModal.class);
+                                        featuredAdapter.add(featuredBooks);
+                                        sub_category_title.setText(subcategory);
+                                    }
 
-                sub_category_title.setText(subcategory);
-            }
+                                    @Override
+                                    public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                    }
 
-            }
+                                    @Override
+                                    public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+                                    }
 
-            }
+                                    @Override
+                                    public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                                    }
 
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
+                            }
+                            else {
+                                noBooksFound.setVisibility(View.VISIBLE);
+                                featuredFragmentLL.setVisibility(View.GONE);
+                                return;
+                            }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+                else {
+                    noBooksFound.setVisibility(View.VISIBLE);
+                    featuredFragmentLL.setVisibility(View.GONE);
+                    return;
+                }
             }
 
             @Override

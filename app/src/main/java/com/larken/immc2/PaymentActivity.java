@@ -166,42 +166,38 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
 
                 if (dataSnapshot.hasChild("Cart")) {
-                    count1 = (int) dataSnapshot.child("Cart").getChildrenCount();
-                    for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
-                        String key = ds.getKey();
-                        tempKeys.add(key);
-                        databaseReference.child("Cart").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                count2++;
-                                bookId.add(dataSnapshot.child("BookID").getValue(String.class));
-                                bookCategoryId.add(dataSnapshot.child("BookCategory").getValue(String.class));
-                                bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
-                                bookName.add(dataSnapshot.child("BookName").getValue(String.class));
-                                itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
-                                bookPrice.add(dataSnapshot.child("Price").getValue(String.class));
+                    paymentShimmer.stopShimmer();
+                    paymentShimmer.setVisibility(View.GONE);
+                    paymentRL.setVisibility(View.VISIBLE);
 
-                                if (count1 == count2){
-                                    Log.v("TAG", "BookID:" + bookId);
-                                    displayCart(bookId,bookCategoryId,bookSubCategoryId,itemsCount,bookName,bookPrice);
+                    databaseReference.child("Cart").addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                            PaymentModal modal = dataSnapshot.getValue(PaymentModal.class);
+                            adapter.add(modal);
+                            displayFinalPrice();
+                        }
 
-                                    paymentShimmer.startShimmer();
-                                    paymentShimmer.setVisibility(View.GONE);
-                                    paymentRL.setVisibility(View.VISIBLE);
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
+                        }
 
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
 
-                                }
+                        }
 
-                            }
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
 
-                            }
-                        });
-                    }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
 
+                        }
+                    });
 
                     //getBookDetails(bookId);
                 }
@@ -232,8 +228,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
         try {
             JSONObject options = new JSONObject();
-            options.put("name", "FitVib");
-            options.put("description", "Hello World");
+            options.put("name", "IamMC2");
+            options.put("description", "Grateful to have you as our customer");
             //You can omit the image option to fetch the image from dashboard
             options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
             options.put("currency", "INR");
@@ -366,7 +362,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                     PaymentModal modal = dataSnapshot.getValue(PaymentModal.class);
                     adapter.add(modal);
                     //adapter.notifyDataSetChanged();
-                    displayFinalPrice();
+
 
                 }
 

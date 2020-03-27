@@ -4,8 +4,8 @@ public class PaymentModal {
 
 
     private String BookName;
-    private String FinalPrice;
-    private String BookImage;
+    private String CartPrice;
+    private String SinglePrice;
     private String Count;
     private String BookPrice;
     private String BookDesigner;
@@ -19,8 +19,8 @@ public class PaymentModal {
     public PaymentModal(String bookName,String cartImage,String bookPrice,String finalPrice,String bookSubCategory,String bookImage,String count,String bookDesigner,String bookCategory)
     {
         BookName = bookName;
-        FinalPrice = finalPrice;
-        BookImage=bookImage;
+        CartPrice = finalPrice;
+        SinglePrice=bookImage;
         BookDesigner=bookDesigner;
         BookPrice=bookPrice;
         CartImage=cartImage;
@@ -37,20 +37,20 @@ public class PaymentModal {
         BookName = bookName;
     }
 
-    public String getFinalPrice() {
-        return FinalPrice;
+    public String getCartPrice() {
+        return CartPrice;
     }
 
-    public void setFinalPrice(String finalPrice) {
-        FinalPrice = finalPrice;
+    public void setCartPrice(String finalPrice) {
+        CartPrice = finalPrice;
     }
 
-    public String getBookImage() {
-        return BookImage;
+    public String getSinglePrice() {
+        return SinglePrice;
     }
 
-    public void setBookImage(String bookImage) {
-        BookImage = bookImage;
+    public void setSinglePrice(String bookImage) {
+        SinglePrice = bookImage;
     }
 
     public String getCount() {

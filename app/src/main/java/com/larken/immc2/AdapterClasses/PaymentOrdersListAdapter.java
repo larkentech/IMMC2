@@ -75,8 +75,8 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<PaymentModal> {
 
         bookName.setText(modal.getBookName());
         bookSubCategory.setText(modal.getBookCategory());
-        bookQuantiy.setText("Qty."+modal.getCount());
-        //bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())+"/-");
+        bookQuantiy.setText("Qty:"+modal.getCount());
+        bookPrice.setText("Rs."+modal.getCartPrice()+"/-");
 
         final List<String> tempList = new ArrayList();
         for(int i=0;i<itemsCount.size();i++){

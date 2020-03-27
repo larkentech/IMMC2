@@ -172,6 +172,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                     cartMap.put("CartPrice",String.valueOf(count*(Integer.parseInt(singleBookPrice))));
                     cartMap.put("CartImage",url_list.get(0));
                     cartMap.put("BookName",bookName.getText().toString());
+                    cartMap.put("SinglePrice",singleBookPrice);
 
                     DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
                     databaseReference3.child("Cart").push().setValue(cartMap);

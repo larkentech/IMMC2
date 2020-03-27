@@ -21,6 +21,7 @@ import android.widget.ListView;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationMenu;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.database.ChildEventListener;
 import com.larken.immc2.AdapterClasses.CartAdapter;
 import com.larken.immc2.MainActivity;
 import com.larken.immc2.ModalClasses.BooksModal;
@@ -91,7 +92,7 @@ public class CartFragment extends Fragment {
         bookSubCategoryId = new ArrayList<>();
         itemsCount = new ArrayList<>();
         tempKeys = new ArrayList<>();
-        bookPrice=new ArrayList<>();
+        bookPrice = new ArrayList<>();
         return inflater.inflate(R.layout.fragment_cart, container, false);
     }
 
@@ -101,27 +102,58 @@ public class CartFragment extends Fragment {
 
         cartListView = view.findViewById(R.id.cartListView);
 
-        final List<PaymentModal> cartItems = new ArrayList<>();
-        adapter = new CartAdapter(getContext(), R.layout.single_cart_item, cartItems,itemsCount,tempKeys, CartFragment.this);
+        List<PaymentModal> cartItems = new ArrayList<>();
+        adapter = new CartAdapter(getContext(), R.layout.single_cart_item, cartItems, tempKeys, CartFragment.this);
         cartListView.setAdapter(adapter);
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.mainBottomNavigationView);
         bottomNavigationView.setVisibility(View.GONE);
 
-        cardLL=view.findViewById(R.id.cardLL);
+        cardLL = view.findViewById(R.id.cardLL);
         cardLL.setVisibility(View.GONE);
         cartShimmer = view.findViewById(R.id.shimmer_view_cart);
         cartShimmer.startShimmer();
-        nocartitem=view.findViewById(R.id.no_cart_item_layout);
+        nocartitem = view.findViewById(R.id.no_cart_item_layout);
+
 
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild("Cart")) {
-                    nocartitem.setVisibility(View.GONE);
+                    cartShimmer.stopShimmer();
+                    cardLL.setVisibility(View.VISIBLE);
                     cartShimmer.setVisibility(View.GONE);
-
                     count1 = (int) dataSnapshot.child("Cart").getChildrenCount();
-                    for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
+                    databaseReference.child("Cart").addChildEventListener(new ChildEventListener() {
+                        @Override
+                        public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                            tempKeys.add(dataSnapshot.getKey());
+                            PaymentModal modal = dataSnapshot.getValue(PaymentModal.class);
+                            adapter.add(modal);
+
+                        }
+
+                        @Override
+                        public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                        }
+
+                        @Override
+                        public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+
+                   /* for (DataSnapshot ds : dataSnapshot.child("Cart").getChildren()) {
                         String key = ds.getKey();
                         tempKeys.add(key);
                         databaseReference.child("Cart").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -133,8 +165,6 @@ public class CartFragment extends Fragment {
                                 bookSubCategoryId.add(dataSnapshot.child("BookSubCategory").getValue(String.class));
                                 itemsCount.add(dataSnapshot.child("Count").getValue(String.class));
                                 bookPrice.add(dataSnapshot.child("Price").getValue(String.class));
-
-
 
                                 databaseReference.child("Price").setValue(bookPrice);
                                 if (count1 == count2){
@@ -146,8 +176,6 @@ public class CartFragment extends Fragment {
 
                                 }
 
-
-
                             }
 
                             @Override
@@ -155,24 +183,16 @@ public class CartFragment extends Fragment {
 
                             }
                         });
-
-
-
-
-                    }
+                    } */
 
 
                     //getBookDetails(bookId);
-                }
-                else
-                {
+                } else {
+                    cartShimmer.stopShimmer();
                     nocartitem.setVisibility(View.VISIBLE);
-                    proceedToPay.setVisibility(View.GONE);
                     cartShimmer.setVisibility(View.GONE);
                 }
-
             }
-
 
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {
@@ -182,30 +202,21 @@ public class CartFragment extends Fragment {
 
         proceedToPay = view.findViewById(R.id.proccedToBuyCart);
         proceedToPay.setOnClickListener(new View.OnClickListener() {
-
             @Override
             public void onClick(View view) {
-                if(bookId.isEmpty()){
-                    Toasty.error(getContext(),"No Items In Cart").show();
-                }
-                else {
-                    Intent i = new Intent(getContext(), PaymentActivity.class);
-                    getActivity().startActivity(i);
-                }
+
+                Intent i = new Intent(getContext(), PaymentActivity.class);
+                getActivity().startActivity(i);
 
             }
-
-
         });
-
     }
-
 
     private Window getWindow() {
         return null;
     }
 
-    private void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId,List<String> bookPrice,List<String> itemsCount) {
+  /*  private void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId,List<String> bookPrice,List<String> itemsCount) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         for (int i=0;i<bookId.size();i++)
         {
@@ -216,7 +227,7 @@ public class CartFragment extends Fragment {
             databaseReference3.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    PaymentModal modal = dataSnapshot.getValue(PaymentModal.class);
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
                     adapter.add(modal);
                     adapter.notifyDataSetChanged();
                 }
@@ -226,13 +237,13 @@ public class CartFragment extends Fragment {
                 }
             });
         }
-    }
+    } */
 
-    public void reloadData(){
-        getData();
-    }
+//    public void reloadData(){
+//        getData();
+//    }
 
-    private void getData() {
+    /*private void getData() {
         databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -276,5 +287,5 @@ public class CartFragment extends Fragment {
 
             }
         });
-    }
+    } */
 }

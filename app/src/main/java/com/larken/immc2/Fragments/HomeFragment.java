@@ -18,9 +18,11 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.AdapterClasses.BestSellingAdapter;
+import com.larken.immc2.AdapterClasses.MainAdapter;
 import com.larken.immc2.AdapterClasses.OffersAdapter;
 import com.larken.immc2.AdapterClasses.SubCategoryAdapter;
 import com.larken.immc2.DetailsContainerActivity;
+import com.larken.immc2.HelperClasses.NonScrollListView;
 import com.larken.immc2.ModalClasses.BooksModal;
 import com.larken.immc2.R;
 import com.google.firebase.database.ChildEventListener;
@@ -117,8 +119,6 @@ public class HomeFragment extends Fragment {
 
 
         offersListView = view.findViewById(R.id.offersList);
-        quotesListView = view.findViewById(R.id.quotesList);
-        scienceListView = view.findViewById(R.id.scienceList);
 
         List<BooksModal> imageList = new ArrayList<>();
         adapter = new OffersAdapter(getContext(),R.layout.offers_single,imageList);
@@ -156,112 +156,22 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        //QuotesTheme model
-        quotesList = new ArrayList<>();
-        subcategoryQuotes = new ArrayList<>();
-        List<BooksModal> dummyList = new ArrayList<>();
-        category = "QuoteTheme";
-        quotesAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList,category,quotesList,subcategoryQuotes);
-        quotesListView.setAdapter(quotesAdapter);
-        //Quotes Theme
-        DatabaseReference databaseReference2 = firebaseDatabase.getReference().child("CategoryImages").child("QuoteTheme");
-        databaseReference2.addValueEventListener(new ValueEventListener() {
+        NonScrollListView mainList = view.findViewById(R.id.mainPageList);
+        List<BooksModal> dummyListMain = new ArrayList<>();
+        final List<String> categoryList = new ArrayList<>();
+        final List<String> subcategoryList = new ArrayList<>();
+        final MainAdapter adapter2 = new MainAdapter(getContext(),R.layout.singl_book_list,dummyListMain,categoryList,subcategoryList);
+        mainList.setAdapter(adapter2);
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReferenceMain = firebaseDatabase.getReference().child("CategoryImages");
+        databaseReferenceMain.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot ds:dataSnapshot.getChildren())
-                {
+                for(DataSnapshot ds:dataSnapshot.getChildren()){
                     BooksModal modal = dataSnapshot.getValue(BooksModal.class);
-                    quotesAdapter.add(modal);
-                    subcategoryQuotes.add(ds.getKey());
-                    quotesList.add(ds.getValue().toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        //Science Model
-        scienceList = new ArrayList<>();
-        scienceSubcategoryList = new ArrayList<>();
-        List<BooksModal> dummyList1 = new ArrayList<>();
-        String category1 = "ScienceTheme";
-        scienceAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList1, category1,scienceList,scienceSubcategoryList);
-        scienceListView.setAdapter(scienceAdapter);
-
-        //Science Theme
-        DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("CategoryImages").child("ScienceTheme");
-        databaseReference3.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot ds:dataSnapshot.getChildren())
-                {
-                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
-                    scienceAdapter.add(modal);
-                    scienceSubcategoryList.add(ds.getKey());
-                    scienceList.add(ds.getValue().toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        //Engineering Model
-        engineeringListView = view.findViewById(R.id.engineeringList);
-        engineeringList = new ArrayList<>();
-        engineeringSubcategoryList = new ArrayList<>();
-        List<BooksModal> dummyList2 = new ArrayList<>();
-        String category2 = "Engineering";
-        engineeringAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList2, category2,engineeringList,engineeringSubcategoryList);
-        engineeringListView.setAdapter(engineeringAdapter);
-        //Science Theme
-        DatabaseReference databaseReference4 = firebaseDatabase.getReference().child("CategoryImages").child("Engineering");
-        databaseReference4.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot ds:dataSnapshot.getChildren())
-                {
-                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
-                    engineeringAdapter.add(modal);
-                    engineeringSubcategoryList.add(ds.getKey());
-                    engineeringList.add(ds.getValue().toString());
-                }
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-        //maths Model
-        mathsListView = view.findViewById(R.id.mathsList);
-        mathsList = new ArrayList<>();
-        mathsSubcategoryList = new ArrayList<>();
-        List<BooksModal> dummyList3 = new ArrayList<>();
-        String category3 = "MathsTheme";
-        mathsAdapter = new SubCategoryAdapter(getContext(),R.layout.single_subcategory,dummyList3, category3,mathsList,mathsSubcategoryList);
-        mathsListView.setAdapter(engineeringAdapter);
-        //Science Theme
-        DatabaseReference databaseReference5 = firebaseDatabase.getReference().child("CategoryImages").child("MathsTheme");
-        databaseReference5.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-
-                for (DataSnapshot ds:dataSnapshot.getChildren())
-                {
-                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
-                    mathsAdapter.add(modal);
-                    mathsSubcategoryList.add(ds.getKey());
-                    mathsList.add(ds.getValue().toString());
+                    adapter2.add(modal);
+                    categoryList.add(ds.getKey());
                 }
             }
 
