@@ -1,6 +1,7 @@
 package com.larken.immc2;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
@@ -14,13 +15,16 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.larken.immc2.AdapterClasses.PaymentOrdersListAdapter;
 import com.larken.immc2.Fragments.AdrsFragment;
 import com.larken.immc2.ModalClasses.BooksModal;
@@ -30,6 +34,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.larken.immc2.ModalClasses.OrderModal;
+import com.larken.immc2.ModalClasses.PaymentModal;
 import com.razorpay.Checkout;
 import com.razorpay.PaymentResultListener;
 
@@ -135,7 +141,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         tempKeys = new ArrayList<>();
 
         ordersList = findViewById(R.id.ordersListPayment);
-        List<BooksModal> cartItems = new ArrayList<>();
+        List<PaymentModal> cartItems = new ArrayList<>();
         adapter = new PaymentOrdersListAdapter(this, R.layout.single_order_item, cartItems,itemsCount,tempKeys);
         ordersList.setAdapter(adapter);
 
@@ -344,21 +350,43 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
 
     }
 
-    public void displayCart(List<String> bookId, List<String> bookCategoryId, List<String> bookSubCategoryId,List<String> bookName,List<String> bookPrice, List<String> itemsCount) {
+    public void displayCart(final List<String> bookId, final List<String> bookCategoryId, final List<String> bookSubCategoryId, final List<String> bookName, final List<String> bookPrice, final List<String> itemsCount) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
         for (int i=0;i<bookId.size();i++)
         {
             orderedBookNames.concat(bookName.get(i)+",");
-            DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("BookDetails").child(bookCategoryId.get(i))
-                    .child(bookSubCategoryId.get(i)).child(bookId.get(i));
-            databaseReference3.addValueEventListener(new ValueEventListener() {
+            DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getUid()).child("Cart");
+            databaseReference3.addChildEventListener(new ChildEventListener() {
+                private Object CartImage;
+
                 @Override
-                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                    PaymentModal modal = dataSnapshot.getValue(PaymentModal.class);
                     adapter.add(modal);
                     //adapter.notifyDataSetChanged();
                     displayFinalPrice();
+
+                }
+
+                private Activity getContext() {
+                    return null;
+                }
+
+                @Override
+                public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+                }
+
+                @Override
+                public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+                }
+
+                @Override
+                public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
                 }
 
                 @Override

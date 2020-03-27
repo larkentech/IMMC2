@@ -8,22 +8,26 @@ public class OrderModal {
     private String BookName;
     private String FinalPrice;
     private String Name;
+    private String BookImage;
     private String OrderDate;
-    private String ItemsCount;
+    private String Count;
     private String PhoneNumber;
+    private String BookDesigner;
     private Long TxnID;
 
 
     public OrderModal() {
     }
 
-    public OrderModal(String address, String bookId, String bookName, String finalPrice, String name, String itemsCount, String phoneNumber, Long txnID, String orderDate) {
+    public OrderModal(String address, String bookImage,String bookId,String bookDesigner, String bookName, String finalPrice, String name, String count, String phoneNumber, Long txnID, String orderDate) {
         Address = address;
         BookID = bookId;
         BookName = bookName;
         FinalPrice = finalPrice;
         Name = name;
-        ItemsCount = itemsCount;
+        BookImage=bookImage;
+        BookDesigner=bookDesigner;
+        Count = count;
         OrderDate = orderDate;
         PhoneNumber = phoneNumber;
         TxnID = txnID;
@@ -70,12 +74,12 @@ public class OrderModal {
         Name = name;
     }
 
-    public String getItemsCount() {
-        return ItemsCount;
+    public String getCount() {
+        return Count;
     }
 
-    public void setItemsCount(String itemsCount) {
-        ItemsCount = itemsCount;
+    public void setCount(String count) {
+        Count = count;
     }
 
     public String getPhoneNumber() {
@@ -99,4 +103,22 @@ public class OrderModal {
     public void setOrderDate(String orderDate) {
         OrderDate = orderDate;
     }
+
+    public String getBookDesigner() {
+        return BookDesigner;
+    }
+
+    public void setBookDesigner(String bookDesigner) {
+        BookDesigner = bookDesigner;
+    }
+
+    public String getBookImage() {
+        return BookImage;
+    }
+
+    public void setBookImage(String bookImage) {
+        BookImage = bookImage;
+    }
+
+
 }

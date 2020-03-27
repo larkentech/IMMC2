@@ -42,7 +42,7 @@ public class OrderAdapter extends ArrayAdapter<OrderModal> {
         TextView Address = convertView.findViewById(R.id.address);
         TextView FinalPrice = convertView.findViewById(R.id.bookPrice);
         TextView PhoneNumber = convertView.findViewById(R.id.phno);
-        TextView OrderCount = convertView.findViewById(R.id.quantity);
+        TextView Count = convertView.findViewById(R.id.quantity);
         TextView OrderDate = convertView.findViewById(R.id.orderDate);
         TextView TxnID = convertView.findViewById(R.id.txnNum);
 
@@ -50,7 +50,7 @@ public class OrderAdapter extends ArrayAdapter<OrderModal> {
         BookName.setText(orderModal.getBookName());
         Address.setText(orderModal.getAddress());
         FinalPrice.setText("Rs." + orderModal.getFinalPrice() + "/- Paid");
-        OrderCount.setText("Qty: " + orderModal.getItemsCount());
+        Count.setText("Qty: " + orderModal.getCount());
         PhoneNumber.setText("Ph: "+ orderModal.getPhoneNumber());
         OrderDate.setText(orderModal.getOrderDate());
         TxnID.setText(orderModal.getTxnID().toString());

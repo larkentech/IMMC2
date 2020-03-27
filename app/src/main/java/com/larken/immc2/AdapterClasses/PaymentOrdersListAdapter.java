@@ -18,6 +18,8 @@ import com.bumptech.glide.Glide;
 import com.larken.immc2.Fragments.CartFragment;
 import com.larken.immc2.ModalClasses.BooksModal;
 
+import com.larken.immc2.ModalClasses.OrderModal;
+import com.larken.immc2.ModalClasses.PaymentModal;
 import com.larken.immc2.PaymentActivity;
 import com.larken.immc2.R;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,7 +35,7 @@ import java.util.List;
 
 import es.dmoral.toasty.Toasty;
 
-public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
+public class PaymentOrdersListAdapter extends ArrayAdapter<PaymentModal> {
     List<String> itemsCount;
     List<String> tempKeys;
     Fragment fragment;
@@ -41,7 +43,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
 
 
 
-    public PaymentOrdersListAdapter(@NonNull Context context, int resource, @NonNull List<BooksModal> objects, List<String> itemsCount,List<String> count) {
+    public PaymentOrdersListAdapter(@NonNull Context context, int resource, @NonNull List<PaymentModal> objects, List<String> itemsCount,List<String> count) {
         super(context, resource, objects);
         this.itemsCount = itemsCount;
         this.tempKeys = count;
@@ -57,21 +59,23 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<BooksModal> {
 
 
 
-        final BooksModal modal = getItem(position);
+        final PaymentModal modal = getItem(position);
 
 
         TextView bookName = convertView.findViewById(R.id.bookNameOrder);
-        TextView authorName = convertView.findViewById(R.id.bookDesignerOrder);
-        final TextView bookPrice = convertView.findViewById(R.id.bookPriceOrder);
-        ImageView BookImage = convertView.findViewById(R.id.itemImageOrder);
+        TextView bookSubCategory = convertView.findViewById(R.id.bookCategoryOrder);
+        TextView bookQuantiy=convertView.findViewById(R.id.orderItemCount);
+        TextView bookPrice = convertView.findViewById(R.id.bookPriceOrder);
+        ImageView CartImage = convertView.findViewById(R.id.itemImageOrder);
         Glide
                 .with(getContext())
-                .load(modal.getBookImage())
+                .load(modal.getCartImage())
                 .centerCrop()
-                .into(BookImage);
+                .into(CartImage);
 
         bookName.setText(modal.getBookName());
-        authorName.setText(modal.getBookDesigner());
+        bookSubCategory.setText(modal.getBookCategory());
+        bookQuantiy.setText("Qty."+modal.getCount());
         //bookPrice.setText("Rs."+Integer.parseInt(modal.getBookPrice())+"/-");
 
         final List<String> tempList = new ArrayList();
