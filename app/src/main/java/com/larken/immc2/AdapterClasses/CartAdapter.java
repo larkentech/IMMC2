@@ -61,6 +61,7 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
         final PaymentModal modal = getItem(position);
 
 
+
         TextView bookName = convertView.findViewById(R.id.bookNameCart);
         TextView authorName = convertView.findViewById(R.id.bookDesignerCart);
         final TextView bookPrice = convertView.findViewById(R.id.bookPriceCart);
@@ -77,6 +78,7 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
         bookName.setText(modal.getBookName());
         BookPages.setText(modal.getPages());
         authorName.setText(modal.getBookCategory() + ", " + modal.getBookSubCategory());
+
         try {
             quantityPicker.setValue(Integer.parseInt(modal.getCount()));
             bookPrice.setText("Rs." + Integer.parseInt(modal.getSinglePrice()) * quantityPicker.getValue() + "/-");
@@ -85,9 +87,12 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
         }
 
 
+
         quantityPicker.setValueChangedListener(new ValueChangedListener() {
             @Override
             public void valueChanged(int value, ActionEnum action) {
+
+
                 bookPrice.setText("Rs." + Integer.parseInt(modal.getSinglePrice()) * value + "/-");
                 FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
                 FirebaseAuth mAuth = FirebaseAuth.getInstance();
@@ -98,7 +103,6 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
                 updatedMap.put("CartPrice", String.valueOf(Integer.parseInt(modal.getSinglePrice()) * value));
                 databaseReference.child(tempKeys.get(position)).updateChildren(updatedMap);
                 Log.v("TAG", "Count:" + String.valueOf(quantityPicker.getValue()));
-
 
             }
         });
@@ -119,10 +123,17 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
                     public void onComplete(@Nullable DatabaseError databaseError, @NonNull DatabaseReference databaseReference) {
                         Toasty.error(getContext(), "Item Removed From Cart").show();
 
-                        ((CartFragment) fragment).cartItems.remove(position);
-                        //((CartFragment) fragment).adapter.clear();
-                        ((CartFragment) fragment).adapter.notifyDataSetChanged();
-                        Log.v("TAG","OBjects:"+objects);
+                        try {
+                            ((CartFragment) fragment).cartItems.remove(position);
+                            //((CartFragment) fragment).adapter.clear();
+                            ((CartFragment) fragment).adapter.notifyDataSetChanged();
+                            Log.v("TAG","OBjects:"+objects);
+
+                        }catch (Exception e){
+                            return;
+                        }
+
+
                     }
                 });
 

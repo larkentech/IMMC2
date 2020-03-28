@@ -63,6 +63,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     public PaymentOrdersListAdapter adapter;
     public TextView finalPrice;
     public String orderedBookNames = "Book Name:";
+    public String orderedBookQuantities="Qty";
 
     Button proceedToBuy;
     FirebaseAuth mAuth;
@@ -179,8 +180,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                             adapter.add(modal);
                             itemsCount.add(modal.getCount());
                             bookPages.add(modal.getPages());
-                            Log.v("TAG","ItemsCount:"+itemsCount);
-                            displayFinalPrice();
+                            Log.v("TAG","ItemsCount:"+itemsCount);displayFinalPrice();
                         }
 
                         @Override
@@ -277,8 +277,6 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getUid());
             databaseReference.child("Cart").removeValue();
 
-
-
             HashMap<String, Object> userMap = new HashMap<>();
             userMap.put("Name", userName.getText().toString());
             userMap.put("FinalPrice",finalPrice.getText().toString());
@@ -296,15 +294,29 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             Toasty.success(getApplicationContext(),"Payment Successfull").show();
             Intent intent=new Intent(this,PaymentSuccessActivity.class);
             startActivity(intent);
-        }catch (Exception e)
-        {
-            Toasty.error(getApplicationContext(),"failed").show();
-            Log.v("TAG","Exception:"+e);
+        }catch (Exception e) {
+            Toasty.error(getApplicationContext(), "failed").show();
+            Log.v("TAG", "Exception:" + e);
+
         }
 
+        int txn = randomTxnID();
+        FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
+        FirebaseDatabase database = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = database.getReference();
 
 
+        HashMap<String, Object> userMap = new HashMap<>();
+        userMap.put("Name", userName.getText().toString());
+        userMap.put("FinalPrice", finalPrice.getText().toString());
+        userMap.put("Address", userAddress.getText().toString());
+        userMap.put("TxnID", String.valueOf(txn));
+        userMap.put("OrderDate", Date.toString());
+        userMap.put("ItemsCount", getItemCount());
+        userMap.put("BookName", getBookNames());
 
+        userMap.put("PhoneNumber", currentFirebaseUser.getPhoneNumber().toString());
+        databaseReference.child("OrderDetails").child(String.valueOf(txn)).setValue(userMap);
 
     }
 
@@ -371,9 +383,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     public void displayCart(final List<String> bookId, final List<String> bookCategoryId, final List<String> bookSubCategoryId, final List<String> bookName, final List<String> bookPrice, final List<String> itemsCount) {
         FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
 
-        for (int i=0;i<bookId.size();i++)
-        {
-            orderedBookNames.concat(bookName.get(i)+",");
+        for (int i = 0; i < bookId.size(); i++) {
+            orderedBookNames.concat(bookName.get(i) + ",");
             DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getUid()).child("Cart");
             databaseReference3.addChildEventListener(new ChildEventListener() {
                 private Object CartImage;
