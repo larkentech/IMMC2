@@ -123,6 +123,11 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
                         //((CartFragment) fragment).adapter.clear();
                         ((CartFragment) fragment).adapter.notifyDataSetChanged();
                         Log.v("TAG","OBjects:"+objects);
+                        if (((CartFragment) fragment).cartListView.getCount() < 1)
+                        {
+                            ((CartFragment) fragment).cartListView.setVisibility(View.GONE);
+                            ((CartFragment) fragment).nocartitem.setVisibility(View.VISIBLE);
+                        }
                     }
                 });
 

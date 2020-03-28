@@ -67,7 +67,7 @@ public class CartFragment extends Fragment {
     //Dummy layout
     ShimmerFrameLayout cartShimmer;
     LinearLayout cardLL;
-    FrameLayout nocartitem;
+    public FrameLayout nocartitem;
     public List<PaymentModal> cartItems;
 
 
