@@ -1,133 +1,298 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/background_light"
     android:orientation="vertical">
 
+
+    <!-- <androidx.cardview.widget.CardView
+         android:id="@+id/orderCard"
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:layout_marginBottom="1dp"
+         app:cardBackgroundColor="@android:color/white"
+         app:cardElevation="0dp">
+
+
+         <RelativeLayout
+             android:layout_width="match_parent"
+             android:layout_height="wrap_content"
+             android:layout_margin="10dp">
+
+             <TextView
+                 android:id="@+id/bookName"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_margin="8dp"
+                 android:fontFamily="@font/latoblack"
+                 android:text="Chemical Engineering "
+                 android:textColor="#111"
+                 android:textSize="20sp" />
+
+             <TextView
+                 android:id="@+id/address"
+                 android:layout_width="280dp"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/bookName"
+                 android:layout_marginStart="8dp"
+                 android:fontFamily="@font/latoblack"
+                 android:text="#152, 1st Stage, 3rd Cross, Kuvempunagar, Mysore - 570023"
+                 android:textSize="14sp" />
+
+             <TextView
+                 android:id="@+id/bookPrice"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/address"
+                 android:layout_marginStart="8dp"
+                 android:layout_marginTop="8dp"
+                 android:fontFamily="@font/latoblack"
+                 android:text="Rs. 4000/- Paid"
+                 android:textColor="#111"
+                 android:textSize="16sp" />
+
+
+             <TextView
+                 android:id="@+id/quantity"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/address"
+                 android:layout_marginStart="30dp"
+                 android:layout_marginTop="8dp"
+                 android:layout_toEndOf="@id/bookPrice"
+                 android:fontFamily="@font/latoblack"
+                 android:text="Qut: 4"
+                 android:textSize="14sp" />
+
+
+             <TextView
+                 android:id="@+id/bD"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/bookPrice"
+                 android:layout_marginStart="8dp"
+                 android:layout_marginTop="8dp"
+                 android:fontFamily="@font/latoblack"
+                 android:text="Booking Date: "
+                 android:textSize="14sp" />
+
+             <TextView
+                 android:id="@+id/orderDate"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@id/bookPrice"
+                 android:layout_marginTop="8dp"
+                 android:layout_toEndOf="@id/bD"
+                 android:fontFamily="@font/latoblack"
+                 android:text=" 24/02/2018"
+                 android:textColor="#111"
+                 android:textSize="14sp" />
+
+
+             <TextView
+                 android:id="@+id/phno"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/bD"
+                 android:layout_marginStart="8dp"
+                 android:layout_marginTop="8dp"
+                 android:fontFamily="@font/latoblack"
+                 android:text="Ph: 9066776695"
+                 android:textColor="#111"
+                 android:textSize="14sp" />
+
+             <TextView
+                 android:id="@+id/txn"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/orderDate"
+                 android:layout_marginTop="12dp"
+                 android:layout_toLeftOf="@id/txnNum"
+                 android:fontFamily="@font/latoblack"
+                 android:text=" TXN ID: "
+                 android:textSize="12sp" />
+
+             <TextView
+                 android:id="@+id/txnNum"
+                 android:layout_width="wrap_content"
+                 android:layout_height="wrap_content"
+                 android:layout_below="@+id/orderDate"
+                 android:layout_alignParentEnd="true"
+                 android:layout_marginTop="12dp"
+                 android:layout_marginEnd="6dp"
+                 android:fontFamily="@font/latoblack"
+                 android:text=" 9066776695"
+                 android:textColor="#111"
+                 android:textSize="12sp" />
+
+         </RelativeLayout>
+
+     </androidx.cardview.widget.CardView> -->
+
+
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
         android:id="@+id/orderCard"
-        app:cardBackgroundColor="@android:color/white"
-        app:cardCornerRadius="16dp"
-        app:cardElevation="0dp">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="6sp">
-            <TextView
-                android:id="@+id/bookName"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="2"
+                android:paddingTop="48dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/txnNum"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:fontFamily="@font/montserrat_black"
+                    android:text=" 9066776695"
+                    android:textColor="#000000"
+                    android:textSize="16sp"
+                    tools:ignore="DuplicateIds" />
+
+                <TextView
+                    android:id="@+id/orderDate"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text=" 24/02/2018"
+                    android:textColor="@android:color/darker_gray"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/bookPrice"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Rs. 4000/- Paid"
+                    android:textColor="#111"
+                    android:textSize="14sp" />
+
+
+
+
+
+
+
+            </LinearLayout>
+
+            <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Chemical Engineering "
-                android:fontFamily="@font/montserrat_bold"
-                android:textSize="20sp"
-                android:textColor="#111"
-                android:layout_margin="8dp"/>
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingStart="8dp"
+                android:paddingEnd="8dp">
 
-            <TextView
-                android:layout_width="280dp"
-                android:layout_height="wrap_content"
-                android:id="@+id/address"
-                android:layout_below="@id/bookName"
-                android:text="#152, 1st Stage, 3rd Cross, Kuvempunagar, Mysore - 570023"
-                android:fontFamily="@font/montserrat_regular"
-                android:textSize="14sp"
-                android:textColor="#111"
-                android:layout_marginStart="8dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 4000 Paid"
-                android:id="@+id/bookPrice"
-                android:layout_below="@id/address"
-                android:fontFamily="@font/montserrat_bold"
-                android:textSize="16sp"
-                android:textColor="#111"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"/>
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/statusCardOrders"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    app:cardBackgroundColor="@color/colorPrimary"
+                    app:cardCornerRadius="16dp"/>
+
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="3"
+                    android:layout_gravity="center"
+                    android:background="@color/colorPrimary"/>
 
 
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="3"
+                android:orientation="vertical"
+                android:paddingTop="48dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/bookName"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Chemical Engineering "
+                    android:textColor="#111"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/bookName"
+                    android:layout_marginEnd="2dp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="#152, 1st Stage, 3rd Cross, Kuvempunagar, Mysore - 570023"
+                    android:textColor="@android:color/black"
+                    android:textSize="11sp" />
+
+                <TextView
+                    android:id="@+id/phno"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Ph: 9066776695"
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp" />
+
+                <TextView
+                    android:id="@+id/quantity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/address"
+                    android:layout_marginTop="8dp"
+                    android:layout_toEndOf="@id/bookPrice"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Qty: 4"
+                    android:textSize="12sp" />
+                <TextView
+                    android:id="@+id/bookPages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/address"
+                    android:layout_marginTop="8dp"
+                    android:layout_toEndOf="@id/bookPrice"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:text="Pages: 160"
+                    android:textSize="12sp" />
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Qut:"
-                android:id="@+id/quantity"
-                android:textColor="#111"
-                android:layout_toEndOf="@id/bookPrice"
-                android:layout_below="@id/address"
-                android:fontFamily="@font/montserrat_black"
-                android:textSize="14sp"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="30dp"/>
 
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Booking Date: "
-                android:fontFamily="@font/montserrat_bold"
-                android:textSize="14sp"
-                android:id="@+id/bD"
-                android:textColor="#111"
-                android:layout_below="@id/bookPrice"
-                android:layout_marginTop="8dp"
-                android:layout_marginStart="8dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 24/02/2018"
-                android:fontFamily="@font/montserrat_regular"
-                android:textSize="14sp"
-                android:layout_toEndOf="@id/bD"
-                android:id="@+id/orderDate"
-                android:layout_below="@id/bookPrice"
-                android:textColor="#111"
-                android:layout_marginTop="8dp"/>
+            </LinearLayout>
 
 
+        </LinearLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Ph:"
-                android:id="@+id/phno"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/montserrat_regular"
-                android:textSize="14sp"
-                android:textColor="#111"
-                android:layout_below="@+id/bD"
-                android:layout_marginTop="8dp"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" TXN ID: "
-                android:id="@+id/txn"
-                android:layout_toLeftOf="@id/txnNum"
-                android:fontFamily="@font/montserrat_bold"
-                android:textSize="12sp"
-                android:layout_below="@+id/orderDate"
-                android:textColor="#111"
-                android:layout_marginTop="12dp" />
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" 9066776695"
-                android:id="@+id/txnNum"
-                android:layout_alignParentEnd="true"
-                android:fontFamily="@font/montserrat_regular"
-                android:textSize="12sp"
-                android:textColor="#111"
-                android:layout_below="@+id/orderDate"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="6dp"/>
-
-        </RelativeLayout>
 
     </androidx.cardview.widget.CardView>
+
 </LinearLayout>
+
+

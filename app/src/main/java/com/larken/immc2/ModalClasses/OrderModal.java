@@ -10,16 +10,16 @@ public class OrderModal {
     private String Name;
     private String BookImage;
     private String OrderDate;
-    private String Count;
+    private String ItemsCount;
     private String PhoneNumber;
     private String BookDesigner;
-    private Long TxnID;
+    private String TxnID;
 
 
     public OrderModal() {
     }
 
-    public OrderModal(String address, String bookImage,String bookId,String bookDesigner, String bookName, String finalPrice, String name, String count, String phoneNumber, Long txnID, String orderDate) {
+    public OrderModal(String address, String bookImage,String bookId,String bookDesigner, String bookName, String finalPrice, String name, String itemsCount, String phoneNumber, String txnID, String orderDate) {
         Address = address;
         BookID = bookId;
         BookName = bookName;
@@ -27,7 +27,7 @@ public class OrderModal {
         Name = name;
         BookImage=bookImage;
         BookDesigner=bookDesigner;
-        Count = count;
+        ItemsCount = itemsCount;
         OrderDate = orderDate;
         PhoneNumber = phoneNumber;
         TxnID = txnID;
@@ -74,12 +74,12 @@ public class OrderModal {
         Name = name;
     }
 
-    public String getCount() {
-        return Count;
+    public String getItemsCount() {
+        return ItemsCount;
     }
 
-    public void setCount(String count) {
-        Count = count;
+    public void setItemsCount(String itemsCount) {
+        ItemsCount = itemsCount;
     }
 
     public String getPhoneNumber() {
@@ -88,11 +88,11 @@ public class OrderModal {
 
     public void setPhoneNumber(String phoneNumber) { PhoneNumber = phoneNumber; }
 
-    public Long getTxnID() {
+    public String getTxnID() {
         return TxnID;
     }
 
-    public void setTxnID(Long txnID) {
+    public void setTxnID(String txnID) {
         TxnID = txnID;
     }
 
