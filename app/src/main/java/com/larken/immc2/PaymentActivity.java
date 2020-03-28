@@ -175,6 +175,8 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                         public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
                             PaymentModal modal = dataSnapshot.getValue(PaymentModal.class);
                             adapter.add(modal);
+                            itemsCount.add(modal.getCount());
+                            Log.v("TAG","ItemsCount:"+itemsCount);
                             displayFinalPrice();
                         }
 
@@ -355,20 +357,16 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getUid()).child("Cart");
             databaseReference3.addChildEventListener(new ChildEventListener() {
                 private Object CartImage;
-
                 @Override
                 public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
                     PaymentModal modal = dataSnapshot.getValue(PaymentModal.class);
                     adapter.add(modal);
+
                     //adapter.notifyDataSetChanged();
 
-
                 }
 
-                private Activity getContext() {
-                    return null;
-                }
 
                 @Override
                 public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {

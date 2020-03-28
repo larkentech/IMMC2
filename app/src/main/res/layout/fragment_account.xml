@@ -341,7 +341,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="16dp"
                                 android:fontFamily="@font/montserrat_bold"
-                                android:text="+919900000000"
+                                android:text="+917019527490"
                                 android:textColor="#2196F3"
                                 android:textSize="20sp">
 
@@ -370,7 +370,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginStart="16dp"
                                 android:fontFamily="@font/montserrat_bold"
-                                android:text="support@immc2.com"
+                                android:text="support@iammc2.com"
                                 android:textColor="#2196F3"
                                 android:textSize="20sp">
 

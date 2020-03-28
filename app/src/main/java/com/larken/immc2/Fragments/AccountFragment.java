@@ -291,7 +291,7 @@ public class AccountFragment extends Fragment {
             public void onClick(View v) {
 
                 Intent i=new Intent(Intent.ACTION_DIAL);
-                i.setData(Uri.parse("tel:9900000000"));
+                i.setData(Uri.parse("tel:7019527490"));
                 startActivity(i);
                 getActivity();
             }
@@ -299,11 +299,12 @@ public class AccountFragment extends Fragment {
         contactWeb.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent();
-                intent.setAction(Intent.ACTION_VIEW);
-                intent.addCategory(Intent.CATEGORY_BROWSABLE);
-                intent.setData(Uri.parse("https://www.google.co.in/"));
-                startActivity(intent);
+                Intent emailIntent = new Intent(Intent.ACTION_SENDTO, Uri.fromParts(
+                        "mailto","abc@gmail.com", null));
+                emailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{"support@iammc2.com"}); // String[] addresses
+                emailIntent.putExtra(Intent.EXTRA_SUBJECT, "Subject");
+                emailIntent.putExtra(Intent.EXTRA_TEXT, "Body");
+                startActivity(Intent.createChooser(emailIntent, "Send email..."));
 
             }
 
