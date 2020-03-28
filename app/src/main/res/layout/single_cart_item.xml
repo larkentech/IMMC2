@@ -78,6 +78,20 @@
                 android:textColor="@color/colorPrimary"
                 android:textSize="16sp" />
 
+            <TextView
+                android:id="@+id/bookPagesCart"
+                android:layout_below="@id/bookDesignerCart"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="160 Pages"
+                android:textColor="@color/black"
+                android:textSize="14sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

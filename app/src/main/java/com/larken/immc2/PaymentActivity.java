@@ -80,6 +80,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
     List<String> bookCategoryId;
     List<String> bookSubCategoryId;
     List<String> itemsCount;
+    List<String> bookPages;
     List<String> bookName;
     List<String> tempKeys;
     List<String> bookPrice;
@@ -139,6 +140,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         bookName=new ArrayList<>();
         bookPrice=new ArrayList<>();
         tempKeys = new ArrayList<>();
+        bookPages = new ArrayList<>();
 
         ordersList = findViewById(R.id.ordersListPayment);
         List<PaymentModal> cartItems = new ArrayList<>();
@@ -176,6 +178,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
                             PaymentModal modal = dataSnapshot.getValue(PaymentModal.class);
                             adapter.add(modal);
                             itemsCount.add(modal.getCount());
+                            bookPages.add(modal.getPages());
                             Log.v("TAG","ItemsCount:"+itemsCount);
                             displayFinalPrice();
                         }
@@ -216,7 +219,7 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         proceedToBuy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                razorPayment(100);
+                razorPayment(1);
             }
         });
 
@@ -233,9 +236,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             options.put("name", "IamMC2");
             options.put("description", "Grateful to have you as our customer");
             //You can omit the image option to fetch the image from dashboard
-            options.put("image", "https://s3.amazonaws.com/rzp-mobile/images/rzp.png");
+
             options.put("currency", "INR");
-            options.put("amount", calulatedprice*100);
+            options.put("amount", 1*100);
 
             JSONObject preFill = new JSONObject();
             preFill.put("email", mAuth.getCurrentUser().getEmail());
@@ -270,10 +273,9 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         try {
             int txn = randomTxnID();
             FirebaseUser currentFirebaseUser = FirebaseAuth.getInstance().getCurrentUser();
-            FirebaseDatabase database = FirebaseDatabase.getInstance();
-            DatabaseReference databaseReference = database.getReference();
-            databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getUid());
-            firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid()).child("Cart").removeValue();
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+            DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getUid());
+            databaseReference.child("Cart").removeValue();
 
 
 
@@ -281,12 +283,14 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
             userMap.put("Name", userName.getText().toString());
             userMap.put("FinalPrice",finalPrice.getText().toString());
             userMap.put("Address",userAddress.getText().toString());
-            userMap.put("TxnID",txn);
+            userMap.put("TxnID",String.valueOf(txn));
             userMap.put("OrderDate",Date.toString());
             userMap.put("ItemsCount",getItemCount());
             userMap.put("BookName",getBookNames());
-
             userMap.put("PhoneNumber", currentFirebaseUser.getPhoneNumber().toString());
+            userMap.put("Pages",getPagesCount());
+            DatabaseReference databaseReference1 = firebaseDatabase.getReference().child("OrderDetails");
+            databaseReference1.child(String.valueOf(txn)).setValue(userMap);
             databaseReference.child("OrderDetails").push().setValue(userMap);
 
             Toasty.success(getApplicationContext(),"Payment Successfull").show();
@@ -330,6 +334,22 @@ public class PaymentActivity extends AppCompatActivity implements PaymentResultL
         for (int i=0;i<itemsCount.size();i++)
         {
             BookNames = BookNames + itemsCount.get(i).toString()+",";
+            Log.v("TAG","BookNames33=>"+BookNames);
+        }
+
+        return BookNames;
+
+
+
+    }
+
+    private String getPagesCount() {
+
+        View v;
+        String BookNames = "";
+        for (int i=0;i<bookPages.size();i++)
+        {
+            BookNames = BookNames + bookPages.get(i).toString()+",";
             Log.v("TAG","BookNames33=>"+BookNames);
         }
 

@@ -12,11 +12,21 @@ public class PaymentModal {
     private String BookCategory;
     private String BookSubCategory;
     private String CartImage;
+    private String Pages;
+
+    public String getPages() {
+        return Pages;
+    }
+
+    public void setPages(String pages) {
+        Pages = pages;
+    }
 
     public PaymentModal(){
 
     }
-    public PaymentModal(String bookName,String cartImage,String bookPrice,String finalPrice,String bookSubCategory,String bookImage,String count,String bookDesigner,String bookCategory)
+    public PaymentModal(String bookName,String cartImage,String bookPrice,String finalPrice,String bookSubCategory,String bookImage,String count,String bookDesigner,String bookCategory,
+                        String pages)
     {
         BookName = bookName;
         CartPrice = finalPrice;
@@ -27,6 +37,7 @@ public class PaymentModal {
         Count = count;
         BookCategory=bookCategory;
         BookSubCategory=bookSubCategory;
+        Pages = pages;
     }
 
     public String getBookName() {

@@ -66,6 +66,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<PaymentModal> {
         TextView bookSubCategory = convertView.findViewById(R.id.bookCategoryOrder);
         TextView bookQuantiy=convertView.findViewById(R.id.orderItemCount);
         TextView bookPrice = convertView.findViewById(R.id.bookPriceOrder);
+        TextView bookPages = convertView.findViewById(R.id.orderItemPages);
         ImageView CartImage = convertView.findViewById(R.id.itemImageOrder);
         Glide
                 .with(getContext())
@@ -77,6 +78,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<PaymentModal> {
         bookSubCategory.setText(modal.getBookCategory());
         bookQuantiy.setText("Qty:"+modal.getCount());
         bookPrice.setText("Rs."+modal.getCartPrice()+"/-");
+        bookPages.setText(modal.getPages());
 
         final List<String> tempList = new ArrayList();
         for(int i=0;i<itemsCount.size();i++){

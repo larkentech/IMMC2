@@ -66,6 +66,7 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
         final TextView bookPrice = convertView.findViewById(R.id.bookPriceCart);
         final NumberPicker quantityPicker = convertView.findViewById(R.id.number_picker_cart);
         ImageView BookImage = convertView.findViewById(R.id.itemImageCart);
+        TextView BookPages = convertView.findViewById(R.id.bookPagesCart);
         Button deleteItem = convertView.findViewById(R.id.delete_cart);
         Glide
                 .with(getContext())
@@ -74,6 +75,7 @@ public class CartAdapter extends ArrayAdapter<PaymentModal> {
                 .into(BookImage);
 
         bookName.setText(modal.getBookName());
+        BookPages.setText(modal.getPages());
         authorName.setText(modal.getBookCategory() + ", " + modal.getBookSubCategory());
         try {
             quantityPicker.setValue(Integer.parseInt(modal.getCount()));

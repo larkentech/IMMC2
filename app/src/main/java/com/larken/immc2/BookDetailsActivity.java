@@ -84,6 +84,7 @@ public class BookDetailsActivity extends AppCompatActivity {
 
     TextView gotoCart;
 
+    String selectedPages = "160 Pages";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -181,6 +182,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                     cartMap.put("CartImage",url_list.get(0));
                     cartMap.put("BookName",bookName.getText().toString());
                     cartMap.put("SinglePrice",singleBookPrice);
+                    cartMap.put("Pages",selectedPages);
 
                     DatabaseReference databaseReference3 = firebaseDatabase.getReference().child("UserDetails").child(mAuth.getCurrentUser().getUid());
                     databaseReference3.child("Cart").push().setValue(cartMap);
@@ -229,6 +231,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                 _160pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
                 singleBookPrice  =_160pages;
                 bookPrice.setText("Rs." +_160pages+ "/-");
+                selectedPages = "160 Pages";
 
             }
         });
@@ -245,6 +248,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                 _200pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
                 singleBookPrice = _200pages;
                 bookPrice.setText("Rs." +_200pages+ "/-");
+                selectedPages = "200 Pages";
             }
         });
 
@@ -260,6 +264,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                 _240pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
                 singleBookPrice = _240pages;
                 bookPrice.setText("Rs." +_240pages+ "/-");
+                selectedPages = "240 Pages";
 
 
             }
