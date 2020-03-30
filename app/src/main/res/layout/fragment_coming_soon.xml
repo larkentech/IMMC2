@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/csRL"
+    tools:context=".Fragments.ComingSoonFragment">
+
+    <LinearLayout
+        android:id="@+id/csll"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/comingImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/propic"
+            android:scaleType="fitXY">
+
+        </ImageView>
+    </LinearLayout>
+    <TextView
+        android:id="@+id/ComingBookName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Book New Arrival"
+        android:layout_below="@id/csll"
+        android:textSize="24sp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/colorAccent">
+
+    </TextView>
+    <TextView
+        android:id="@+id/ComingDate"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ComingBookName"
+        android:text="Coming Date:1/1/2030"
+        android:layout_marginStart="8dp"
+        android:textSize="16sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/Coming_Desc"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ComingDate"
+        android:text="Description:"
+        android:layout_marginStart="8dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/black">
+
+    </TextView>
+    <TextView
+        android:id="@+id/ComingDesc"
+        android:layout_marginTop="8dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/ComingDate"
+        android:layout_toEndOf="@+id/Coming_Desc"
+        android:text="A new book with new content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="12sp"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@color/black">
+
+    </TextView>
+
+
+
+
+
+
+
+</RelativeLayout>

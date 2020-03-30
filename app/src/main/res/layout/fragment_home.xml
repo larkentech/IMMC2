@@ -11,8 +11,7 @@
     <com.facebook.shimmer.ShimmerFrameLayout
         android:id="@+id/shimmer_view_home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:visibility="gone">
+        android:layout_height="wrap_content">
 
         <include
             layout="@layout/dummy_home"
@@ -22,6 +21,7 @@
     </com.facebook.shimmer.ShimmerFrameLayout>
 
     <ScrollView
+
         android:visibility="gone"
         android:id="@+id/homeSV"
         android:layout_width="match_parent"
@@ -254,6 +254,23 @@
                 android:layout_height="125dp"
                 android:layout_marginTop="4dp" />
 
+            <TextView
+                android:layout_marginTop="8dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:padding="6dp"
+                android:text="Coming Soon..!"
+                android:textColor="#000000"
+                android:textSize="18sp" />
+
+            <it.sephiroth.android.library.widget.HListView
+                android:id="@+id/comingList"
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_marginTop="4dp" />
+
 
             <com.larken.immc2.HelperClasses.NonScrollListView
                 android:layout_width="match_parent"
@@ -265,7 +282,8 @@
         </LinearLayout>
 
 
-    </ScrollView>
+    </ScrollView
+        >
 
 </LinearLayout>
 

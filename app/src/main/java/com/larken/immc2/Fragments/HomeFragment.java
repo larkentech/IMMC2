@@ -24,6 +24,7 @@ import com.larken.immc2.AdapterClasses.SubCategoryAdapter;
 import com.larken.immc2.DetailsContainerActivity;
 import com.larken.immc2.HelperClasses.NonScrollListView;
 import com.larken.immc2.ModalClasses.BooksModal;
+import com.larken.immc2.ModalClasses.OffersModal;
 import com.larken.immc2.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
@@ -120,15 +121,15 @@ public class HomeFragment extends Fragment {
 
         offersListView = view.findViewById(R.id.offersList);
 
-        List<BooksModal> imageList = new ArrayList<>();
+        List<OffersModal> imageList = new ArrayList<>();
         adapter = new OffersAdapter(getContext(),R.layout.offers_single,imageList);
         offersListView.setAdapter(adapter);
         databaseReference = firebaseDatabase.getReference().child("Offers");
         databaseReference.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                BooksModal csNoteBooksModal = dataSnapshot.getValue(BooksModal.class);
-                adapter.add(csNoteBooksModal);
+                OffersModal OM = dataSnapshot.getValue(OffersModal.class);
+                adapter.add(OM);
 
                 homeShimmer.stopShimmer();
                 homeShimmer.setVisibility(View.GONE);

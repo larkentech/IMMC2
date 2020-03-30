@@ -191,8 +191,16 @@ public class BookDetailsActivity extends AppCompatActivity {
 
                 }
 
-                numberPicker.setValue(1);
-                bookPrice.setText("Rs." + _160pages + "/-");
+                if (_160pages.matches("0")){
+                    addToCart.setEnabled(false);
+                    bookPrice.setText("Currently Unavailable");
+                    Toasty.error(BookDetailsActivity.this,"Currently Unavailable").show();
+                }else {
+                    numberPicker.setValue(1);
+                    bookPrice.setText("Rs." + _160pages + "/-");
+                    addToCart.setEnabled(true);
+                }
+
 
                 _200pagescard.setCardElevation(0);
                 _240pagescard.setCardElevation(0);
@@ -233,6 +241,16 @@ public class BookDetailsActivity extends AppCompatActivity {
                 bookPrice.setText("Rs." +_160pages+ "/-");
                 selectedPages = "160 Pages";
 
+                if (_160pages.matches("0")){
+                    addToCart.setEnabled(false);
+                    bookPrice.setText("Currently Unavailable");
+                    Toasty.error(BookDetailsActivity.this,"Currently Unavailable").show();
+                }else {
+                    bookPrice.setText("Rs." + _160pages + "/-");
+                    addToCart.setEnabled(true);
+                    addToCart.setEnabled(true);
+                }
+
             }
         });
 
@@ -246,9 +264,22 @@ public class BookDetailsActivity extends AppCompatActivity {
                 _160pagescard.setBackground( null);
                 _240pagescard.setBackground( null);
                 _200pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
-                singleBookPrice = _200pages;
-                bookPrice.setText("Rs." +_200pages+ "/-");
-                selectedPages = "200 Pages";
+
+
+                if (_200pages.matches("0")){
+
+                    addToCart.setEnabled(false);
+                    bookPrice.setText("Currently Unavailable");
+                    bookPriceIncrement.setVisibility(View.GONE);
+                    Toasty.error(BookDetailsActivity.this,"Currently Unavailable").show();
+
+                }else {
+                    singleBookPrice = _200pages;
+                    bookPrice.setText("Rs." +_200pages+ "/-");
+                    selectedPages = "200 Pages";
+                    addToCart.setEnabled(true);
+                }
+
             }
         });
 
@@ -262,9 +293,19 @@ public class BookDetailsActivity extends AppCompatActivity {
                 _200pagescard.setBackground( null);
                 _160pagescard.setBackground( null);
                 _240pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
-                singleBookPrice = _240pages;
-                bookPrice.setText("Rs." +_240pages+ "/-");
-                selectedPages = "240 Pages";
+
+                if (_240pages.matches("0")){
+                    addToCart.setEnabled(false);
+                    bookPrice.setText("Currently Unavailable");
+                    Toasty.error(BookDetailsActivity.this,"Currently Unavailable").show();
+
+                }else {
+                    singleBookPrice = _240pages;
+                    bookPrice.setText("Rs." +_240pages+ "/-");
+                    selectedPages = "240 Pages";
+                    addToCart.setEnabled(true);
+                }
+
 
 
             }
