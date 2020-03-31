@@ -69,7 +69,6 @@
                     android:textSize="18sp" />
 
                 <ImageView
-                    android:id="@+id/comingList"
                     android:layout_width="match_parent"
                     android:layout_height="200dp"
                     android:layout_marginTop="4dp"
