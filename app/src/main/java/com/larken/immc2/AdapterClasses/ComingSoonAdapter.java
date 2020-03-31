@@ -63,7 +63,7 @@ public class ComingSoonAdapter extends ArrayAdapter<ComingSoonModal> {
                 args.putString("ProductName",comingSoonModal.getProductName());
                 args.putString("ProductImage",comingSoonModal.getProductImage());
                 args.putString("ReleaseDate",comingSoonModal.getReleaseDate());
-                args.putString("Description",comingSoonModal.getProductDesc());
+                args.putString("Description",comingSoonModal.getDescription());
 
                 dialogFragment.setArguments(args);
                 dialogFragment.show(manager,"Dialog");

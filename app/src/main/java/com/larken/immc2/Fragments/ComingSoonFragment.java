@@ -15,9 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridView;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -45,7 +48,7 @@ public class ComingSoonFragment extends DialogFragment {
     String productImage;
     String productName;
     String releaseDate;
-    String productDesc;
+    String description;
     private Object ComingSoonModal;
 
 
@@ -67,12 +70,35 @@ public class ComingSoonFragment extends DialogFragment {
         productName = getArguments().getString("ProductName");
         productImage = getArguments().getString("ProductImage");
         releaseDate = getArguments().getString("ReleaseDate");
-        productDesc = getArguments().getString("Description");
+        description = getArguments().getString("Description");
 
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_coming_soon, container, false);
 
+
+
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        ImageView productImagesIV = view.findViewById(R.id.comingImage);
+        TextView productNameTV = view.findViewById(R.id.ComingBookName);
+        TextView productDateTV = view.findViewById(R.id.ComingDate);
+        TextView productDescTV = view.findViewById(R.id.ComingDesc);
+
+        productNameTV.setText(productName);
+        productDescTV.setText(description);
+        productDateTV.setText("Release Date:"+releaseDate);
+
+
+        Glide
+                .with(getContext())
+                .load(productImage)
+                .centerCrop()
+                .into(productImagesIV);
 
 
     }

@@ -7,18 +7,18 @@ public class ComingSoonModal {
     private String ProductImage;
     private String ProductName;
     private String ReleaseDate;
-    private String ProductDesc;
+    private String Description;
 
     private  ComingSoonModal(){
 
     }
-    public ComingSoonModal(String displayName,String displayImage,String productImage,String productDesc,String productName,String releaseDate){
+    public ComingSoonModal(String displayName,String displayImage,String productImage,String description,String productName,String releaseDate){
         this.DisplayImage=displayImage;
         this.DisplayName=displayName;
         this.ProductImage=productImage;
         this.ProductName=productName;
         this.ReleaseDate=releaseDate;
-        this.ProductDesc=productDesc;
+        this.Description=description;
 
     }
     public String getDisplayName() {
@@ -61,12 +61,12 @@ public class ComingSoonModal {
         this.ReleaseDate = releaseDate;
     }
 
-    public String getProductDesc() {
-        return ProductDesc;
+    public String getDescription() {
+        return Description;
     }
 
-    public void setProductDesc(String productDesc) {
-        this.ProductDesc = productDesc;
+    public void setDescription(String description) {
+        this.Description = description;
     }
 
 
