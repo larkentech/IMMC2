@@ -18,12 +18,14 @@ import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.AdapterClasses.BestSellingAdapter;
+import com.larken.immc2.AdapterClasses.ComingSoonAdapter;
 import com.larken.immc2.AdapterClasses.MainAdapter;
 import com.larken.immc2.AdapterClasses.OffersAdapter;
 import com.larken.immc2.AdapterClasses.SubCategoryAdapter;
 import com.larken.immc2.DetailsContainerActivity;
 import com.larken.immc2.HelperClasses.NonScrollListView;
 import com.larken.immc2.ModalClasses.BooksModal;
+import com.larken.immc2.ModalClasses.ComingSoonModal;
 import com.larken.immc2.ModalClasses.OffersModal;
 import com.larken.immc2.R;
 import com.google.firebase.database.ChildEventListener;
@@ -43,6 +45,7 @@ import it.sephiroth.android.library.widget.HListView;
 public class HomeFragment extends Fragment {
 
     HListView offersListView;
+    HListView comingSoonListView;
     HListView quotesListView;
     HListView scienceListView;
     HListView engineeringListView;
@@ -56,11 +59,13 @@ public class HomeFragment extends Fragment {
 
 
     OffersAdapter adapter;
+    ComingSoonAdapter comingSoonAdapter;
     SubCategoryAdapter quotesAdapter;
     SubCategoryAdapter scienceAdapter;
 
     FirebaseDatabase firebaseDatabase;
     DatabaseReference databaseReference;
+    DatabaseReference comingSoonref;
 
     List<String> featuredID;
     List<String> bestSellingID;
@@ -156,6 +161,44 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
+        comingSoonListView = view.findViewById(R.id.comingList);
+
+        List<ComingSoonModal> imageList2 = new ArrayList<>();
+        comingSoonAdapter = new ComingSoonAdapter(getContext(),R.layout.coming_soon_single,imageList2);
+        comingSoonListView.setAdapter(comingSoonAdapter);
+        comingSoonref = firebaseDatabase.getReference().child("ComingSoon");
+        comingSoonref.addChildEventListener(new ChildEventListener() {
+            @Override
+            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+                ComingSoonModal CM = dataSnapshot.getValue(ComingSoonModal.class);
+                comingSoonAdapter.add(CM);
+
+            }
+
+            @Override
+            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
+
+            }
+
+            @Override
+            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+
 
         NonScrollListView mainList = view.findViewById(R.id.mainPageList);
         List<BooksModal> dummyListMain = new ArrayList<>();
