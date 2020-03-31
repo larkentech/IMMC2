@@ -36,9 +36,8 @@ public class BestSellingAdapter extends ArrayAdapter<BooksModal> {
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {
 
-        if (convertView == null)
-        {
-            convertView = ((Activity)getContext()).getLayoutInflater().inflate(R.layout.best_seller_single,parent,false);
+        if (convertView == null) {
+            convertView = ((Activity) getContext()).getLayoutInflater().inflate(R.layout.best_seller_single, parent, false);
         }
         final BooksModal bestSellingModal = getItem(position);
 
@@ -54,25 +53,23 @@ public class BestSellingAdapter extends ArrayAdapter<BooksModal> {
                 .centerCrop()
                 .into(BookImage);
 
-        if(bestSellingModal.getBookPrice160Pages().matches("0"))
-        {
+        if (bestSellingModal.getBookPrice160Pages().matches("0")) {
             BookPrice.setText("Out Of Stock");
             BookPrice.setTextColor(Color.parseColor("#FF0000"));
-        }
-        else
-            BookPrice.setText("Rs."+bestSellingModal.getBookPrice160Pages()+"/-");
+        } else
+            BookPrice.setText("Rs." + bestSellingModal.getBookPrice160Pages() + "/-");
         BooksName.setText(bestSellingModal.getBookName());
-        BookDesigner.setText("Designed By "+bestSellingModal.getBookDesigner());
+        BookDesigner.setText("Designed By " + bestSellingModal.getBookDesigner());
 
         bestSellercard.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent i = new Intent(getContext(), BookDetailsActivity.class);
-                i.putExtra("BookID",bestSellingModal.getBookID());
-                i.putExtra("BookCategory",bestSellingModal.getBookCategory());
-                i.putExtra("BookSubCategory",bestSellingModal.getBookSubCategory());
+                i.putExtra("BookID", bestSellingModal.getBookID());
+                i.putExtra("BookCategory", bestSellingModal.getBookCategory());
+                i.putExtra("BookSubCategory", bestSellingModal.getBookSubCategory());
                 getContext().startActivity(i);
-                ((Activity)getContext()).finish();
+                ((Activity) getContext()).finish();
             }
         });
 

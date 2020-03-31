@@ -52,7 +52,7 @@ public class DetailsContainerActivity extends AppCompatActivity {
         transaction5.add(R.id.detailsActivityContainer,featuredFragment);
         transaction5.commit();
 
-        Bundle args2 = new Bundle();
+       /* Bundle args2 = new Bundle();
         args2.putString("ProductImage",productImage);
         args2.putString("ProductName",productName);
         args2.putString("ReleaseDate",releaseDate);
@@ -61,8 +61,8 @@ public class DetailsContainerActivity extends AppCompatActivity {
         ComingSoonFragment comingSoonFragment = new ComingSoonFragment();
         comingSoonFragment.setArguments(args2);
         FragmentTransaction transaction6 = manager6.beginTransaction();
-        transaction6.add(R.id.detailsActivityContainer,comingSoonFragment);
-        transaction6.commit();
+        transaction6.replace(R.id.detailsActivityContainer,comingSoonFragment);
+        transaction6.commit(); */
 
 
 

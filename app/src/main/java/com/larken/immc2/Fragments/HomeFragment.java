@@ -17,6 +17,7 @@ import androidx.fragment.app.Fragment;
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.ValueEventListener;
+import com.larken.immc2.AdapterClasses.ActivityTrackerSubAdapter;
 import com.larken.immc2.AdapterClasses.BestSellingAdapter;
 import com.larken.immc2.AdapterClasses.ComingSoonAdapter;
 import com.larken.immc2.AdapterClasses.MainAdapter;
@@ -94,6 +95,9 @@ public class HomeFragment extends Fragment {
 
     ShimmerFrameLayout homeShimmer;
     ScrollView homeSV;
+
+    //Activity Trackers
+    HListView trackerList;
 
 
     public HomeFragment() {
@@ -217,6 +221,35 @@ public class HomeFragment extends Fragment {
                     adapter2.add(modal);
                     categoryList.add(ds.getKey());
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+
+        //Activity Tracker List
+        trackerList = view.findViewById(R.id.trackerCategoryList);
+        final List<String> trackerCategories = new ArrayList<>();
+        final List<String> trackerUrl = new ArrayList<>();
+        List<BooksModal> dummyTrackerList = new ArrayList<>();
+        final ActivityTrackerSubAdapter adapter = new ActivityTrackerSubAdapter(getContext(),R.layout.single_subcategory,dummyTrackerList,trackerCategories,trackerUrl);
+        trackerList.setAdapter(adapter);
+        FirebaseDatabase firebaseDatabase1 = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("ActivityTrackersImages");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds:dataSnapshot.getChildren())
+                {
+                    BooksModal modal = dataSnapshot.getValue(BooksModal.class);
+                    trackerCategories.add(ds.getKey());
+                    trackerUrl.add(ds.getValue().toString());
+                    adapter.add(modal);
+                }
+
             }
 
             @Override
