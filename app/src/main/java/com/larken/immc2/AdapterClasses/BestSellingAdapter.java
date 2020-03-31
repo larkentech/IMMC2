@@ -30,6 +30,7 @@ public class BestSellingAdapter extends ArrayAdapter<BooksModal> {
         this.bookID = bookId;
     }
 
+
     @NonNull
     @Override
     public View getView(final int position, @Nullable View convertView, @NonNull ViewGroup parent) {

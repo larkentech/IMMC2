@@ -57,6 +57,23 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:orientation="vertical">
+                <TextView
+                    android:layout_marginTop="8dp"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="16dp"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:padding="6dp"
+                    android:background="#D5D1D1"
+                    android:textColor="#000000"
+                    android:textSize="18sp" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="4dp"
+                    android:src="@drawable/dummy_background"
+                    android:scaleType="fitXY"/>
 
                 <TextView
                     android:layout_width="300dp"
@@ -77,6 +94,7 @@
                     android:textColor="#000000"
                     android:background="#D5D1D1"
                     android:textSize="12sp" />
+
 
                 <ImageView
                     android:layout_width="match_parent"
