@@ -66,7 +66,7 @@ public class PaymentOrdersListAdapter extends ArrayAdapter<PaymentModal> {
         TextView bookSubCategory = convertView.findViewById(R.id.bookCategoryOrder);
         TextView bookQuantiy=convertView.findViewById(R.id.orderItemCount);
         TextView bookPrice = convertView.findViewById(R.id.bookPriceOrder);
-        TextView bookPages = convertView.findViewById(R.id.orderBookPages);
+        TextView bookPages = convertView.findViewById(R.id.orderItemPages);
         ImageView CartImage = convertView.findViewById(R.id.itemImageOrder);
         Glide
                 .with(getContext())

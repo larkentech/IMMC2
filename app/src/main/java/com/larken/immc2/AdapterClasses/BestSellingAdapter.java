@@ -3,6 +3,7 @@ package com.larken.immc2.AdapterClasses;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
@@ -53,7 +54,13 @@ public class BestSellingAdapter extends ArrayAdapter<BooksModal> {
                 .centerCrop()
                 .into(BookImage);
 
-        BookPrice.setText("Rs."+bestSellingModal.getBookPrice160Pages()+"/-");
+        if(bestSellingModal.getBookPrice160Pages().matches("0"))
+        {
+            BookPrice.setText("Out Of Stock");
+            BookPrice.setTextColor(Color.parseColor("#FF0000"));
+        }
+        else
+            BookPrice.setText("Rs."+bestSellingModal.getBookPrice160Pages()+"/-");
         BooksName.setText(bestSellingModal.getBookName());
         BookDesigner.setText("Designed By "+bestSellingModal.getBookDesigner());
 

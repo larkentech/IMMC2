@@ -14,12 +14,21 @@ public class OrderModal {
     private String PhoneNumber;
     private String BookDesigner;
     private String TxnID;
+    private String Pages;
 
+    public String getPages() {
+        return Pages;
+    }
+
+    public void setPages(String pages) {
+        Pages = pages;
+    }
 
     public OrderModal() {
     }
 
-    public OrderModal(String address, String bookImage,String bookId,String bookDesigner, String bookName, String finalPrice, String name, String itemsCount, String phoneNumber, String txnID, String orderDate) {
+    public OrderModal(String address, String bookImage,String bookId,String bookDesigner, String bookName, String finalPrice, String name, String itemsCount, String phoneNumber, String txnID, String orderDate,
+                      String pages) {
         Address = address;
         BookID = bookId;
         BookName = bookName;
@@ -31,6 +40,7 @@ public class OrderModal {
         OrderDate = orderDate;
         PhoneNumber = phoneNumber;
         TxnID = txnID;
+        Pages = pages;
     }
 
 

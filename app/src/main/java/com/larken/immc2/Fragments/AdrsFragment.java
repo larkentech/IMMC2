@@ -21,6 +21,8 @@ import android.widget.Toast;
 import com.larken.immc2.PaymentActivity;
 import com.larken.immc2.R;
 
+import es.dmoral.toasty.Toasty;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -85,42 +87,30 @@ public class AdrsFragment extends DialogFragment {
         buttonOK.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String name = enterName.getText().toString();
-                String number=enterPhone.getText().toString();
-                String finalAddress = enterHouseNo.getText().toString() +",\nLandmark: "+
-                        enterLandmark.getText().toString() +","+ enterArea.getText().toString() +","+
-                        enterCity.getText().toString() +","+ enterState.getText().toString() +","+
-                        enterPincode.getText().toString();
+
+                if(enterName.getText().toString().matches("") || enterPhone.getText().toString().matches("")
+                || enterHouseNo.getText().toString().matches("")||enterLandmark.getText().toString().matches("") || enterArea.getText().toString().matches("")
+                ||enterCity.getText().toString().matches("") ||enterState.getText().toString().matches("")|| enterPincode.getText().toString().matches("") )
+                {
+                    Toasty.error(getContext(),"Please enter all the details").show();
+                }
+                else {
+                    String name = enterName.getText().toString();
+                    String number=enterPhone.getText().toString();
+                    String finalAddress = enterHouseNo.getText().toString() +",\nLandmark: "+
+                            enterLandmark.getText().toString() +","+ enterArea.getText().toString() +","+
+                            enterCity.getText().toString() +","+ enterState.getText().toString() +","+
+                            enterPincode.getText().toString();
 
 
-                ((PaymentActivity)(getContext())).userName.setText(name);
-                ((PaymentActivity)getContext()).userPhone.setText(number);
-                ((PaymentActivity)getContext()).userAddress.setText(finalAddress);
-                getDialog().dismiss();
+                    ((PaymentActivity)(getContext())).userName.setText(name);
+                    ((PaymentActivity)getContext()).userPhone.setText(number);
+                    ((PaymentActivity)getContext()).userAddress.setText(finalAddress);
+                    getDialog().dismiss();
+                }
+
             }
         });
-
-
-
-
-
-
-
-        // AdrsFragment adrsFragment = new AdrsFragment();
-        // Dialog dl = adrsFragment.getDialog();
-        //btnSave = dl.findViewById(R.id.btnsAVE);
-
-        //btnSave.setOnClickListener(new View.OnClickListener() {
-        // @Override
-        // public void onClick(View v) {
-
-        //String name = enterName.getText().toString();
-        //String phone = enterPhone.getText().toString();
-        // Toasty.success(getContext(),"Hello"+name).show();
-        //Log.v("TAG","Success");
-
-        // }
-        //});
 
     }
 }

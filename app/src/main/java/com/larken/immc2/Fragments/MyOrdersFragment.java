@@ -23,6 +23,7 @@ import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.AdapterClasses.OrderAdapter;
 import com.larken.immc2.ModalClasses.OrderModal;
+import com.larken.immc2.ModalClasses.PaymentModal;
 import com.larken.immc2.R;
 
 import java.util.ArrayList;
