@@ -1,7 +1,6 @@
 package com.larken.immc2.Fragments;
 
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,24 +15,22 @@ import androidx.fragment.app.Fragment;
 
 import com.facebook.shimmer.ShimmerFrameLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.google.firebase.database.ValueEventListener;
-import com.larken.immc2.AdapterClasses.ActivityTrackerSubAdapter;
-import com.larken.immc2.AdapterClasses.BestSellingAdapter;
-import com.larken.immc2.AdapterClasses.ComingSoonAdapter;
-import com.larken.immc2.AdapterClasses.MainAdapter;
-import com.larken.immc2.AdapterClasses.OffersAdapter;
-import com.larken.immc2.AdapterClasses.SubCategoryAdapter;
-import com.larken.immc2.DetailsContainerActivity;
-import com.larken.immc2.HelperClasses.NonScrollListView;
-import com.larken.immc2.ModalClasses.BooksModal;
-import com.larken.immc2.ModalClasses.ComingSoonModal;
-import com.larken.immc2.ModalClasses.OffersModal;
-import com.larken.immc2.R;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.larken.immc2.AdapterClasses.ActivityTrackerSubAdapter;
+import com.larken.immc2.AdapterClasses.ComingSoonAdapter;
+import com.larken.immc2.AdapterClasses.MainAdapter;
+import com.larken.immc2.AdapterClasses.OffersAdapter;
+import com.larken.immc2.AdapterClasses.SubCategoryAdapter;
+import com.larken.immc2.HelperClasses.NonScrollListView;
+import com.larken.immc2.ModalClasses.BooksModal;
+import com.larken.immc2.ModalClasses.ComingSoonModal;
+import com.larken.immc2.ModalClasses.OffersModal;
+import com.larken.immc2.R;
 
 import java.util.ArrayList;
 import java.util.List;
