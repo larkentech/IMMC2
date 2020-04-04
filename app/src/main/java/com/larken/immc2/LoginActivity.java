@@ -153,33 +153,109 @@ public class LoginActivity extends AppCompatActivity {
 
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
 
+        if (mAuth.getCurrentUser() != null) {
 
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        try{
-                            if (task.isSuccessful()) {
+            mAuth.getCurrentUser().linkWithCredential(credential)
+                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            try{
+                                if (task.isSuccessful()) {
 
-                                checkUser(mAuth.getCurrentUser().getUid());
+                                    checkUser(mAuth.getCurrentUser().getUid());
 
-                            } else {
+                                } else {
 
-                                String message = "Somthing is wrong, we will fix it soon...";
+                                    String message = "Somthing is wrong, we will fix it soon...";
 
-                                if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                    message = "Invalid code entered...";
-                                    Toasty.error(getApplicationContext(),"Invalid Code").show();
+                                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                        message = "Invalid code entered...";
+                                        Toasty.error(getApplicationContext(),"Invalid Code").show();
+                                    }
                                 }
-                            }
-                        }catch (Exception e)
-                        {
-                            Log.v("TAG","OTP Exception"+e);
+                            }catch (Exception e)
+                            {
+                                Log.v("TAG","OTP Exception"+e);
 
-                            Toast.makeText(LoginActivity.this,"Incorrect OTP",Toast.LENGTH_LONG).show();
+                                Toast.makeText(LoginActivity.this,"Incorrect OTP",Toast.LENGTH_LONG).show();
+                            }
                         }
-                    }
-                });
+
+
+                    });
+
+
+        }
+        else {
+            mAuth.signInWithCredential(credential)
+                    .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            try {
+                                if (task.isSuccessful()) {
+
+                                    checkUser(mAuth.getCurrentUser().getUid());
+                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(i);
+                                        finish();
+
+
+                                } else {
+
+                                    String message = "Somthing is wrong, we will fix it soon...";
+
+                                    if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                        message = "Invalid code entered...";
+                                        Toast.makeText(LoginActivity.this, message, Toast.LENGTH_LONG).show();
+
+                                    }
+                                }
+                            } catch (Exception e) {
+                                Log.v("TAG", "OTP Exception" + e);
+                                Toast.makeText(LoginActivity.this, "Incorrect OTP", Toast.LENGTH_LONG).show();
+
+                            }
+                        }
+                        public void checkUser(final String userUID){
+
+                            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+                            DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails");
+                            databaseReference.addListenerForSingleValueEvent(new ValueEventListener(){
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                    if (dataSnapshot.hasChild(userUID))
+                                    {
+                                        Intent i = new Intent(LoginActivity.this,MainActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                        Toasty.success(getApplicationContext(),"Logged in Successfully").show();
+                                    }
+                                    else {
+
+                                        Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
+                                        i.putExtra("Phone",phonenumber);
+                                        startActivity(i);
+                                        finish();
+                                        Toasty.error(getApplicationContext(),"Number is Not Linked With Facebook or Google").show();
+
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                }
+
+                            });
+                        }
+                    });
+
+        }
+
+
+
+
     }
 
 

@@ -16,6 +16,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
@@ -43,6 +44,7 @@ public class UseraccountActivity extends AppCompatActivity {
     MaterialEditText userlandmark;
     MaterialEditText userPhone;
     Button saveprofile;
+
 
     ImageView profilepic;
 
@@ -82,6 +84,16 @@ public class UseraccountActivity extends AppCompatActivity {
         userPhone = findViewById(R.id.phone);
         userPhone.setText("+91 "+phone);
 
+        final FirebaseAuth mAuth = FirebaseAuth.getInstance();
+        username.setText(mAuth.getCurrentUser().getDisplayName());
+        usermail.setText(mAuth.getCurrentUser().getEmail());
+        Glide
+                .with(getApplicationContext())
+                .load(mAuth.getCurrentUser().getPhotoUrl())
+                .centerCrop()
+                .into(profilepic);
+
+
 
         profilepic.setOnClickListener(new View.OnClickListener() {
 
@@ -117,14 +129,12 @@ public class UseraccountActivity extends AppCompatActivity {
                     DatabaseReference databaseReference = database.getReference();
 
                     HashMap<String, Object> userMap = new HashMap<>();
-                    userMap.put("Name", username.getText().toString());
-                    userMap.put("Email", usermail.getText().toString());
-                    userMap.put("ProfilePhoto",userProfileUrl);
+                    userMap.put("Name", Name);
+                    userMap.put("Email", Email);
+                    userMap.put("ProfilePhoto",mAuth.getCurrentUser().getPhotoUrl().toString());
+                    userMap.put("PhoneNumber", mAuth.getCurrentUser().getPhoneNumber().toString());
 
-                    userMap.put("PhoneNumber", currentFirebaseUser.getPhoneNumber().toString());
-
-                    databaseReference.child("UserDetails").child(currentFirebaseUser.getUid()).setValue(userMap);
-                    databaseReference.child("UserDetails").child(String.valueOf(currentFirebaseUser.getPhotoUrl())).setValue(userMap);
+                    databaseReference.child("UserDetails").child(mAuth.getUid()).setValue(userMap);
 
                     DatabaseReference databaseReference1 = database.getReference();
                     HashMap<String, Object> addMap = new HashMap<>();
@@ -135,7 +145,7 @@ public class UseraccountActivity extends AppCompatActivity {
                     addMap.put("Zipcode", userzipcode.getText().toString());
 
 
-                    databaseReference1.child("UserDetails").child(currentFirebaseUser.getUid()).child("Address").setValue(addMap);
+                    databaseReference1.child("UserDetails").child(mAuth.getUid()).child("Address").setValue(addMap);
 
 
                     Intent i = new Intent(UseraccountActivity.this, MainActivity.class);

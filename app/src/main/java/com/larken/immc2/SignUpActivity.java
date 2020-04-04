@@ -1,5 +1,6 @@
 package com.larken.immc2;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
@@ -13,6 +14,11 @@ import com.firebase.ui.auth.AuthUI;
 import com.firebase.ui.auth.IdpResponse;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.HelperClasses.CheckConnection;
 
 import java.util.Arrays;
@@ -25,6 +31,7 @@ public class SignUpActivity extends AppCompatActivity {
     Button getOtp;
     EditText phoneNumberEt;
     String phoneNumber;
+    FirebaseAuth mAuth;
 
     CardView loginSocial;
 
@@ -41,6 +48,7 @@ public class SignUpActivity extends AppCompatActivity {
 
         getOtp = findViewById(R.id.getOTPLoginSignUp);
         phoneNumberEt = findViewById(R.id.phoneNumberEt);
+        mAuth = FirebaseAuth.getInstance();
 
         getOtp.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,26 +98,7 @@ public class SignUpActivity extends AppCompatActivity {
             if (resultCode == RESULT_OK) {
                 // Successfully signed in
 
-                if (new CheckConnection().checkLogin())
-                {
-                    Intent i = new Intent(SignUpActivity.this, MainActivity.class);
-                    startActivity(i);
-                    finish();
-                }
-                else {
-                    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-                    Intent i = new Intent(getApplicationContext(),LoginActivity.class);
-                    i.putExtra("PhoneNumber","9611967501");
-                    i.putExtra("FlowType","SignUp");
-                    startActivity(i);
-                }
-
-
-
-
-
-
-
+              checkUser(mAuth.getUid());
 
 
 
@@ -120,6 +109,39 @@ public class SignUpActivity extends AppCompatActivity {
                 // response.getError().getErrorCode() and handle the error.
                 // ...
             }
+
+
+
         }
     }
+    public void checkUser(final String userUID){
+
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+        DatabaseReference databaseReference = firebaseDatabase.getReference().child("UserDetails");
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener(){
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if (dataSnapshot.hasChild(userUID))
+                {
+                    Intent i = new Intent(SignUpActivity.this,MainActivity.class);
+                    startActivity(i);
+                    finish();
+                }
+                else {
+                    Intent i = new Intent(SignUpActivity.this, LoginActivity.class);
+                    startActivity(i);
+                    finish();
+
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+
+        });
+    }
+
 }

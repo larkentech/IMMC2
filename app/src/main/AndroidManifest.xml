@@ -58,9 +58,6 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".OtpActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 

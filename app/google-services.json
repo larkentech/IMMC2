@@ -15,19 +15,27 @@
       },
       "oauth_client": [
         {
-          "client_id": "617156791548-oi8no3lsnfe8engace1cpuon3rg8q3kv.apps.googleusercontent.com",
+          "client_id": "617156791548-mss6kneeh92cj7c5tmmudulo3d4tel3o.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.larken.immc2",
+            "certificate_hash": "a870360d1ae4f9b1ab2077138fb96f8283008a11"
+          }
+        },
+        {
+          "client_id": "617156791548-shoiou70qnsr40dns9fs0m5uk0a31h8c.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.larken.immc2",
+            "certificate_hash": "fed20f14944bcba192c3adddfc0a055e14c28748"
+          }
+        },
+        {
+          "client_id": "617156791548-jcja61msv1rh01tauv7co5tpbj942lt8.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.larken.immc2",
             "certificate_hash": "eb3b42d0a004c820bfc1f4a42236dfa51efd44a2"
-          }
-        },
-        {
-          "client_id": "617156791548-lv45l49bpnq42psjhi0bbht2b0lpsk25.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.larken.immc2",
-            "certificate_hash": "954103554cac4e2af9a7300c4a8353cdfe76eb89"
           }
         },
         {
