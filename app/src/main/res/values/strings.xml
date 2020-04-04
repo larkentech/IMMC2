@@ -7,5 +7,8 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="strike_line"> <strike>Testing for line str</strike> </string>
 
+    <string name="facebook_application_id" translatable="false">3204212016471297</string>
+    <string name="facebook_login_protocol_scheme" translatable="false">fb3204212016471297</string>
+
 
 </resources>

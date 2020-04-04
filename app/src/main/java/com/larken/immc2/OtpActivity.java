@@ -2,6 +2,8 @@ package com.larken.immc2;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +28,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.larken.immc2.Fragments.HomeFragment;
 
 import java.util.concurrent.TimeUnit;
 
@@ -134,7 +137,7 @@ public class OtpActivity extends AppCompatActivity {
     private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
 
 
-            mAuth.signInWithCredential(credential)
+            mAuth.getCurrentUser().linkWithCredential(credential)
                     .addOnCompleteListener(OtpActivity.this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
@@ -172,9 +175,10 @@ public class OtpActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 if (dataSnapshot.hasChild(userUID))
                 {
-                    Intent i = new Intent(OtpActivity.this,MainActivity.class);
+                    Intent i = new Intent(OtpActivity.this, MainActivity.class);
                     startActivity(i);
                     finish();
+
                 }
                 else {
                     Intent i = new Intent(OtpActivity.this, UseraccountActivity.class);
