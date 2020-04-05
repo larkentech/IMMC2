@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.ContactsContract;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -13,13 +14,16 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.AuthUI;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.gms.tasks.TaskExecutors;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
 import com.google.firebase.database.DataSnapshot;
@@ -151,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
         signInWithPhoneAuthCredential(credential);
     }
 
-    private void signInWithPhoneAuthCredential(PhoneAuthCredential credential) {
+    private void signInWithPhoneAuthCredential(final PhoneAuthCredential credential) {
 
         if (mAuth.getCurrentUser() != null) {
 
@@ -216,6 +220,8 @@ public class LoginActivity extends AppCompatActivity {
 
                             }
                         }
+
+
                         public void checkUser(final String userUID){
 
                             FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
@@ -228,19 +234,46 @@ public class LoginActivity extends AppCompatActivity {
                                         Intent i = new Intent(LoginActivity.this,MainActivity.class);
                                         startActivity(i);
                                         finish();
-                                        Toasty.success(getApplicationContext(),"Logged in Successfully").show();
+                                        Toasty.success(getApplicationContext(),"Welcome Again").show();
                                     }
                                     else {
+                                       final FirebaseUser user=mAuth.getCurrentUser();
+                                       user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                           @Override
+                                           public void onComplete(@NonNull Task<Void> task) {
+                                               user.delete().addOnCompleteListener(new OnCompleteListener<Void>() {
+                                                   @Override
+                                                   public void onComplete(@NonNull Task<Void> task) {
+                                                       if (task.isSuccessful()){
+                                                           Log.d("TAG","User Account Deleted");
+                                                           Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
+                                                           Toasty.error(getApplicationContext(),"Number is Not Linked With Any Social Account").show();
+                                                           i.putExtra("Phone",phonenumber);
+                                                           startActivity(i);
+                                                           finish();
 
-                                        Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
-                                        i.putExtra("Phone",phonenumber);
-                                        startActivity(i);
-                                        finish();
-                                        Toasty.error(getApplicationContext(),"Number is Not Linked With Facebook or Google").show();
+
+                                                       }
+                                                   }
+                                               });
+                                           }
+                                       });
+                                        AuthUI.getInstance()
+                                                .signOut(getApplicationContext()).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                            @Override
+                                            public void onComplete(@NonNull Task<Void> task) {
+                                                Intent i=new Intent(getApplicationContext(),SignUpActivity.class);
+                                                startActivity(i);
+                                                finish();
+                                            }
+                                        });
+
 
                                     }
 
                                 }
+
+
 
                                 @Override
                                 public void onCancelled(@NonNull DatabaseError databaseError) {
