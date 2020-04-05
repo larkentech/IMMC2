@@ -52,26 +52,18 @@ public class SignUpActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_up);
 
         getOtp = findViewById(R.id.getOTPLoginSignUp);
-        phoneNumberEt = findViewById(R.id.phoneNumberEt);
         mAuth = FirebaseAuth.getInstance();
 
         getOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                phoneNumber = phoneNumberEt.getText().toString().trim();
-                if (phoneNumber.matches("") || phoneNumber.length() < 10)
-                {
-                    Toasty.error(getApplicationContext(),"Enter a valid number").show();
-                    phoneNumberEt.getText().clear();
-                }
-                else {
                     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
                     Intent i = new Intent(getApplicationContext(),LoginActivity.class);
                     i.putExtra("PhoneNumber",phoneNumber);
                     i.putExtra("FlowType","OTP");
                     startActivity(i);
-                }
+
 
 
             }
