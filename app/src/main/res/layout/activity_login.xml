@@ -56,6 +56,7 @@
             android:shadowDx="2"
             android:shadowDy="4"
             android:textSize="14sp"
+            android:maxLength="10"
             android:textColor="@android:color/black" />
 
     </LinearLayout>

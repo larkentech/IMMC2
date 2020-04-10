@@ -83,7 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
                     verifyOtp.setVisibility(View.VISIBLE);
+                    Phonenumber.setVisibility(View.GONE);
                     sendVerificationCode(phonenumber);
+
                 }
 
             }
