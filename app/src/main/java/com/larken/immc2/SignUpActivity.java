@@ -78,6 +78,7 @@ public class SignUpActivity extends AppCompatActivity {
                                 .createSignInIntentBuilder()
                                 .setAvailableProviders(providers)
                                 .setTheme(R.style.LoginTheme)
+                                .setLogo(R.drawable.logo)
                                 .build(),
                         RC_SIGN_IN);
 

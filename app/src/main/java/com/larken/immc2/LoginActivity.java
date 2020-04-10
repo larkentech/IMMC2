@@ -140,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
             mVerificationId = s;
+            Toast.makeText(LoginActivity.this,"OTP has been Sent to your Number",Toast.LENGTH_LONG).show();
             //mResendToken = forceResendingToken;
 
         }

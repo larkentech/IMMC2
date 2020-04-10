@@ -35,6 +35,7 @@
         <item name="windowNoTitle">true</item>
         <item name="fontFamily">@font/montserrat_bold</item>
         <item name="android:textColorHint">#777272</item>
+        <item name="background">@color/white</item>
     </style>
 
 </resources>
