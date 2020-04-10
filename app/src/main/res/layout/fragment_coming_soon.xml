@@ -17,7 +17,7 @@
             android:id="@+id/comingImage"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/propic"
+            android:src="@drawable/dummy_background"
             android:scaleType="fitXY">
 
         </ImageView>

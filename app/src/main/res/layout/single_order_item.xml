@@ -30,6 +30,7 @@
                 <ImageView
                     android:id="@+id/itemImageOrder"
                     android:layout_width="match_parent"
+                    android:src="@drawable/dummy_background"
                     android:layout_height="match_parent"
                     android:background="@color/colorPrimary"
                     android:scaleType="fitXY" />

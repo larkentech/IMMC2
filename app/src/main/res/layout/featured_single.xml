@@ -20,6 +20,7 @@
                 android:id="@+id/featured_image_single"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
+                android:src="@drawable/dummy_background"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY" />
 

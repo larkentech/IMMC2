@@ -18,6 +18,7 @@
         <ImageView
             android:id="@+id/offer_image_single"
             android:layout_width="match_parent"
+            android:src="@drawable/dummy_background"
             android:layout_height="match_parent"
             android:scaleType="fitXY"/>
 
