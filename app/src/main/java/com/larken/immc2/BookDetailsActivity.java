@@ -133,6 +133,7 @@ public class BookDetailsActivity extends AppCompatActivity {
                 bookPrice.setText("Rs."+_160pages+"/-");
                 bookCategory.setText("Category: " + dataSnapshot.child("BookSubCategory").getValue(String.class));
                 bookDesc.setText(dataSnapshot.child("BookDesc").getValue(String.class));
+                _160pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
 
                 for (DataSnapshot ds : dataSnapshot.child("BookImages").getChildren()) {
                     url_list.add(ds.getValue(String.class));
@@ -210,7 +211,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                 _240pagescard.setCardBackgroundColor( Color.parseColor("#F7F7F7"));
                 _200pagescard.setBackground( null);
                 _240pagescard.setBackground( null);
-                _160pagescard.setBackground( null);
 
             }
         });

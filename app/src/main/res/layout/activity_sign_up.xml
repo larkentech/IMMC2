@@ -7,15 +7,17 @@
     tools:context=".SignUpActivity">
 
     <ImageView
-        android:layout_marginTop="20dp"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="200dp"
+        android:layout_above="@id/phoneNumberLL"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginEnd="32dp"
+        android:fontFamily="@font/montserrat_bold"
         android:src="@drawable/logoo"
         android:textColor="@color/colorPrimary"
-        android:layout_above="@id/phoneNumberLL"
-        android:textSize="48sp"
-        android:fontFamily="@font/montserrat_bold"
-        android:layout_centerHorizontal="true"/>
+        android:textSize="48sp" />
 
 
     <LinearLayout
