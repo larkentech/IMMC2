@@ -8,394 +8,417 @@
     android:orientation="vertical"
     tools:context=".BookDetailsActivity">
 
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/prsnImage"
-        android:layout_width="80dp"
-        android:layout_height="80dp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="24dp" />
-
-    <TextView
-        android:id="@+id/prsnName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="16dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Hemanth"
-        android:textColor="@android:color/black"
-        android:textSize="18sp" />
-
-    <TextView
-        android:id="@+id/prsnMail"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="8dp"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="abhishekdas218@gmail.com"
-        android:textColor="@android:color/black"
-        android:textSize="14sp" />
-
-    <TextView
-        android:id="@+id/prsnNum"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/montserrat_regular"
-        android:text="+917204974972"
-        android:textColor="@android:color/black"
-        android:textSize="14sp" />
-
-    <HorizontalScrollView
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:scrollbars="none">
+        android:layout_height="match_parent"
+        android:fillViewport="true">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
-            <FrameLayout
-                android:layout_width="360dp"
-                android:layout_height="400dp"
-                android:layout_marginStart="16dp">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/prsnImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="12dp" />
 
-                <androidx.cardview.widget.CardView
+            <TextView
+                android:id="@+id/prsnName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="16dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Hemanth"
+                android:textColor="@android:color/black"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/prsnMail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="abhishekdas218@gmail.com"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+
+            <TextView
+                android:id="@+id/prsnNum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/montserrat_regular"
+                android:text="+917204974972"
+                android:textColor="@android:color/black"
+                android:textSize="14sp" />
+            <ImageView
+                android:layout_marginTop="8dp"
+                android:layout_width="match_parent"
+                android:layout_height="20dp"
+                android:src="@drawable/dots">
+
+            </ImageView>
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none">
+
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="20dp"
-                    app:cardBackgroundColor="#F2F5F4"
-                    app:cardCornerRadius="6dp">
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:orientation="vertical"
-                        android:padding="16dp">
+                    <FrameLayout
+                        android:layout_width="360dp"
+                        android:layout_height="400dp"
+                        android:layout_marginStart="16dp">
 
-                        <TextView
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:gravity="center_horizontal"
-                            android:text="Address Details"
-                            android:textColor="#000000"
-                            android:textSize="16sp">
-
-                        </TextView>
-
-                        <EditText
-                            android:id="@+id/addFlatnum"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:padding="12dp"
-                            android:text="#118"
-                            android:textColor="#000000"
-                            android:textSize="14sp" />
-
-                        <EditText
-                            android:id="@+id/addLandmark"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:padding="12dp"
-                            android:text="3rd cross"
-                            android:textColor="#000000"
-                            android:textSize="14sp">
-                        </EditText>
-
-                        <EditText
-                            android:id="@+id/addArea"
-                            android:layout_width="match_parent"
-                            android:layout_height="48dp"
-                            android:layout_marginTop="6dp"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:padding="12dp"
-                            android:text="Vivekanda nagar"
-                            android:textColor="#000000"
-                            android:textSize="14sp">
-
-                        </EditText>
-
-                        <EditText
-                            android:id="@+id/addCity"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="6dp"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:padding="12dp"
-                            android:text="mysuru"
-                            android:textColor="#000000"
-                            android:textSize="14sp">
-
-                        </EditText>
-
-                        <Button
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="24dp"
-                            android:layout_marginEnd="24dp"
+                            android:layout_height="match_parent"
                             android:layout_marginTop="16dp"
-                            android:background="@color/colorAccent"
-                            android:text="Update"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:textColor="@android:color/white"
-                            android:id="@+id/updateAddress"/>
+                            android:layout_marginBottom="20dp"
+                            app:cardBackgroundColor="#F2F5F4"
+                            app:cardCornerRadius="6dp">
 
-                    </LinearLayout>
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:padding="16dp">
 
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:gravity="center_horizontal"
+                                    android:text="Address Details"
+                                    android:textColor="#000000"
+                                    android:textSize="16sp">
 
-                </androidx.cardview.widget.CardView>
-            </FrameLayout>
+                                </TextView>
 
-            <FrameLayout
-                android:layout_width="360dp"
-                android:layout_height="400dp"
-                android:layout_marginStart="16dp">
+                                <EditText
+                                    android:id="@+id/addFlatnum"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="8dp"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:padding="12dp"
+                                    android:text="#118"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp" />
 
-                <androidx.cardview.widget.CardView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="20dp"
-                    app:cardBackgroundColor="#F2F5F4"
-                    app:cardCornerRadius="6dp">
+                                <EditText
+                                    android:id="@+id/addLandmark"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:padding="12dp"
+                                    android:text="3rd cross"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp">
+                                </EditText>
 
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:gravity="center_horizontal"
-                        android:text="My Orders"
-                        android:textColor="#000000"
-                        android:textSize="28sp">
+                                <EditText
+                                    android:id="@+id/addArea"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="48dp"
+                                    android:layout_marginTop="6dp"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:padding="12dp"
+                                    android:text="Vivekanda nagar"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp">
 
-                    </TextView>
+                                </EditText>
 
-                    <TextView
-                        android:id="@+id/txtMyOrders"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:gravity="center"
-                        android:text="Click here to see Orders"
-                        android:textColor="#2196F3"
-                        android:textSize="20sp">
+                                <EditText
+                                    android:id="@+id/addCity"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="6dp"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:padding="12dp"
+                                    android:text="mysuru"
+                                    android:textColor="#000000"
+                                    android:textSize="14sp">
 
-                    </TextView>
+                                </EditText>
 
-                </androidx.cardview.widget.CardView>
+                                <Button
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginStart="24dp"
+                                    android:layout_marginEnd="24dp"
+                                    android:layout_marginTop="16dp"
+                                    android:background="@color/colorAccent"
+                                    android:text="Update"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:textColor="@android:color/white"
+                                    android:id="@+id/updateAddress"/>
 
-
-            </FrameLayout>
-
-            <FrameLayout
-
-                android:layout_width="360dp"
-                android:layout_height="400dp"
-                android:layout_marginStart="16dp">
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="20dp"
-                    app:cardBackgroundColor="#F2F5F4"
-                    app:cardCornerRadius="6dp">
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:gravity="center_horizontal"
-                        android:text="Send Feedback"
-                        android:textColor="#000000"
-                        android:textSize="28sp">
-
-                    </TextView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp">
+                            </LinearLayout>
 
 
-                        <com.hsalf.smilerating.SmileRating
-                            android:id="@+id/smile_rating"
-                            android:layout_width="300dp"
-                            android:layout_height="90dp"
-                            android:layout_centerHorizontal="true"
-                            android:layout_marginTop="90dp" />
+                        </androidx.cardview.widget.CardView>
+                    </FrameLayout>
 
+                    <FrameLayout
+                        android:layout_width="360dp"
+                        android:layout_height="400dp"
+                        android:layout_marginStart="16dp">
 
-                        <TextView
-                            android:id="@+id/feedbackTV"
+                        <androidx.cardview.widget.CardView
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/smile_rating"
-                            android:layout_marginTop="12dp"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:gravity="center_horizontal"
-                            android:text="Your feedback is important to us!!"
-                            android:textColor="@color/colorAccent"
-                            android:textSize="14sp" />
-
-                        <EditText
-                            android:id="@+id/userFeedbackET"
-                            android:layout_width="match_parent"
-                            android:layout_height="60dp"
-                            android:layout_below="@id/feedbackTV"
-                            android:layout_margin="16dp"
-                            android:background="@drawable/edittextstyle"
-                            android:fontFamily="@font/montserrat_regular"
-                            android:foregroundTint="@color/colorPrimary"
-                            android:gravity="start"
-                            android:hint="(Optional)"
-                            android:isScrollContainer="true"
-                            android:padding="8dp"
-                            android:textColor="@android:color/black"
-                            android:textColorHint="@android:color/black"
-                            android:textSize="12sp" />
-
-                        <com.google.android.material.floatingactionbutton.FloatingActionButton
-                            android:id="@+id/sendFeedback"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@id/userFeedbackET"
-                            android:layout_alignParentEnd="true"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginEnd="20dp"
-                            app:backgroundTint="@color/colorPrimary"
-                            app:fabSize="mini"
-                            app:srcCompat="@drawable/ic_feedback" />
-
-
-                    </RelativeLayout>
-
-
-                </androidx.cardview.widget.CardView>
-            </FrameLayout>
-
-            <FrameLayout
-
-                android:layout_width="360dp"
-                android:layout_height="400dp"
-                android:layout_marginStart="16dp">
-
-                <androidx.cardview.widget.CardView
-
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginBottom="20dp"
-                    app:cardBackgroundColor="#F2F5F4"
-                    app:cardCornerRadius="6dp">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="30dp"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:gravity="center_horizontal"
-                        android:text="Contact Us"
-                        android:textColor="#000000"
-                        android:textSize="28sp">
-
-                    </TextView>
-
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="100dp"
-                            android:orientation="horizontal">
-
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="16dp"
-                                android:src="@drawable/ic_call_black">
-
-                            </ImageView>
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="20dp"
+                            app:cardBackgroundColor="#F2F5F4"
+                            app:cardCornerRadius="6dp">
 
                             <TextView
-                                android:id="@+id/contactNumber"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:gravity="center_horizontal"
+                                android:text="My Orders"
+                                android:textColor="#000000"
+                                android:textSize="28sp">
+
+                            </TextView>
+
+                            <TextView
+                                android:id="@+id/txtMyOrders"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_vertical"
-                                android:layout_marginStart="16dp"
                                 android:fontFamily="@font/montserrat_bold"
-                                android:text="+917019527490"
+                                android:gravity="center"
+                                android:text="Click here to see Orders"
                                 android:textColor="#2196F3"
                                 android:textSize="20sp">
 
                             </TextView>
-                        </LinearLayout>
 
-                        <LinearLayout
+                        </androidx.cardview.widget.CardView>
+
+
+                    </FrameLayout>
+
+                    <FrameLayout
+
+                        android:layout_width="360dp"
+                        android:layout_height="400dp"
+                        android:layout_marginStart="16dp">
+
+                        <androidx.cardview.widget.CardView
+
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="200dp"
-                            android:orientation="horizontal">
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="20dp"
+                            app:cardBackgroundColor="#F2F5F4"
+                            app:cardCornerRadius="6dp">
 
-                            <ImageView
-                                android:layout_width="40dp"
-                                android:layout_height="40dp"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="16dp"
-                                android:src="@drawable/ic_computer_black_24dp">
-
-                            </ImageView>
 
                             <TextView
-                                android:id="@+id/contactWeb"
-                                android:layout_width="wrap_content"
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginStart="16dp"
+                                android:layout_marginTop="30dp"
                                 android:fontFamily="@font/montserrat_bold"
-                                android:text="support@iammc2.com"
-                                android:textColor="#2196F3"
-                                android:textSize="20sp">
+                                android:gravity="center_horizontal"
+                                android:text="Send Feedback"
+                                android:textColor="#000000"
+                                android:textSize="28sp">
 
                             </TextView>
-                        </LinearLayout>
-                    </RelativeLayout>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginBottom="16dp">
 
 
-                </androidx.cardview.widget.CardView>
-            </FrameLayout>
+                                <com.hsalf.smilerating.SmileRating
+                                    android:id="@+id/smile_rating"
+                                    android:layout_width="300dp"
+                                    android:layout_height="90dp"
+                                    android:layout_centerHorizontal="true"
+                                    android:layout_marginTop="90dp" />
+
+
+                                <TextView
+                                    android:id="@+id/feedbackTV"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/smile_rating"
+                                    android:layout_marginTop="12dp"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:gravity="center_horizontal"
+                                    android:text="Your feedback is important to us!!"
+                                    android:textColor="@color/colorAccent"
+                                    android:textSize="14sp" />
+
+                                <EditText
+                                    android:id="@+id/userFeedbackET"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="60dp"
+                                    android:layout_below="@id/feedbackTV"
+                                    android:layout_margin="16dp"
+                                    android:background="@drawable/edittextstyle"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:foregroundTint="@color/colorPrimary"
+                                    android:gravity="start"
+                                    android:hint="(Optional)"
+                                    android:isScrollContainer="true"
+                                    android:padding="8dp"
+                                    android:textColor="@android:color/black"
+                                    android:textColorHint="@android:color/black"
+                                    android:textSize="12sp" />
+
+                                <com.google.android.material.floatingactionbutton.FloatingActionButton
+                                    android:id="@+id/sendFeedback"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_below="@id/userFeedbackET"
+                                    android:layout_alignParentEnd="true"
+                                    android:layout_alignParentBottom="true"
+                                    android:layout_marginEnd="20dp"
+                                    app:backgroundTint="@color/colorPrimary"
+                                    app:fabSize="mini"
+                                    app:srcCompat="@drawable/ic_feedback" />
+
+
+                            </RelativeLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+                    </FrameLayout>
+
+                    <FrameLayout
+
+                        android:layout_width="360dp"
+                        android:layout_height="400dp"
+                        android:layout_marginStart="16dp">
+
+                        <androidx.cardview.widget.CardView
+
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginTop="16dp"
+                            android:layout_marginBottom="20dp"
+                            app:cardBackgroundColor="#F2F5F4"
+                            app:cardCornerRadius="6dp">
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="30dp"
+                                android:fontFamily="@font/montserrat_bold"
+                                android:gravity="center_horizontal"
+                                android:text="Contact Us"
+                                android:textColor="#000000"
+                                android:textSize="28sp">
+
+                            </TextView>
+
+                            <RelativeLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="100dp"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="16dp"
+                                        android:src="@drawable/ic_call_black">
+
+                                    </ImageView>
+
+                                    <TextView
+                                        android:id="@+id/contactNumber"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="16dp"
+                                        android:fontFamily="@font/montserrat_bold"
+                                        android:text="+917019527490"
+                                        android:textColor="#2196F3"
+                                        android:textSize="20sp">
+
+                                    </TextView>
+                                </LinearLayout>
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginTop="200dp"
+                                    android:orientation="horizontal">
+
+                                    <ImageView
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="16dp"
+                                        android:src="@drawable/ic_computer_black_24dp">
+
+                                    </ImageView>
+
+                                    <TextView
+                                        android:id="@+id/contactWeb"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginStart="16dp"
+                                        android:fontFamily="@font/montserrat_bold"
+                                        android:text="support@iammc2.com"
+                                        android:textColor="#2196F3"
+                                        android:textSize="20sp">
+
+                                    </TextView>
+                                </LinearLayout>
+                            </RelativeLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+                    </FrameLayout>
+                </LinearLayout>
+
+            </HorizontalScrollView>
+
+            <TextView
+                android:id="@+id/signOut"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="18dp"
+                android:drawableLeft="@drawable/ic_power_settings_new_black_24dp"
+                android:drawablePadding="8dp"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="Sign Out"
+                android:textColor="@android:color/black"
+                android:textSize="18sp"/>
         </LinearLayout>
 
-    </HorizontalScrollView>
 
-    <TextView
-        android:id="@+id/signOut"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginBottom="18dp"
-        android:drawableLeft="@drawable/ic_power_settings_new_black_24dp"
-        android:drawablePadding="8dp"
-        android:fontFamily="@font/montserrat_bold"
-        android:text="Sign Out"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"/>
+
+    </ScrollView>
+
 
 </LinearLayout>

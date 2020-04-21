@@ -23,7 +23,9 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.larken.immc2.AdapterClasses.ActivityTrackerSubAdapter;
 import com.larken.immc2.AdapterClasses.ComingSoonAdapter;
+import com.larken.immc2.AdapterClasses.ImageSliderAdapter;
 import com.larken.immc2.AdapterClasses.MainAdapter;
+import com.larken.immc2.AdapterClasses.OfferSliderAdapter;
 import com.larken.immc2.AdapterClasses.OffersAdapter;
 import com.larken.immc2.AdapterClasses.SubCategoryAdapter;
 import com.larken.immc2.HelperClasses.NonScrollListView;
@@ -31,6 +33,7 @@ import com.larken.immc2.ModalClasses.BooksModal;
 import com.larken.immc2.ModalClasses.ComingSoonModal;
 import com.larken.immc2.ModalClasses.OffersModal;
 import com.larken.immc2.R;
+import com.smarteist.autoimageslider.SliderView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +45,7 @@ import it.sephiroth.android.library.widget.HListView;
  */
 public class HomeFragment extends Fragment {
 
-    HListView offersListView;
+    SliderView offersListView;
     HListView comingSoonListView;
     HListView quotesListView;
     HListView scienceListView;
@@ -94,7 +97,7 @@ public class HomeFragment extends Fragment {
     ScrollView homeSV;
 
     //Activity Trackers
-    HListView trackerList;
+   HListView trackerList;
 
 
     public HomeFragment() {
@@ -125,36 +128,20 @@ public class HomeFragment extends Fragment {
         homeShimmer.startShimmer();
 
 
-        offersListView = view.findViewById(R.id.offersList);
+        offersListView = view.findViewById(R.id.offerSlider);
+        SliderView bookImage = view.findViewById(R.id.offerSlider);
 
-        List<OffersModal> imageList = new ArrayList<>();
-        adapter = new OffersAdapter(getContext(),R.layout.offers_single,imageList);
-        offersListView.setAdapter(adapter);
+
+        final OfferSliderAdapter sliderAdapter = new OfferSliderAdapter(getContext());
+        bookImage.setSliderAdapter(sliderAdapter);
         databaseReference = firebaseDatabase.getReference().child("Offers");
-        databaseReference.addChildEventListener(new ChildEventListener() {
+        databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-                OffersModal OM = dataSnapshot.getValue(OffersModal.class);
-                adapter.add(OM);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot ds:dataSnapshot.getChildren()){
 
-                homeShimmer.stopShimmer();
-                homeShimmer.setVisibility(View.GONE);
-                homeSV.setVisibility(View.VISIBLE);
-            }
-
-            @Override
-            public void onChildChanged(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
-            }
-
-            @Override
-            public void onChildRemoved(@NonNull DataSnapshot dataSnapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
-
+                    sliderAdapter.addItem(ds.child("OfferImage").getValue(String.class),ds.child("OfferCategory").getValue(String.class),ds.child("OfferSubCategory").getValue(String.class));
+                }
             }
 
             @Override
@@ -162,6 +149,7 @@ public class HomeFragment extends Fragment {
 
             }
         });
+
 
         comingSoonListView = view.findViewById(R.id.comingList);
 
@@ -245,6 +233,10 @@ public class HomeFragment extends Fragment {
                     trackerCategories.add(ds.getKey());
                     trackerUrl.add(ds.getValue().toString());
                     adapter.add(modal);
+
+                    homeShimmer.stopShimmer();
+                    homeSV.setVisibility(View.VISIBLE);
+                    homeShimmer.setVisibility(View.GONE);
                 }
 
             }

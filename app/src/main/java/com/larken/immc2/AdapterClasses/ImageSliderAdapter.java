@@ -108,7 +108,7 @@ public class ImageSliderAdapter extends
 
         public SliderAdapterVH(View itemView) {
             super(itemView);
-            imageViewBackground = itemView.findViewById(R.id.iv_auto_image_slider);
+            imageViewBackground = itemView.findViewById(R.id.offer_image_single);
             this.itemView = itemView;
         }
     }
