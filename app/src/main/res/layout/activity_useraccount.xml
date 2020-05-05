@@ -103,7 +103,6 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="Name"
-                        android:enabled="false"
                         android:fontFamily="@font/montserrat_regular"
                         android:textSize="14sp"
                         android:textColor="@android:color/black"

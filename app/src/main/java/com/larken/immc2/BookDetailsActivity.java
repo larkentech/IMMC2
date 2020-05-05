@@ -133,6 +133,23 @@ public class BookDetailsActivity extends AppCompatActivity {
                 bookPrice.setText("Rs."+_160pages+"/-");
                 bookCategory.setText("Category: " + dataSnapshot.child("BookSubCategory").getValue(String.class));
                 bookDesc.setText(dataSnapshot.child("BookDesc").getValue(String.class));
+                _160pagescard.setBackground(getDrawable(R.drawable.select_pages_shadow));
+
+                if (_160pages.matches("0")){
+                    addToCart.setEnabled(false);
+                    _200pagescard.setEnabled(false);
+                    _240pagescard.setEnabled(false);
+                    bookPrice.setText("Currently Unavailable");
+                    bookPrice.setTextColor(Color.parseColor("#FF0000"));
+                    Toasty.error(BookDetailsActivity.this,"Currently Unavailable").show();
+                }else {
+                    numberPicker.setValue(1);
+                    bookPrice.setText("Rs." + _160pages + "/-");
+                    addToCart.setEnabled(true);
+                    _200pagescard.setEnabled(true);
+                    _240pagescard.setEnabled(true);
+                }
+
 
                 for (DataSnapshot ds : dataSnapshot.child("BookImages").getChildren()) {
                     url_list.add(ds.getValue(String.class));
@@ -191,15 +208,6 @@ public class BookDetailsActivity extends AppCompatActivity {
 
                 }
 
-                if (_160pages.matches("0")){
-                    addToCart.setEnabled(false);
-                    bookPrice.setText("Currently Unavailable");
-                    Toasty.error(BookDetailsActivity.this,"Currently Unavailable").show();
-                }else {
-                    numberPicker.setValue(1);
-                    bookPrice.setText("Rs." + _160pages + "/-");
-                    addToCart.setEnabled(true);
-                }
 
 
                 _200pagescard.setCardElevation(0);
@@ -208,10 +216,6 @@ public class BookDetailsActivity extends AppCompatActivity {
                 _160pagescard.setCardBackgroundColor(Color.LTGRAY);
                 _200pagescard.setCardBackgroundColor( Color.parseColor("#F7F7F7"));
                 _240pagescard.setCardBackgroundColor( Color.parseColor("#F7F7F7"));
-                _200pagescard.setBackground( null);
-                _240pagescard.setBackground( null);
-                _160pagescard.setBackground( null);
-
             }
         });
 

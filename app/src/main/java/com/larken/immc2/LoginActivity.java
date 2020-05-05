@@ -83,7 +83,9 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 else {
                     verifyOtp.setVisibility(View.VISIBLE);
+                    Phonenumber.setVisibility(View.GONE);
                     sendVerificationCode(phonenumber);
+
                 }
 
             }
@@ -140,6 +142,7 @@ public class LoginActivity extends AppCompatActivity {
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
             super.onCodeSent(s, forceResendingToken);
             mVerificationId = s;
+            Toast.makeText(LoginActivity.this,"OTP has been Sent to your Number",Toast.LENGTH_LONG).show();
             //mResendToken = forceResendingToken;
 
         }
@@ -199,9 +202,6 @@ public class LoginActivity extends AppCompatActivity {
                                 if (task.isSuccessful()) {
 
                                     checkUser(mAuth.getCurrentUser().getUid());
-                                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                                        startActivity(i);
-                                        finish();
 
 
                                 } else {
@@ -237,7 +237,11 @@ public class LoginActivity extends AppCompatActivity {
                                         Toasty.success(getApplicationContext(),"Welcome Again").show();
                                     }
                                     else {
-                                       final FirebaseUser user=mAuth.getCurrentUser();
+
+                                        Toasty.error(getApplicationContext(),"Profile does not exists,Create new").show();
+
+
+                                        final FirebaseUser user=mAuth.getCurrentUser();
                                        user.reauthenticate(credential).addOnCompleteListener(new OnCompleteListener<Void>() {
                                            @Override
                                            public void onComplete(@NonNull Task<Void> task) {
@@ -245,19 +249,19 @@ public class LoginActivity extends AppCompatActivity {
                                                    @Override
                                                    public void onComplete(@NonNull Task<Void> task) {
                                                        if (task.isSuccessful()){
+
                                                            Log.d("TAG","User Account Deleted");
                                                            Intent i = new Intent(LoginActivity.this, SignUpActivity.class);
-                                                           Toasty.error(getApplicationContext(),"Number is Not Linked With Any Social Account").show();
                                                            i.putExtra("Phone",phonenumber);
                                                            startActivity(i);
                                                            finish();
-
 
                                                        }
                                                    }
                                                });
                                            }
                                        });
+                                       if (userUID.isEmpty())
                                         AuthUI.getInstance()
                                                 .signOut(getApplicationContext()).addOnCompleteListener(new OnCompleteListener<Void>() {
                                             @Override
@@ -306,11 +310,11 @@ public class LoginActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
+
                     Intent i = new Intent(LoginActivity.this, UseraccountActivity.class);
                     i.putExtra("Phone",phonenumber);
                     startActivity(i);
                     finish();
-
                 }
 
             }

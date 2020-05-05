@@ -36,6 +36,8 @@
         <item name="android:windowBackground">#FFFFFF</item>
         <item name="fontFamily">@font/montserrat_bold</item>
         <item name="android:textColorHint">#777272</item>
+        <item name="background">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
     </style>
 
 </resources>
