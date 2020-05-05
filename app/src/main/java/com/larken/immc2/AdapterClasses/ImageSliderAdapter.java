@@ -59,6 +59,7 @@ public class ImageSliderAdapter extends
         Glide.with(viewHolder.itemView)
                 .load(sliderItem)
                 .fitCenter()
+
                 .into(viewHolder.imageViewBackground);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
