@@ -97,7 +97,6 @@ public class SplashActivity extends AppCompatActivity {
             IdpResponse response = IdpResponse.fromResultIntent(data);
 
             if (resultCode == RESULT_OK) {
-
                 checkUser();
                 // ...
             } else {
@@ -121,6 +120,10 @@ public class SplashActivity extends AppCompatActivity {
                     finish();
                 }
                 else {
+
+                    Intent intent=new Intent(SplashActivity.this, SignUpActivity.class);
+                    startActivity(intent);
+                    finish();
 
                 }
             }

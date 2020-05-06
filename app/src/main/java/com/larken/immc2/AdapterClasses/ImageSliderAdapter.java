@@ -59,7 +59,6 @@ public class ImageSliderAdapter extends
         Glide.with(viewHolder.itemView)
                 .load(sliderItem)
                 .fitCenter()
-
                 .into(viewHolder.imageViewBackground);
 
         viewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -109,7 +108,7 @@ public class ImageSliderAdapter extends
 
         public SliderAdapterVH(View itemView) {
             super(itemView);
-            imageViewBackground = itemView.findViewById(R.id.offer_image_single);
+            imageViewBackground = itemView.findViewById(R.id.iv_auto_image_slider);
             this.itemView = itemView;
         }
     }
